@@ -1,0 +1,276 @@
+This software is provided 'as-is', without any expressed or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose. If you use this software in a product, an acknowledgment in the product documentation would be deeply appreciated but is not required.
+
+In the case of the GOLD Parser Engine source code, permission is granted to anyone to alter it and redistribute it freely, subject to the following restrictions:
+
+   1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software.
+   2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+   3. This notice may not be removed or altered from any source distribution
+
+
+-----------------------------------------------------------------------------
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+--------------------------------------------
+Quest Software, Inc.
+Freeware License Agreement
+
+BY CLICKING THE ACCEPTANCE BUTTON FOR THE SOFTWARE (THE "PRODUCT"), YOU ARE CONSENTING TO BE BOUND BY AND BECOME A PARTY TO THIS AGREEMENT AS THE "LICENSEE." IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, YOU MUST SELECT THE BUTTON INDICATING NON-ACCEPTANCE, YOU MUST NOT INSTALL OR USE THE PRODUCT, AND YOU DO NOT BECOME A LICENSEE UNDER THIS AGREEMENT.
+
+1. License Agreement. As used in this Agreement, "Quest" shall mean Quest Software, Inc. Quest grants Licensee a non-exclusive and non-transferable license to reproduce and use for personal or internal business purposes the executable code version of the Product, provided any copy must contain all of the original proprietary notices. This license does not entitle Licensee to receive from Quest hard-copy documentation, technical support, telephone assistance, or enhancements or updates to the Product. If more than one license agreement was provided for the Product, and the terms vary, the order of precedence of those license agreements is as follows: a signed agreement, a license agreement available for review on the Quest website, a printed or electronic agreement that states clearly that it supersedes other agreements, a printed agreement provided with the Product, an electronic agreement provided with the Product. Quest may terminate this Agreement at any time, for any reason or no reason. Quest may also terminate this Agreement if Licensee breaches any of its terms and conditions. Upon termination, Licensee shall destroy all copies of the Product.
+
+2. Restrictions. Without Quest’s prior written consent, Licensee may not: (i) modify or create any derivative works of the Product or documentation, including customization, translation or localization; (ii) decompile, disassemble, reverse engineer, or otherwise attempt to derive the source code for the Product (except to the extent applicable laws specifically prohibit such restriction); (iii) redistribute, encumber, sell, rent, lease, sublicense, or otherwise transfer rights to the Product; (iv) remove or alter any trademark, logo, copyright or other proprietary notices, legends, symbols or labels in the Product; or (v) publish any results of benchmark tests run on the Product to a third party .
+
+3. Fees. There is no license fee for the Product. If Licensee wishes to receive the Product on media, there may be a small charge for the media and for shipping and handling. Licensee is responsible for any and all taxes.
+
+4. Proprietary Rights. Title, ownership rights, and intellectual property rights in the Product shall remain in Quest and/or its suppliers. The Product is protected by copyright and other intellectual property laws and by international treaties.
+
+5. Disclaimer of Warranty. THE PRODUCT IS PROVIDED FREE OF CHARGE, AND, THEREFORE, ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE WARRANTIES THAT IT IS FREE OF DEFECTS, VIRUS FREE, ABLE TO OPERATE ON AN UNINTERRUPTED BASIS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS AGREEMENT. NO USE OF THE PRODUCT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER.
+
+6. Limitation of Liability. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL QUEST OR ITS AFFILIATES OR SUPPLIERS BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF OR INABILITY TO USE THE PRODUCT, INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOST PROFITS, LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF, AND REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED. IN ANY CASE, QUEST’S COLLECTIVE LIABILITY UNDER ANY PROVISION OF THIS AGREEMENT SHALL NOT EXCEED IN THE AGGREGATE THE SUM OF THE FEES LICENSEE PAID FOR THIS LICENSE (IF ANY). SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL, CONSEQUENTIAL OR SPECIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT APPLY TO YOU.
+
+7. Export Control. Licensee agrees to comply with all export laws and restrictions and regulations of the United States or foreign agencies or authorities, and not to export or re-export the Product or any direct product thereof in violation of any such restrictions, laws or regulations, or without all necessary approvals. As applicable, each party shall obtain and bear all expenses relating to any necessary licenses and/or exemptions with respect to its own export of the Product from the U.S. By installing or using the Product, Licensee agrees to the foregoing and represents and warrants that it complies with these conditions.
+
+8. U.S. Government End-Users. The Product is a "commercial item," as that term is defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of "commercial computer software" and "commercial computer software documentation," as such terms are used in 48 C.F.R. 12.212 (Sept. 1995). Consistent with 48 C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through 227.7202-4 (June 1995), all U.S. Government End-Users acquire the Product with only those rights set forth herein.
+
+9. Miscellaneous. This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof, and may be amended only by a writing signed by both parties. This Agreement shall be governed by the laws of the State of California, U.S.A., excluding its conflict of law provisions. All disputes relating to this Agreement are subject to the exclusive jurisdiction of the courts of California and you expressly consent to the exercise of personal jurisdiction in the courts of California in connection with any such dispute including any claim involving Quest. This Agreement shall not be governed by the United Nations Convention on Contracts for the International Sale of Goods. If any provision in this Agreement should be held illegal or unenforceable by a court of competent jurisdiction, such provision shall be modified to the extent necessary to render it enforceable without losing its intent, or severed from this Agreement if no such modification is possible, and other provisions of this Agreement shall remain in full force and effect. A waiver by either party of any term or condition of this Agreement or any breach thereof, in any one instance, shall not waive such term or condition or any subsequent breach thereof. If any dispute arises under this Agreement, the prevailing party shall be reimbursed by the other party for any and all legal fees and costs associated therewith
+
+10. Licensee Outside the U.S. If Licensee is located outside the U.S., then the provisions of this Section shall apply. Les parties aux presentes confirment leur volonte que cette convention de meme que tous les documents y compris tout avis qui s'y rattache, soient rediges en langue anglaise. (translation: "The parties confirm that this Agreement and all related documentation is and will be in the English language.")
+-------------------------------------------------------------
+
+zeta producer Freeware License Agreements
+
+Important: Please read these license agreements carefully.            
+
+Fees
+zeta producer Freeware is a freeware product. You are allowed to use the product for an unlimited time and without paying any fees. A registration at zeta software is required in order to use the product.
+
+Copying zeta producer
+You are granted the right to make as many copies of this version and the online-documentation as wanted. You can distribute exact copies of the original version as electronic media to anybody you like.
+
+Limited Warranties
+THE SOFTWARE IS PROVIDED FREE OF CHARGE, AND, THEREFORE, ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE WARRANTIES THAT IT IS FREE OF DEFECTS, VIRUS FREE, ABLE TO OPERATE ON AN UNINTERRUPTED BASIS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS AGREEMENT. NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER.
+
+---------------------------------------
+	       Franz Binary Freeware License Agreement
+			      9/16/2002
+
+ATTENTION: READ CAREFULLY: By using, copying, or distributing the
+accompanying software you indicate your acceptance of the following
+Franz Binary Freeware License Agreement ("Agreement").
+
+1. LICENSE. Franz Inc. ("Franz") hereby grants you (each licensee is
+   addressed as "you") a non-exclusive, transferable license to use
+   its software product and accompanying documentation (the program's
+   object code and documentation are collectively referred to as the
+   "Software") on the following terms and only for non-commercial
+   purposes (see Section 2 below). You may:
+
+   a. use the Software on any computer in your possession;
+
+   b. make copies of the Software; and
+
+   c. distribute the Software (subject to the requirements of Section
+   3 below) only in the form originally furnished by Franz with no
+   modifications or additions whatsoever. If you have the slightest
+   doubt that your copy of the Software is not original, you must
+   contact Franz for an original copy.
+
+2. LIMITATIONS ON LICENSE. The license granted in Section 1 is subject
+   to the following restrictions:
+
+   a. The Software is to be used only for non-commercial purposes
+   unless you obtain Franz's prior written consent. Prohibited
+   commercial purposes include, but are not limited to:
+
+     (i) Selling, licensing or renting the Software to third parties
+     for a fee (by payment of money or otherwise, whether direct or
+     indirect);
+
+     (ii) Using the Software to provide services or products to others
+     for which you are compensated in any manner (by payment of money
+     or otherwise, whether direct or indirect), including, without
+     limitation, providing support or maintenance for the Software;
+
+     (iii) Using the Software to develop a similar application on any
+     platform for commercial distribution; or
+
+     (iv) Using the Software in any manner that is generally
+     competitive with a Franz product as defined by Franz.
+
+   b. However, media costs associated with the distribution of the
+   Software may be recovered. You shall use your best efforts to
+   promptly notify Franz upon learning of any violation of the above
+   commercial restrictions.
+
+   c. On each copy of the Software you must conspicuously and
+   appropriately reproduce Franz's copyright notices (see Software for
+   examples of such notices) and disclaimer of warranty; keep intact
+   this Agreement and all notices that refer to this Agreement or any
+   absence of warranty (whether written or interactively displayed);
+   and give any other recipients of the Software a copy of this
+   Agreement.
+
+   d. You may not modify, combine other commercial applications with,
+   or otherwise prepare derivative works of the Software.
+
+   e. In order to preserve the value of the Franz name and/or any
+   trademarks, service marks, trade dress adopted and/or used by Franz
+   from time to time, you shall not make use of any of them for any
+   reason (e.g., with respect to an Additional File, in advertising,
+   marketing your own products, press releases, or other publicity)
+   except solely as may be expressly authorized by this Agreement or
+   by the prior written consent of Franz.
+
+   f. Franz, in its sole and absolute discretion,  may have included a
+   portion of the source code or online documentation of the
+   Software. Except for any such portions, you shall not REVERSE
+   ENGINEER, DECOMPILE, DISASSEMBLE, OR OTHERWISE REDUCE ANY PORTION
+   OF THE SOFTWARE TO ANY HUMAN PERCEIVABLE FORM, except to the extent
+   this restriction is prohibited by applicable law.
+
+3. DISTRIBUTION: As used in this Agreement, the term "distribute" (and
+   its variants) includes making the Software available (either
+   intentionally or unintentionally) to third parties for copying or
+   use, including providing timeshare access. Each time you distribute
+   the Software, the recipient must expressly agree to comply with
+   these terms and conditions.  The recipient automatically receives
+   this license to use, copy, or distribute the Software subject to
+   these terms and conditions. You may not impose any further
+   restrictions on the recipients' exercise of the rights granted
+   herein. You are not responsible for enforcing compliance with this
+   Agreement by recipients.
+
+4. TITLE. Title, ownership rights, and intellectual property rights in
+   and to the Software, and each copy thereof (including all
+   copyrights therein), shall remain in Franz. The Software is
+   protected by the copyright laws of the United States and
+   international copyright treaties.
+
+5. NO FRANZ OBLIGATION. You are solely responsible for all of your
+   costs and expenses incurred in connection with the distribution of
+   the Software, and Franz shall have no liability, obligation or
+   responsibility therefor. Franz shall have no obligation to provide
+   maintenance, support, upgrades or new releases to you or to any
+   distributee of the Software.
+
+6. NO WARRANTY. THE SOFTWARE IS LICENSED FREE OF CHARGE, AND THERE IS
+   NO WARRANTY FOR THE SOFTWARE. FRANZ PROVIDES THE SOFTWARE "AS IS,"
+   AND FRANZ, ITS DISTRIBUTORS AND SUPPLIERS, AND ALL OTHER PERSONS
+   WHO HAVE BEEN INVOLVED IN THE CREATION, PRODUCTION, OR DELIVERY OF
+   THE SOFTWARE, DISCLAIM ALL CONDITIONS AND WARRANTIES OF ANY KIND,
+   EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING, BUT
+   NOT LIMITED TO, ANY CONDITIONS OR IMPLIED WARRANTIES OF
+   MERCHANTABILITY, SATISFACTORY QUALITY, AND FITNESS FOR A PARTICULAR
+   PURPOSE. THE ENTIRE RISK AS TO THE RESULTS, QUALITY AND PERFORMANCE
+   OF THE SOFTWARE IS WITH YOU AND YOUR DISTRIBUTEES. SHOULD THE
+   SOFTWARE PROVE DEFECTIVE, YOU AND YOUR DISTRIBUTEES (AND NOT FRANZ)
+   ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+   FRANZ MAKES NO WARRANTY OF NONINFRINGEMENT OF THE INTELLECTUAL
+   PROPERTY RIGHTS OF THIRD PARTIES.
+
+7. LIMITATION OF LIABILITY. UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL
+   THEORY, TORT, CONTRACT, OR OTHERWISE, SHALL FRANZ, ITS DISTRIBUTORS
+   AND SUPPLIERS, OR ANY OTHER PERSON WHO HAS BEEN INVOLVED IN THE
+   CREATION, PRODUCTION, OR DELIVERY OF THE SOFTWARE BE LIABLE TO YOU
+   OR ANY OTHER PERSON FOR ANY GENERAL, DIRECT, INDIRECT, SPECIAL,
+   INCIDENTAL, CONSEQUENTIAL, OR OTHER DAMAGES OF ANY CHARACTER
+   ARISING OUT OF THIS AGREEMENT OR THE USE OF OR INABILITY TO USE THE
+   SOFTWARE, INCLUDING BUT NOT LIMITED TO PERSONAL INJURY, LOSS OF
+   PROFITS, LOSS OF DATA, OUTPUT FROM THE SOFTWARE OR DATA BEING
+   RENDERED INACCURATE, FAILURE OF THE SOFTWARE TO OPERATE WITH ANY
+   OTHER PROGRAMS, DAMAGES FOR LOSS OF GOODWILL, BUSINESS
+   INTERRUPTION, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER
+   DAMAGES OR LOSSES OF WHATEVER NATURE, EVEN IF FRANZ HAS BEEN
+   INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+8. INDEMNIFICATION. You and your distributees shall defend, indemnify
+   and hold harmless Franz, its distributors and suppliers, and all
+   other persons who have been involved in the creation, production,
+   or delivery of the Software, from any claim, demand, liability,
+   damage award, suit, judgment, or other legal action (including
+   reasonable attorney's fees) arising out of your use, distribution,
+   modification, or duplication of the Software.
+
+9. TERMINATION. The license granted hereunder is effective until
+   terminated by Franz. You may terminate it at any time by destroying
+   the Software. This license will terminate automatically if you fail
+   to comply with the limitations described above. On termination, you
+   must destroy all copies of the Software. The termination of your
+   license will not result in the termination of the licenses of any
+   distributees who have received rights to the Software through you
+   so long as they are in compliance with the provisions of this
+   Agreement.
+
+10. EXPORT CONTROLS. None of the Software or underlying information or
+    technology may be downloaded or otherwise exported or re-exported
+    into (or to a national or resident of) any country in violation of
+    the laws and administrative regulations of the United States
+    relating to the control of exports of commodities and technical
+    data. By downloading or using the Software, you are agreeing to
+    the foregoing and you are representing and warranting that you are
+    not located in, under the control of, or a national or resident of
+    any such country.
+
+11. U. S. GOVERNMENT USE. The Software and any accompanying
+    documentation are deemed to be "commercial computer software" and
+    "commercial computer software documentation," respectively,
+    pursuant to DFAR Section 227.7202 and FAR Section 12.212, as
+    applicable.  Any use, modification, reproduction, release,
+    performing, displaying or disclosing of the Software and
+    accompanying documentation by the U.S. Government shall be
+    governed solely by the terms of this Agreement and shall be
+    prohibited except to the extent expressly permitted by the terms
+    of this Agreement.  Contractor/manufacturer is Franz Inc., 555
+    12th St., Suite 1450, Oakland, CA 94607.
+ 
+12. MISCELLANEOUS. This Agreement represents the complete agreement
+    concerning this license between the parties and supersedes all
+    prior agreements and representations between them. It may not be
+    amended. If any provision of this Agreement is held to be
+    unenforceable for any reason, this Agreement shall terminate. This
+    Agreement shall be governed by and construed under California law
+    as such law applies to agreements between California residents
+    entered into and to be performed within California, except as
+    governed by U.S. federal law. The application of the United
+    Nations Convention on Contracts for the International Sale of
+    Goods is expressly excluded. Address all correspondence regarding
+    this license to:
+
+	Franz Inc.
+	Attn: Legal Department
+	555 12th St., Suite 1450
+	Oakland, CA  94607
+	510-452-2000
+	510-452-0182 (fax)
+
+Copyright and Trademark Notices:
+--------------------------------
+The Software is Copyright (c) Franz Inc. 1986-2002. All rights
+reserved. The documentation and all computer files are also Copyright
+(c) Franz Inc. 1986-2002. All rights reserved. These rights include
+but are not limited to any foreign language translations of the manual
+or the software, and all derivative works of both. The trademarks
+Allegro CL and Allegro Common Lisp are the property of Franz Inc. All
+other trademarks are the property of their respective owners.
+

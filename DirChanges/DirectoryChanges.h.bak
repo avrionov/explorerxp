@@ -1,0 +1,256 @@
+// DirectoryChanges.h: interface for the 
+// CDirectoryChangeWatcher and CDirectoryChangeHandler classes.
+//
+//  Uses an io completion port and ReadDirectoryChangesW -- this code will only work on 
+//	Windows NT/2000.
+//
+//	The directory being watched must be a directory on a Windows NT/2000 machine
+//
+//
+//	These classes are based on the FWatch sample program in the SDK.
+//
+//
+//	If you get a compile time error that ReadDirectoryChangesW is an undeclared identifier,
+//  you'll need to #define _WIN32_WINNT 0x400 in stdafx.h.
+//
+//
+//	Copyright 2001. Wes Jones (wesj@hotmail.com)
+//
+//	This code is free, unless you want to give me money.
+//  You are free to do use code as you see fit, with the following exceptions:
+//		You may not claim authorship of this code.
+//		You may not sell or distrubute this code without author's permission.
+//		If you're going to sell it, let's make a deal.
+//
+//		You are not permitted to sell this code in it's compiled, non-compiled, or executable binary form. 
+//		Executable binary code excepted in the case that it is not sold separately from an application which 
+//		uses this code.
+//		
+//	
+//
+//  No guarantees or warranties are expressed or implied.
+//  Please let me know of any bugs, bug fixes, or enhancements made to this code.
+//  If you have better ideas for this, and/or tips or admonitions, I would be glad to hear them.
+//
+//	See notes at top of DirectoryChanges.cpp for more.
+//
+//		If this code was not obtained by downloading it from www.codeproject.com
+//		please tell me, & let me know how you got it. There a plenty of lazy bastards that 
+//		collect source code from the internet, and then sell it as part of 
+//		a 'Programmer's Library'.  Using this code for such a purpose is stricly prohibited.
+//
+//		If you'd like to pay me to turn this into an ActiveX object so you 
+//		can use it in a Visual Basic application, feel free to contact me with an offer,
+//		and I will create it for you. Otherwise, here is the source code, and make your own
+//		ActiveX object.
+//
+//////////////////////////////////////////////////////////////////////
+
+#if !defined(AFX_DIRECTORYCHANGES_H__02E53FDE_CB22_4176_B6D7_DA3675D9F1A6__INCLUDED_)
+#define AFX_DIRECTORYCHANGES_H__02E53FDE_CB22_4176_B6D7_DA3675D9F1A6__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#include <afxmt.h>
+#include <afxtempl.h>
+
+#define READ_DIR_CHANGE_BUFFER_SIZE 4096
+
+class CDirectoryChangeWatcher;
+class CDelayedDirectoryChangeHandler;//used to insure notifications fire in main thread.
+
+class CDirectoryChangeHandler
+/***********************************
+ A class to handle changes to files in a directory.  
+ The virtual On_Filexxx() functions are called whenever changes are made to a watched directory that is being handled by this object...
+ The On_Filexxx() functions execute in the context of the main thread.
+
+  NOTES: 
+		A CDirectoryChangeHandler can only be used by ONE CDirectoryChangeWatcher object,
+		but a CDirectoryChangeWatcher object may use multiple CDirectoryChangeHandler objects.
+
+	When this object is destroyed, whatever directories that it was being used to handle directory changes for
+	will automatically be 'unwatched'.
+
+	The class is reference counted.  The reference count is increased every time it is used 
+	in a (successfull) call to CDirectoryChangeWatcher::WatchDirectory() and is decremented whenever
+	the directory becomes 'unwatched'.
+
+   The only notifications are File Added, Removed, Modified, and renamed.
+   Even though the CDirectoryChangeWatcher::WatchDirectory (which'll call ReadDirectoryChangesW()) function allows you to specify flags 
+   to watch for changes to last access time, last write time, attributes changed, etc,
+   these changes all map out to On_FileModified() which doesn't specify the type of modification
+
+
+  NOTE:   The CDirectoryChangeHandler::On_Filexxx() functions
+		  are called in the context of the main thread, the thread that called CDirectoryChangeWatcher::WatchDirectory()
+
+************************************/
+{
+public:
+
+	CDirectoryChangeHandler();
+	virtual ~CDirectoryChangeHandler();
+
+	//this class is reference counted
+	long AddRef(){ return InterlockedIncrement(&m_nRefCnt);	}
+	long Release()
+		{  long nRefCnt = -1;
+			if( (nRefCnt = InterlockedDecrement(&m_nRefCnt)) == 0 )
+				delete this;
+			return nRefCnt;
+		}
+	long CurRefCnt()const { return m_nRefCnt;}
+
+
+	BOOL UnwatchDirectory();
+	
+	const CString & GetChangedDirectoryName() const { return m_strChangedDirectoryName;}
+								//returns the directory name where the change occured.  This contains
+							   //the last directory to have changed if the same CDirectoryChangeHandler is
+							   //being used to watch multiple directories. It will return an empty string
+							   //if no changes have been made to a directory yet.   It will always be the 
+							   //name of the currently changed directory(as specified in CDirectoryChangeWatcher::WatchDirectory())
+							   //if called in the context of one of the
+							   //On_Filexxx() functions.
+protected:
+	//
+	//	Override these functions:
+	//	These functions are called when the directory to watch has had a change made to it
+	virtual void On_FileAdded(const CString & strFileName); //=0;
+	virtual void On_FileRemoved(const CString & strFileName);// = 0;
+	virtual void On_FileModified(const CString & strFileName);// = 0;
+	virtual void On_FileNameChanged(const CString & strOldFileName, const CString & strNewFileName);// = 0;
+
+	virtual void On_ReadDirectoryChangesError(DWORD dwError){
+		TRACE(_T("ReadDirectoryChangesW has failed! %d"), dwError);
+	}
+	//
+	//	End Override these functions (ie: don't worry about the rest of this class)
+	//
+	
+	void SetChangedDirectoryName(const CString & strChangedDirName);
+	
+private:
+	long m_nRefCnt;
+	CString m_strChangedDirectoryName;
+
+	friend class CDirectoryChangeWatcher;
+	friend class CDelayedDirectoryChangeHandler;
+	//
+	//	This class keeps a reference to the CDirectoryChangeHandler 
+	//	that was used when an object of this type is passed 
+	//	to CDirectoryChangeWatcher::WatchDirectory().
+	//
+	//	This way, when the CDirecotryChangeHandler object is destroyed(or if CDirectoryChangeHandler::UnwatchDirectory() is called)
+	//	AFTER CDirectoryChangeWatcher::UnwatchDirecotry() or CDirecotryChangeWatcher::UnwatchAllDirectories() is called 
+	//	the directory(or direcotries) that this 
+	//	CDirecotryChangeHandler object is handling will be automatically unwatched
+	//	If the CDirecotryChangeWatcher object is destroyed before the CDirectoryChangeHandler objects 
+	//	that are being used with that watcher are destroyed, the reference counting prevents
+	//	this class from referencing a destructed object.
+	//	Basically, neither class needs to worry about the lifetime of the other(CDirectoryChangeWatcher && CDirectoryChangeHandler)
+	//
+
+	long  ReferencesWatcher(CDirectoryChangeWatcher * pDirChangeWatcher);
+	long  ReleaseReferenceToWatcher(CDirectoryChangeWatcher * pDirChangeWatcher);
+	CDirectoryChangeWatcher * m_pDirChangeWatcher;
+	long   m_nWatcherRefCnt; //<-- when this reaches 0, m_pDirChangeWatcher is set to NULL
+	CCriticalSection m_csWatcher;
+};
+
+///////////////////////////////////////////////////////////
+
+class CDirectoryChangeWatcher  
+/***************************************
+  A class to monitor a directory for changes made to it.
+  The class CDirectoryChangeHandler handles the changes.
+
+
+  Multiple directories can be watched simultaneously using a single instance of CDirectoryChangeWatcher.
+  Single or multiple instances of CDirectoryChangeHandler object(s) can be used to handle changes to watched directories.
+  Directories can be added and removed from the watch dynamically at run time without destroying 
+  the CDirectoryChangeWatcher object (or CDirectoryChangeHandler object(s).
+
+  This class uses a single worker thread, an io completion port, and ReadDirectoryChangesW() to monitor changes to a direcory (or subdirectories).
+  There will always only be a single thread no matter how many directories are being watched(per instance of CDirectoryChangeHandler)
+
+  
+  
+****************************************/
+{
+public:
+	CDirectoryChangeWatcher();
+	virtual ~CDirectoryChangeWatcher();
+
+	DWORD WatchDirectory(const CString & strDirToWatch, DWORD dwChangesToWatchFor, CDirectoryChangeHandler * pChangeHandler, BOOL bWatchSubDirs = FALSE);
+
+	BOOL IsWatchingDirectory (const CString & strDirName);
+	
+	BOOL UnwatchDirectory(const CString & strDirToStopWatching);
+	BOOL UnwatchAllDirectories();
+
+protected:
+	
+	virtual void On_ThreadInitialize(){}//All file change notifications has taken place in the context of a worker thread...do any thread initialization here..
+	virtual void On_ThreadExit(){}//do thread cleanup here
+	
+private:
+	friend class CDirectoryChangeHandler;
+	BOOL UnwatchDirectory(CDirectoryChangeHandler * pChangeHandler);//called in CDirectoryChangeHandler::~CDirectoryChangeHandler()
+
+
+	UINT static MonitorDirectoryChanges(LPVOID lpvThis );
+	
+	class CDirWatchInfo 
+		//this class is used internally by CDirecotryChangeWatcher
+		//to help manage the watched directories
+	{
+	private:
+		CDirWatchInfo();		//private & not implemented
+		CDirWatchInfo & operator=(const CDirWatchInfo & rhs);//so that they're aren't accidentally used. -- you'll get a linker error
+	public:
+		CDirWatchInfo(HANDLE hDir, const CString & strDirectoryName, 
+					  CDirectoryChangeHandler * pChangeHandler, 
+					  DWORD dwChangeFilter, BOOL bWatchSubDir);
+		~CDirWatchInfo( );
+		
+		DWORD StartMonitor(HANDLE hCompPort);
+		BOOL UnwatchDirectory( HANDLE hCompPort);
+		BOOL LockProperties() { return m_cs.Lock(); }
+		BOOL UnlockProperties(){ return m_cs.Unlock();	}
+
+		CDelayedDirectoryChangeHandler* GetChangeHandler()const;
+		CDirectoryChangeHandler * GetRealChangeHandler()const;
+		CDirectoryChangeHandler * SetRealDirectoryChangeHandler(CDirectoryChangeHandler * pChangeHandler);
+		
+		
+		//CDirectoryChangeHandler * m_pChangeHandler;
+		CDelayedDirectoryChangeHandler * m_pChangeHandler;
+		HANDLE      m_hDir;//handle to directory that we're watching
+		DWORD		m_dwChangeFilter;
+		BOOL		m_bWatchSubDir;
+		CString     m_strDirName;//name of the directory that we're watching
+		CHAR        m_Buffer[ READ_DIR_CHANGE_BUFFER_SIZE ];//buffer for ReadDirectoryChangesW
+		DWORD       m_dwBufLength;//length or returned data from ReadDirectoryChangesW -- ignored?...
+		OVERLAPPED  m_Overlapped;
+		DWORD		m_dwReadDirError;//indicates the success of the call to ReadDirectoryChanges()
+		CCriticalSection m_cs;
+		CEvent		m_StartStopEvent;
+		enum eRunningState{
+			 RUNNING_STATE_NOT_SET, DO_START_MONITOR, DO_STOP_MONITOR, DO_STOP_MONITOR_STEP2,
+			 DO_RUN_NORMAL,  };
+		eRunningState m_RunningState;
+		};
+
+	HANDLE m_hCompPort;
+	HANDLE m_hThread;
+	//DWORD  m_dwThreadID;
+	CTypedPtrArray<CPtrArray, CDirWatchInfo*> m_DirectoriesToWatch;
+	CCriticalSection m_csDirWatchInfo;
+	
+};
+
+#endif // !defined(AFX_DIRECTORYCHANGES_H__02E53FDE_CB22_4176_B6D7_DA3675D9F1A6__INCLUDED_)

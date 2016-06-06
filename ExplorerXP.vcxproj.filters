@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4ec73d06-e090-43b4-9bd0-f072ce6ce6e9}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Grid">
+      <UniqueIdentifier>{cc40e74c-f2c6-419c-8499-040a1876477c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Viewers">
+      <UniqueIdentifier>{a71816b4-1c58-4516-9ace-40663c052c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Views &amp; Docs">
+      <UniqueIdentifier>{6b1abcf4-1a1b-410f-ac32-70bc38499f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DirChanges">
+      <UniqueIdentifier>{e3436834-94ba-4e4e-8cfb-198fe71838c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bars">
+      <UniqueIdentifier>{b84eaf4f-fe42-486d-a222-c5a1822d8ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FolderTrees">
+      <UniqueIdentifier>{cdbfa091-74a8-4e22-b94b-c45f8141edd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResizableLib">
+      <UniqueIdentifier>{8d094af2-97bc-46c8-9fbd-a225f30fdada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResizableLib\SizeBar">
+      <UniqueIdentifier>{c1e9b43e-dce6-46c2-be29-001254a4ada8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialogs">
+      <UniqueIdentifier>{0f228a0a-6916-41bc-bf29-dcf9ee589aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialogs\Options">
+      <UniqueIdentifier>{09097bbe-bef2-47b5-85f8-f007a2da5429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI Classes">
+      <UniqueIdentifier>{b6bdd93b-0776-4e62-bfbc-5eb7ce80b21a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{83651ef1-1980-439b-9615-eb8a9660ca0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Persist">
+      <UniqueIdentifier>{12e2d795-7573-417b-bb7b-ae26580412cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AddressBar">
+      <UniqueIdentifier>{0c8672f7-adeb-4df9-83dc-9a454f73a1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{8bc6ab6f-ec03-40c7-884b-7c73243af49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{1a196996-7f2c-4c57-a6f1-79850babbec8}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Bitmaps">
+      <UniqueIdentifier>{b009de2d-f954-4238-bcac-1117d446eb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{ad22dfce-82ca-4ac1-89ba-eefa3252d2bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BrowseForFolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Charts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClipboardFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirSize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplorerXP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderStateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericDropTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="History.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenameInsert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shell32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShellContextMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortcutManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\FontMapper.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\GridCell.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\GridCellBase.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\GridCtrl.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\GridDropTarget.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\InPlaceEdit.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCtrl_src\TitleTip.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="DriveViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="RecBinViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplorerXPDoc.cpp">
+      <Filter>Source Files\Views &amp; Docs</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplorerXPView.cpp">
+      <Filter>Source Files\Views &amp; Docs</Filter>
+    </ClCompile>
+    <ClCompile Include="DirChanges\DelayedDirectoryChangeHandler.cpp">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClCompile>
+    <ClCompile Include="DirChanges\DirectoryChanges.cpp">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClCompile>
+    <ClCompile Include="DirSizeChangeHandler.cpp">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClCompile>
+    <ClCompile Include="DocSelect.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="MainBarDropTarget.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="MainToolBar.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="TabDropTarget.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBarEx.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowTabCtrl.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="DriveTree.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="FavTree.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFolder.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTreeDropTarget.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlFolder.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableDialog.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableGrip.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableLayout.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableMinMax.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableMsgSupport.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableState.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableVersion.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizableLib\ResizableWndState.cpp">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Sizebar\scbarcf.cpp">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Sizebar\scbarg.cpp">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Sizebar\SizableReBar.cpp">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Sizebar\sizecbar.cpp">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddEditPatternDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="CleanDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="CopyMoveDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="EditFilterDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="EditFiltersDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="MergeDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiRenameDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="NewFolderDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="RenameDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="RenaneReplace.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="RenTrimDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="ReNumberDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="SplitDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderSizeDlg.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardPage.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsDialog.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="TabOptionsDlg.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="hotkeyctrlex.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="HoverButton.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="HyperLink.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Subclass.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Themes.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlEx.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="WinClasses.cpp">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLock.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PropContainer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleFile.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleInstance.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SplitPath.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SysImageList.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TextUtil.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TGABitmap.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="XWinVer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Persist\PersistFrameImpl.cpp">
+      <Filter>Source Files\Persist</Filter>
+    </ClCompile>
+    <ClCompile Include="Persist\PersistMDIFrame.cpp">
+      <Filter>Source Files\Persist</Filter>
+    </ClCompile>
+    <ClCompile Include="ACEdit.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ACListWnd.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxFolder.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="PathEdit.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="FileMerge.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSplit.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="FindMissing.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="FileShellAttributes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShellTree.cpp">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BrowseForFolder.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Charts.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClipboardFiles.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirSize.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplorerXP.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileInfo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindMissing.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderStateManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericDropTarget.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridList.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="History.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListControlMem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Options.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenameInsert.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shell32.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellContextMenu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortcutManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wclassdefines.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\CellRange.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\FontMapper.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\GridCell.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\GridCellBase.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\GridCtrl.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\GridDropTarget.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\InPlaceEdit.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\TitleTip.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="DriveViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="RecBinViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplorerXPDoc.h">
+      <Filter>Source Files\Views &amp; Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplorerXPView.h">
+      <Filter>Source Files\Views &amp; Docs</Filter>
+    </ClInclude>
+    <ClInclude Include="DirChanges\DelayedDirectoryChangeHandler.h">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClInclude>
+    <ClInclude Include="DirChanges\DirectoryChanges.h">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClInclude>
+    <ClInclude Include="DirSizeChangeHandler.h">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClInclude>
+    <ClInclude Include="DocSelect.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="MainBarDropTarget.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="MainToolBar.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="TabDropTarget.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBarEx.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowTabCtrl.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="DriveTree.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="FavTree.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFolder.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTreeDropTarget.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrlFolder.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableDialog.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableGrip.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableLayout.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableMinMax.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableMsgSupport.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableState.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableVersion.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizableLib\ResizableWndState.h">
+      <Filter>Source Files\ResizableLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\scbarcf.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\scbarg.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\SizableReBar.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="SizeBarInclude.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\SizeBarInclude.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\sizecbar.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddEditPatternDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="CleanDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="CopyMoveDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="EditFilterDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="EditFiltersDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="MergeDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiRenameDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="NewFolderDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="RenameDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="RenaneReplace.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="RenTrimDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ReNumberDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderSizeDlg.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardPage.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsDialog.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="TabOptionsDlg.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="hotkeyctrlex.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="HoverButton.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="HyperLink.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Subclass.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Themes.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrlEx.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="WinClasses.h">
+      <Filter>Source Files\UI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="fast_array.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="InOut.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLock.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PropContainer.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleFile.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleInstance.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitPath.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SysImageList.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TextUtil.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TGABitmap.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="XWinVer.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Persist\PersistFrameImpl.h">
+      <Filter>Source Files\Persist</Filter>
+    </ClInclude>
+    <ClInclude Include="Persist\PersistFrames.h">
+      <Filter>Source Files\Persist</Filter>
+    </ClInclude>
+    <ClInclude Include="Persist\PersistMDIFrame.h">
+      <Filter>Source Files\Persist</Filter>
+    </ClInclude>
+    <ClInclude Include="ACEdit.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="ACListWnd.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxFolder.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="PathEdit.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="FileMerge.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSplit.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCtrl_src\MemDC.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="FileShellAttributes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_new.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellTree.h">
+      <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ExplorerXP.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ExplorerXP.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\rt_manif.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_tga.tga">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bmp00001.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\hdrdown.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\hdrup.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\hoverbmp.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\LogoXPQ.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\toolbar1.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\toolbar2.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="res\ExplorerXP.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\ExplorerXPDoc.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\favs.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\folders.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\icon_fop.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\icon_fup.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\left.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\right.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\up_folder.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\ExplorerXP.exe.manifest">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

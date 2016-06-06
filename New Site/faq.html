@@ -1,0 +1,370 @@
+<HTML>
+	<HEAD>
+		<TITLE>ExplorerXP - Freeware file manager for Win2K/XP </TITLE>
+		<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<meta content="ExplorerXP, file manager, disk space manager, folder size, files, size, tabbed interface"
+			name="Keywords">
+		<meta content="all" name="Robots">
+		<META content="Nikolay Avrionov" name="author">
+		<LINK href="images/main.css" type="text/css" rel="stylesheet">
+			<link href="http://www.explorerxp.com/iconxp.ico" rel="SHORTCUT ICON">
+				<SCRIPT language="JavaScript">
+		<!--
+			function newWin( fName, title, width, height )			
+			{
+  			if (width == null) {
+    			width = 200;
+  			}
+  			if (height == null) {
+    			height = 300;
+  			}
+
+			if (document.all){
+					var hWnd = window.open(fName,
+                    	title,
+                    	"width=" + width + ", " +
+                    	"height=" + height + ", " +
+                    	"resizable=1, " +
+                    	"menubar=0, " +
+                    	"toolbar=0, " +
+                    	"directories=0, " +
+                    	"location=0, " +
+                    	"scrollbars=0, " +
+                    	"status=0")
+				}
+				else{
+  				//netscape code here
+					var hWnd = window.open(fName,
+                    	title,
+                    	"width=" + width + "," +
+                    	"height=" + height + "," +
+                    	"resizable=1," +
+                    	"menubar=0," +
+                    	"toolbar=0," +
+                    	"directories=0," +
+                    	"location=0," +
+                    	"scrollbars=0," +
+                    	"status=0")
+				}
+			}
+		-->
+				</SCRIPT>
+	</HEAD>
+	<BODY text="#000000" vLink="#003366" aLink="#003366" link="#003366" bgColor="#ffffff"
+		leftMargin="0" topMargin="2" marginwidth="0" marginheight="0">
+		<TABLE cellSpacing="0" cellPadding="0" width="800" align="center" border="0">
+			<TBODY>
+				<TR>
+					<TD width="800" background="images/dotted_line.gif" colSpan="3"></TD>
+				</TR>
+				<TR>
+					<TD width="1" background="images/dotted_line.gif"></TD>
+					<TD width="638"><IMG src="images/LogoWeb.png"></TD>
+					<TD width="1" background="images/dotted_line.gif"></TD>
+				</TR>
+			</TBODY></TABLE>
+		<TABLE cellSpacing="0" cellPadding="0" width="800" align="center" border="0">
+			<TBODY>
+				<TR>
+					<TD width="800" background="images/dotted_line.gif" colSpan="5"></TD>
+				</TR>
+				<TR vAlign="top">
+					<TD width="1" background="images/dotted_line.gif"></TD>
+					<TD width="160">
+						<TABLE cellSpacing="0" cellPadding="0" bgColor="#ffffff" border="0">
+							<TBODY>
+								<TR><TD colSpan="2" height="20"><FONT id="lnt" face="arial" size="1">&nbsp;</FONT></TD></TR>
+								<TR><TD align="right" width="29" height="20"></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id=lnl href="index.html#home target=" _main?>Home</A></FONT></TD></TR>
+								<TR><TD align=right height=20></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id="A3" href="index.html#download" target=_main>Download</A></FONT></TD></TR>
+								<TR><TD align=right height=20></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id="A4" href="history.html" target=_main>History</A></FONT></TD></TR>
+								<TR><TD align=right height=20></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id="A5" href="http://www.explorerxp.com/phpBB2">Forum</A></FONT></FONT></TD></TR>
+								<TR><TD align="right" height="20"></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id="A1" href="faq.html">FAQ</A></FONT></FONT></TD></TR>
+								<TR><TD align="right" height="20"></TD><TD><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2"><A id="A6" href="help.html">Help</A></FONT></FONT></TD></TR>
+								<TR><TD colSpan="2" height="20"><FONT id="lnt" face="arial" size="1">&nbsp;</FONT></TD></TR>
+								<TR>
+									<TD align = "center" colSpan="2" height="30"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" ID="Form2">
+<input type="hidden" name="cmd" value="_s-xclick" ID="Hidden3">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" ID="Image2">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----&#13;&#10;" ID="Hidden4">
+</form></TD>
+								</TR>
+							</TBODY></TABLE>
+						<TABLE cellSpacing="0" cellPadding="0" width="160" align="left" border="0">
+							<TR>
+								<TD>
+	<script type="text/javascript"><!--
+google_ad_client = "pub-2522961231050492";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+								</TD>
+							</TR>
+						</TABLE>
+					</TD>
+					<TD width="1" background="images/dotted_line.gif"></TD>
+					<TD align="center">
+						<TABLE cellSpacing="0" cellPadding="0" border="0">
+							<TBODY>
+								<TR>
+									<TD height="12"  width = 40></TD>
+									<TD height="12"  width = 600></TD>																		
+								</TR>
+								<TR>
+									<TD> </TD>
+									<TD >
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2">
+													<A id="A2" href="#q1">How to turn off the grid?</A></FONT></FONT></P>
+									</TD>
+								</TR>
+								<TR>	
+									<TD> </TD>
+									<TD >
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2">
+													<A id="A7" href="#q2">How to prevent ExplorerXP  from calculating folder sizes?</A></FONT></FONT></P>
+									</TD>
+								</TR>
+								<TR>
+									<TD> </TD>
+									<TD >
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2">
+													<A id="A8" href="#q3">How to print a folder?</A></FONT></FONT></P>
+									</TD>																											
+								</TR>	
+								<TR>
+									<TD> </TD>
+									<TD >
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><FONT id="lnt" face="arial,verdana,helvetica" color="#003366" size="2">
+													<A id="A9" href="#q4">How to add folders to the groups?</A></FONT></FONT></P>
+									</TD>																											
+								</TR>	
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro"><a name="q1"></TD>
+									<TD bgColor="gainsboro">
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><STRONG>How to turn off the grid?
+												</STRONG></FONT></P>
+									</TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>	
+								<TR>
+									<TD vAlign="top" align="center"></TD>
+									<TD align="left"></TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>							
+								<TR>
+									<TD </TD>
+									<TD><FONT id="t" face="arial,verdana,helvetica" size="2">1. Open the ExplorerXP Main Menu and choose File->Settings.</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">2. Remove the check marks from "Vertical"  or/and  "Horizontal".</FONT>
+									</TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>							
+								<TR>
+									<TD></TD>
+									<TD><IMG alt="" src="screens/removegrid.png" width="460" height="393" border="0">
+										</A>
+									</TD>
+								</TR>
+								<TR>
+									<TD vAlign="top" align="center"></TD>
+									<TD align="left"></TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>	
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro"><a name="q2"></TD>
+									<TD bgColor="gainsboro">
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><STRONG>How to prevent ExplorerXP  from calculating folder sizes?
+												</STRONG></FONT></P>
+									</TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>	
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>									
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>	
+								<TR>
+									<TD </TD>
+									<TD><FONT id="t" face="arial,verdana,helvetica" size="2">1. Open the ExplorerXP Main Menu and choose File->Settings</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">2. Select "Folder Sizes" Tab.</FONT><br>						
+										<FONT id="t" face="arial,verdana,helvetica" size="2">3. Select "Never".</FONT><br>
+									</TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>							
+								<TR>
+									<TD></TD>
+									<TD><IMG alt="" src="screens/nocalc.png" width="460" height="393" border="0">
+										</A>
+									</TD>
+								</TR>
+								
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>
+														
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro"><a name="q3"></TD>
+									<TD bgColor="gainsboro">
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><STRONG>How to print a folder?
+												</STRONG></FONT></P>
+									</TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>	
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>									
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>	
+								<TR>
+									<TD </TD>
+									<TD><FONT id="t" face="arial,verdana,helvetica" size="2">1. Select a group of file and folders.</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">2. Open the ExplorerXP Main Menu and choose Edit->Copy File Info As Text.</FONT><br>						
+										<FONT id="t" face="arial,verdana,helvetica" size="2">3. Open Microsoft Office Excel".</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">4. Open Excel Main Menu and choose Edit->Paste".</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">5. Print the table.</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">Note: Any spreadsheet application or text editor can be used.</FONT><br><br>
+									</TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>							
+								<TR>
+									<TD></TD>
+									<TD><IMG alt="" src="screens/copyinfo.png" width="320" height="367" border="0">
+										</A>
+									</TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>	
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>							
+								<TR>						
+								<TR>
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>								
+								<TR>
+									<TD bgColor="gainsboro"><a name="q4"></TD>
+									<TD bgColor="gainsboro">
+										<P align="left"><FONT id="t" face="arial,verdana,helvetica" size="2"><STRONG>How to add folders to the groups?
+												</STRONG></FONT></P>
+									</TD>
+								</TR>	
+								<TR>								
+									<TD bgColor="gainsboro" height="5"></TD>
+									<TD bgColor="gainsboro" height="5"></TD>
+								</TR>	
+								<TR>
+								<TD  background="images/dotted_line.gif" colSpan="2"><IMG src="images/1x1.gif"></TD>                
+								</TR>									
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>	
+								<TR>
+									<TD </TD>
+									<TD><FONT id="t" face="arial,verdana,helvetica" size="2">1. Select a group of folders.</FONT><br>
+										<FONT id="t" face="arial,verdana,helvetica" size="2">2. Drag them to a group name in the group view.</FONT><br>																
+										
+									</TD>
+								</TR>
+								<TR>
+									<TD height="8"></TD>
+									<TD height="8"></TD>
+								</TR>							
+								<TR>
+									<TD></TD>
+									<TD><IMG alt="" src="screens/addtogroups.png" width="427" height="434" border="0">
+										</A>
+									</TD>
+								</TR>
+								<TR>
+									<TD height="20"  width = 40></TD>
+									<TD height="20"  width = 600></TD>																		
+								</TR>
+								
+														
+															
+								
+								
+							</TBODY></TABLE>
+					</TD>
+					<TD background="images/dotted_line.gif"><IMG src="images/1x1.gif"></TD>
+				</TR>
+			</TBODY></TABLE>
+		<TABLE cellSpacing="0" cellPadding="0" width="800" align="center" border="0">
+			<TBODY>
+				<TR>
+					<TD width="800" background="images/dotted_line.gif" colSpan="4"><IMG src="images/1x1.gif"></TD>
+				</TR>
+				<TR>
+					<TD align="right" width="1" background="images/dotted_line.gif"></TD>
+					<TD width="160"></TD>
+					<TD align="right" width="1" background="images/dotted_line.gif"></TD>
+					<TD width="637"><FONT id="t" face="arial,verdana,helvetica" color="#0054a6" size="1">© 
+							2003-2004 Nikolay Avrionov. All rights reserved.</FONT></TD>
+					<TD align="right" width="1" background="images/dotted_line.gif"></TD>
+				</TR>
+				<TR>
+					<TD width="800" background="images/dotted_line.gif" colSpan="4"><IMG src="images/1x1.gif"></TD>
+				</TR>
+			</TBODY></TABLE>
+	</BODY>
+</HTML>

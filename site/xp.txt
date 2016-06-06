@@ -1,0 +1,41 @@
+What is Total Commander?
+
+Total Commander (former Wincmd) is a file manager for Windows (TM) similar to the Windows Explorer. But Total Commander uses a different approach: it has two fixed windows side by side like a well-known file manager for DOS.
+
+Here are some key features of Total Commander:
+
+
+-	Keyboard functions similar to the DOS original.
+-	Supports Drag & Drop with the mouse, including to the print manager.
+-	Extended copying, moving, renaming and deleting of entire trees (Enables deleting "full" directories).
+-	Archives are handled like subdirectories. You can easily copy files to and from archives. The appropriate archiving program is automatically called. pkzip, arj, lha, rar, uc2 and ace are all supported.
+
+-	Start-menu (User-defined commands) to place your frequently used DOS or Windows programs into a drop-down menu. The actual directory and/or the file under the cursor can be delivered to the application.
+-	Command line for the simple starting of programs with parameters, simply by typing the program name or by pressing CTRL+ENTER or CTRL+SHIFT+ENTER.
+-	Enhanced  search function with full text search in any files across multiple drives.
+-	Built in file viewer (F3) to view files of ANY SIZE in hex, binary or text format, using either the ASCII- (DOS) or the ANSI- (Windows) character set. The line width and font size can now be changed.
+
+-	Internal Unzip by Info-Zip, which allows unzipping without calling an external program! The source code in Turbo-Pascal is free and can be obtained directly from the author.
+-	Configurable button bar to start external programs or internal menu commands.
+-	Configurable main menu.
+-	Internal unpackers for ZIP, ARJ, LZH, GZ, TAR, RAR and ACE formats.
+-	Internal ZIP packer, based on ZLib by Jean-loup Gailly.
+SizeExplorer is a disk space manager. The main purpose of SizeExplorer is to 
+show you the actual space used by a folder (a feature that Windows Explorer 
+lack of). Furthermore, SizeExplorer provide you with a complete set of tools
+to help you manage your disk space. Graphical charts, files distribution 
+statistics, complete files listing, network exploration and exports to excel,
+text file, etc. are some examples of features included in SizeExplorer.
+
+All the information provided by SizeExplorer will help you manage your drives
+more easily. You will be able to rapidly spot large files that may be useless
+and you will have a good general view of the space usage distribution on your
+local and network drives.
+
+
+ Krusader is an advanced twin-panel (commander-style) file-manager for KDE 3.x (similar to Midnight or Total Commander) but with many extras. It provides all the file-management features you could possibly want.
+Plus: extensive archive handling, mounted filesystem support, FTP, advanced search module, viewer/editor, directory synchronisation, file content comparisons, powerful batch renaming and much much more.
+It supports the following archive formats: tar, zip, bzip2, gzip, rar, ace, arj and rpm and can handle other KIOSlaves such as smb:// or fish://
+It is (almost) completely customizable, very user friendly, fast and looks great on your desktop! :-)
+
+You should give it a try. 

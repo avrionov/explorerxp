@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<XML_DIZ_INFO>
+	<MASTER_PAD_VERSION_INFO>
+		<MASTER_PAD_VERSION>2.01</MASTER_PAD_VERSION>
+		<MASTER_PAD_EDITOR>PADGen 2.0.1.22 http://www.padgen.org</MASTER_PAD_EDITOR>
+		<MASTER_PAD_INFO>Portable Application Description, or PAD for short, is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://www.asp-shareware.org/pad</MASTER_PAD_INFO>
+	</MASTER_PAD_VERSION_INFO>
+	<Company_Info>
+		<Company_Name>Nikolay Avrionov</Company_Name>
+		<Address_1>330 Hollipat Center Dr</Address_1>
+		<Address_2 />
+		<City_Town>Santa Barbara</City_Town>
+		<State_Province>CA</State_Province>
+		<Zip_Postal_Code>93111</Zip_Postal_Code>
+		<Country>USA</Country>
+		<Company_WebSite_URL>http://www.explorerxp.com</Company_WebSite_URL>
+		<Contact_Info>
+			<Author_First_Name>Nikolay</Author_First_Name>
+			<Author_Last_Name>Avrionov</Author_Last_Name>
+			<Author_Email>navrionov@rocketmail.com</Author_Email>
+			<Contact_First_Name>Nikolay</Contact_First_Name>
+			<Contact_Last_Name>Avrionov</Contact_Last_Name>
+			<Contact_Email>navrionov@rocketmail.com</Contact_Email>
+		</Contact_Info>
+		<Support_Info>
+			<Sales_Email>info@explorerxp.com</Sales_Email>
+			<Support_Email>info@explorerxp.com</Support_Email>
+			<General_Email>info@explorerxp.com</General_Email>
+			<Sales_Phone />
+			<Support_Phone />
+			<General_Phone />
+			<Fax_Phone />
+		</Support_Info>
+	</Company_Info>
+	<Program_Info>
+		<Program_Name>ExplorerXP</Program_Name>
+		<Program_Version>1.07</Program_Version>
+		<Program_Release_Month>09</Program_Release_Month>
+		<Program_Release_Day>17</Program_Release_Day>
+		<Program_Release_Year>2005</Program_Release_Year>
+		<Program_Cost_Dollars />
+		<Program_Cost_Other_Code />
+		<Program_Cost_Other />
+		<Program_Type>Freeware</Program_Type>
+		<Program_Release_Status>Major Update</Program_Release_Status>
+		<Program_Install_Support>Install and Uninstall</Program_Install_Support>
+		<Program_OS_Support>Windows2000,WinXP,Windows2003</Program_OS_Support>
+		<Program_Language>English</Program_Language>
+		<Program_Change_Info />
+		<Program_Specific_Category>Utilities</Program_Specific_Category>
+		<Program_Category_Class>System Utilities::File &amp; Disk Management</Program_Category_Class>
+		<Program_Categories>File and Disk Managment</Program_Categories>
+		<Program_System_Requirements />
+		<Includes_JAVA_VM>N</Includes_JAVA_VM>
+		<Includes_VB_Runtime>N</Includes_VB_Runtime>
+		<Includes_DirectX>N</Includes_DirectX>
+		<File_Info>
+			<Filename_Versioned>explorerxpsetup.exe</Filename_Versioned>
+			<Filename_Previous>explorerxpsetup.exe</Filename_Previous>
+			<Filename_Generic>explorerxpsetup.exe</Filename_Generic>
+			<Filename_Long>explorerxpsetup.exe</Filename_Long>
+			<File_Size_Bytes>420220</File_Size_Bytes>
+			<File_Size_K>410</File_Size_K>
+			<File_Size_MB>0.40</File_Size_MB>
+		</File_Info>
+		<Expire_Info>
+			<Has_Expire_Info>N</Has_Expire_Info>
+			<Expire_Count />
+			<Expire_Based_On>Days</Expire_Based_On>
+			<Expire_Other_Info />
+			<Expire_Month />
+			<Expire_Day />
+			<Expire_Year />
+		</Expire_Info>
+	</Program_Info>
+	<Program_Descriptions>
+		<English>
+			<Keywords>file explorer, disk space manager, tabbed interface, merge split</Keywords>
+			<Char_Desc_45>File explorer with tabbed UI &amp; folder sizes</Char_Desc_45>
+			<Char_Desc_80>File explorer with tabbed UI &amp; shows folder sizes. Merge, split &amp; clean  tools.</Char_Desc_80>
+			<Char_Desc_250>ExplorerXP is a very fast, small, compact file manager for Windows 2000/XP. Unlike the regular Windows Explorer, it displays the total size of each folder and allows you to browse multiple folders from a tabbed interface.</Char_Desc_250>
+			<Char_Desc_450>ExplorerXP is a very fast, small, compact and innovative FREEWARE (for non - commercial use) file manager for Windows 2000/XP. Unlike the regular Windows Explorer, it displays the total size of each folder and allows you to browse multiple folders from a tabbed interface. It also includes an option to split and merge files, and to select or delete files based on wildcards.</Char_Desc_450>
+			<Char_Desc_2000>ExplorerXP is a very fast, small, compact and innovative FREEWARE (for non - commercial use) file manager for Windows 2000/XP. Unlike the regular Windows Explorer, it displays the total size of each folder and allows you to browse multiple folders from a tabbed interface. It also includes an option to split and merge files, and to select or delete files based on wildcards.
+Features - Tabbed interface, folder size information, real size of compressed files &amp; folders, Unicode support, Merge &amp; Split  tools, wildcard selections, advanced copy/move.</Char_Desc_2000>
+		</English>
+	</Program_Descriptions>
+	<Web_Info>
+		<Application_URLs>
+			<Application_Info_URL>http://www.explorerxp.com</Application_Info_URL>
+			<Application_Order_URL>http://www.explorerxp.com</Application_Order_URL>
+			<Application_Screenshot_URL>http://www.explorerxp.com/screens/expscr640.gif</Application_Screenshot_URL>
+			<Application_Icon_URL>http://www.explorerxp.com/iconxp.gif</Application_Icon_URL>
+			<Application_XML_File_URL>http://www.explorerxp.com/exppad_file.xml</Application_XML_File_URL>
+		</Application_URLs>
+		<Download_URLs>
+			<Primary_Download_URL>http://www.explorerxp.com/explorerxpsetup.exe</Primary_Download_URL>
+			<Secondary_Download_URL />
+			<Additional_Download_URL_1 />
+			<Additional_Download_URL_2 />
+		</Download_URLs>
+	</Web_Info>
+	<Permissions>
+		<Distribution_Permissions>This program is freeware. There is no charge for using it and it may be distributed freely so long as the files are kept together and unaltered. You may neither sell nor profit from distribution of this software in any way. Distribution on CD-ROMs, Shareware-disks, in shops or through networks are allowed as long as a) no money (for the program itself) is taken b) you informed me about it</Distribution_Permissions>
+		<EULA>Permission is hereby granted, without written agreement and without license or royalty fees, to use, copy, modify and/or distribute this package, provided that: copyright notices are retained unchanged, any distribution of this package, whether modified or not, includes this file.
+
+THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT WARRANTY.
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THIS PACKAGE.</EULA>
+	</Permissions>
+	<ASP>
+		<ASP_FORM>Y</ASP_FORM>
+		<ASP_Member>N</ASP_Member>
+		<ASP_Member_Number />
+	</ASP>
+</XML_DIZ_INFO>

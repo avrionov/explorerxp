@@ -1,0 +1,120 @@
+A#lnl {
+	TEXT-DECORATION: none
+}
+A#lnl:hover {
+	TEXT-DECORATION: underline
+}
+FONT#lnt {
+	FONT-SIZE: 12px
+}
+INPUT#fi {
+	FONT-SIZE: 11px
+}
+INPUT#fit {
+	FONT-SIZE: 11px
+}
+INPUT#fbt {
+	FONT-SIZE: 11px
+}
+INPUT#fb {
+	FONT-SIZE: 11px
+}
+SELECT {
+	FONT-SIZE: 11px
+}
+TEXTAREA {
+	FONT-SIZE: 11px
+}
+FONT#t {
+	FONT-SIZE: 12px
+}
+INPUT#fi {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+INPUT#fit {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+INPUT#fbt {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+INPUT#fb {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+INPUT#fbjh {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+SELECT {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+TEXTAREA {
+	FONT-FAMILY: Arial,Verdana,Helvetica
+}
+INPUT#fi {
+	BACKGROUND-COLOR: #f2f8fc
+}
+INPUT#fit {
+	BACKGROUND-COLOR: #f2f8fc
+}
+SELECT {
+	BACKGROUND-COLOR: #f2f8fc
+}
+TEXTAREA {
+	BACKGROUND-COLOR: #f2f8fc
+}
+INPUT#fi {
+	WIDTH: 168px
+}
+SELECT#fs {
+	WIDTH: 168px
+}
+INPUT#fi {
+	BORDER-RIGHT: #0077c0 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #0077c0 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: #0077c0 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #0077c0 1px solid
+}
+INPUT#fit {
+	BORDER-RIGHT: #0077c0 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #0077c0 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: #0077c0 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #0077c0 1px solid
+}
+TEXTAREA#fta {
+	BORDER-RIGHT: #0077c0 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #0077c0 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: #0077c0 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #0077c0 1px solid
+}
+TEXTAREA#ftal {
+	BORDER-RIGHT: #0077c0 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #0077c0 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: #0077c0 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #0077c0 1px solid
+}
+INPUT#fb {
+	WIDTH: 115px
+}
+INPUT#fbjh {
+	FONT-SIZE: 13px; WIDTH: 100px
+}
+INPUT#frb {
+	MARGIN: 0px; WIDTH: 12px; HEIGHT: 12px
+}
+SELECT {
+	HEIGHT: 16px
+}
+SELECT#fss {
+	WIDTH: 90px
+}
+SELECT#fstz {
+	WIDTH: 356px
+}
+SELECT#mym {
+	WIDTH: 105px
+}
+SELECT#myy {
+	WIDTH: 70px
+}
+SELECT#fsl {
+	WIDTH: 358px
+}
+TEXTAREA#fta {
+	WIDTH: 358px
+}
+TEXTAREA#ftal {
+	WIDTH: 546px
+}
+TEXTAREA#fta {
+	OVERFLOW: auto; HEIGHT: 74px
+}
+TEXTAREA#ftal {
+	OVERFLOW: auto; HEIGHT: 74px
+}
