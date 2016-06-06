@@ -14,7 +14,7 @@
 #include "explorerxp.h"
 #include "EditFilterDialog.h"
 #include "AddEditPatternDlg.h"
-#include "Filter.h"
+#include "FileFilter.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

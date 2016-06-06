@@ -103,7 +103,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Dialogs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_WIN32_WINNT=0x0600;_USING_V110_SDK71_;_UNICODE;UNICODE</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -244,6 +244,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Dialogs;</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -284,6 +285,25 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
+    <ClCompile Include="Dialogs\AddEditPatternDlg.cpp" />
+    <ClCompile Include="Dialogs\CleanDialog.cpp" />
+    <ClCompile Include="Dialogs\CopyMoveDlg.cpp" />
+    <ClCompile Include="Dialogs\EditFilterDialog.cpp" />
+    <ClCompile Include="Dialogs\EditFiltersDialog.cpp" />
+    <ClCompile Include="Dialogs\FolderSizeDlg.cpp" />
+    <ClCompile Include="Dialogs\KeyboardPage.cpp" />
+    <ClCompile Include="Dialogs\MergeDlg.cpp" />
+    <ClCompile Include="Dialogs\MultiRenameDlg.cpp" />
+    <ClCompile Include="Dialogs\NewFolderDialog.cpp" />
+    <ClCompile Include="Dialogs\OptionsDialog.cpp" />
+    <ClCompile Include="Dialogs\OptionsDlg.cpp" />
+    <ClCompile Include="Dialogs\RenameDlg.cpp" />
+    <ClCompile Include="Dialogs\RenaneReplace.cpp" />
+    <ClCompile Include="Dialogs\RenTrimDlg.cpp" />
+    <ClCompile Include="Dialogs\ReNumberDlg.cpp" />
+    <ClCompile Include="Dialogs\SelectDialog.cpp" />
+    <ClCompile Include="Dialogs\SplitDlg.cpp" />
+    <ClCompile Include="Dialogs\TabOptionsDlg.cpp" />
     <ClCompile Include="DirSize.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
       <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
@@ -296,6 +316,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
+    <ClCompile Include="FileFilter.cpp" />
     <ClCompile Include="FileInfo.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
       <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
@@ -303,12 +324,6 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="FileShellAttributes.cpp" />
-    <ClCompile Include="Filter.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
     <ClCompile Include="FolderStateManager.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
@@ -562,82 +577,6 @@
     <ClCompile Include="Sizebar\scbarg.cpp" />
     <ClCompile Include="Sizebar\SizableReBar.cpp" />
     <ClCompile Include="Sizebar\sizecbar.cpp" />
-    <ClCompile Include="AddEditPatternDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="CleanDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="CopyMoveDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="EditFilterDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="EditFiltersDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="MergeDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="MultiRenameDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="NewFolderDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="RenameDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="RenaneReplace.cpp" />
-    <ClCompile Include="RenTrimDlg.cpp" />
-    <ClCompile Include="ReNumberDlg.cpp" />
-    <ClCompile Include="SelectDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="SplitDlg.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="FolderSizeDlg.cpp" />
-    <ClCompile Include="KeyboardPage.cpp" />
-    <ClCompile Include="OptionsDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="TabOptionsDlg.cpp" />
     <ClCompile Include="hotkeyctrlex.cpp" />
     <ClCompile Include="HoverButton.cpp" />
     <ClCompile Include="HyperLink.cpp">
@@ -757,11 +696,30 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClipboardFiles.h" />
     <ClInclude Include="debug_new.h" />
+    <ClInclude Include="Dialogs\AddEditPatternDlg.h" />
+    <ClInclude Include="Dialogs\CleanDialog.h" />
+    <ClInclude Include="Dialogs\CopyMoveDlg.h" />
+    <ClInclude Include="Dialogs\EditFilterDialog.h" />
+    <ClInclude Include="Dialogs\EditFiltersDialog.h" />
+    <ClInclude Include="Dialogs\FolderSizeDlg.h" />
+    <ClInclude Include="Dialogs\KeyboardPage.h" />
+    <ClInclude Include="Dialogs\MergeDlg.h" />
+    <ClInclude Include="Dialogs\MultiRenameDlg.h" />
+    <ClInclude Include="Dialogs\NewFolderDialog.h" />
+    <ClInclude Include="Dialogs\OptionsDialog.h" />
+    <ClInclude Include="Dialogs\OptionsDlg.h" />
+    <ClInclude Include="Dialogs\RenameDlg.h" />
+    <ClInclude Include="Dialogs\RenaneReplace.h" />
+    <ClInclude Include="Dialogs\RenTrimDlg.h" />
+    <ClInclude Include="Dialogs\ReNumberDlg.h" />
+    <ClInclude Include="Dialogs\SelectDialog.h" />
+    <ClInclude Include="Dialogs\SplitDlg.h" />
+    <ClInclude Include="Dialogs\TabOptionsDlg.h" />
     <ClInclude Include="DirSize.h" />
     <ClInclude Include="ExplorerXP.h" />
+    <ClInclude Include="FileFilter.h" />
     <ClInclude Include="FileInfo.h" />
     <ClInclude Include="FileShellAttributes.h" />
-    <ClInclude Include="Filter.h" />
     <ClInclude Include="FindMissing.h" />
     <ClInclude Include="FolderStateManager.h" />
     <ClInclude Include="GenericDropTarget.h" />
@@ -823,24 +781,6 @@
     <ClInclude Include="SizeBarInclude.h" />
     <ClInclude Include="Sizebar\SizeBarInclude.h" />
     <ClInclude Include="Sizebar\sizecbar.h" />
-    <ClInclude Include="AddEditPatternDlg.h" />
-    <ClInclude Include="CleanDialog.h" />
-    <ClInclude Include="CopyMoveDlg.h" />
-    <ClInclude Include="EditFilterDialog.h" />
-    <ClInclude Include="EditFiltersDialog.h" />
-    <ClInclude Include="MergeDlg.h" />
-    <ClInclude Include="MultiRenameDlg.h" />
-    <ClInclude Include="NewFolderDialog.h" />
-    <ClInclude Include="RenameDlg.h" />
-    <ClInclude Include="RenaneReplace.h" />
-    <ClInclude Include="RenTrimDlg.h" />
-    <ClInclude Include="ReNumberDlg.h" />
-    <ClInclude Include="SelectDialog.h" />
-    <ClInclude Include="SplitDlg.h" />
-    <ClInclude Include="FolderSizeDlg.h" />
-    <ClInclude Include="KeyboardPage.h" />
-    <ClInclude Include="OptionsDialog.h" />
-    <ClInclude Include="TabOptionsDlg.h" />
     <ClInclude Include="hotkeyctrlex.h" />
     <ClInclude Include="HoverButton.h" />
     <ClInclude Include="HyperLink.h" />

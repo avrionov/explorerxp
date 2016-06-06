@@ -15,6 +15,8 @@
 
 #pragma once
 
+#include <vector>
+
 class CFilter  
 {
 public:

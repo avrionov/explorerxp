@@ -20,7 +20,7 @@
 #include "DirSize.h"
 #include "ThreadPool.h"
 #include "SplitPath.h"
-#include "Filter.h"
+#include "FileFilter.h"
 #include "shlwapi.h"
 #include "Options.h"
 

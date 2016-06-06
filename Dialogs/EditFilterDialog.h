@@ -19,7 +19,7 @@
 // CEditFilterDialog dialog
 
 #include "ResizableLib\ResizableDialog.h"
-#include "Filter.h"
+#include "FileFilter.h"
 
 class CEditFilterDialog : public CResizableDialog
 {

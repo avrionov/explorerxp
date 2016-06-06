@@ -10,51 +10,57 @@
 * limitations under the License.
 */
 
-#ifndef __EDIT_FILTERS_DIALOG_H__
-#define __EDIT_FILTERS_DIALOG_H__
+#ifndef __CLEANDIALOG_H__
+#define __CLEANDIALOG_H__
+
 
 #pragma once
 
 #include "ResizableLib\ResizableDialog.h"
-#include "Filter.h"
+#include "FileFilter.h"
+#include "globals.h"
 
-class CEditFiltersDialog : public CResizableDialog
+/////////////////////////////////////////////////////////////////////////////
+// CCleanDialog dialog
+
+class CCleanDialog : public CResizableDialog
 {
 // Construction
 public:
-	CEditFiltersDialog (CFilterMan &filterMan, CWnd* pParent = NULL);   // standard constructor
+	CCleanDialog (CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CEditFiltersDialog)
-	enum { IDD = IDD_EDITFILTERS };
+	//{{AFX_DATA(CCleanDialog)
+	enum { IDD = IDD_CLEAN };
+	CButton	m_EditFilters;
+	CButton	m_Clean;
 	CButton	m_Edit;
 	CButton	m_Delete;
-	CButton	m_Add;
-	CListCtrl	m_FilterList;
+	CListCtrl	m_FilterList;	
 	//}}AFX_DATA
 
-	CFilterMan & GetFilterMan () { return m_FilterMan;};
-	virtual BOOL OnInitDialog();
+	CFilterMan m_FilterMan;	
+	int m_nSel;
 // Overrides
 	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CEditFiltersDialog)
+	//{{AFX_VIRTUAL(CCleanDialog)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
-
+	void EnableControls ();
 // Implementation
 protected:
-	void EnableControls ();
 	void Fill ();
-	CFilterMan m_FilterMan;
+	
+	
 	// Generated message map functions
-	//{{AFX_MSG(CEditFiltersDialog)
-
-	afx_msg void OnAdd();
-	afx_msg void OnEdit();
-	afx_msg void OnDelete();
+	//{{AFX_MSG(CCleanDialog)
+	virtual BOOL OnInitDialog();
 	afx_msg void OnItemchangedList(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnEdit();
+	afx_msg void OnEditfilters();
 	afx_msg void OnDblclkList(NMHDR* pNMHDR, LRESULT* pResult);
+	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
@@ -62,4 +68,4 @@ protected:
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_EDITFILTERSDIALOG_H__3DF50331_4269_4C27_B221_6AF65A7D66E9__INCLUDED_)
+#endif // __CLEANDIALOG_H__

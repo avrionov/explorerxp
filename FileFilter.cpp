@@ -13,7 +13,7 @@
 
 #include "stdafx.h"
 #include "explorerxp.h"
-#include "Filter.h"
+#include "FileFilter.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE

@@ -83,9 +83,6 @@
     <ClCompile Include="FileInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FolderStateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -242,60 +239,6 @@
     <ClCompile Include="Sizebar\sizecbar.cpp">
       <Filter>Source Files\ResizableLib\SizeBar</Filter>
     </ClCompile>
-    <ClCompile Include="AddEditPatternDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="CleanDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="CopyMoveDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="EditFilterDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="EditFiltersDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="MergeDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiRenameDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="NewFolderDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="RenameDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="RenaneReplace.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="RenTrimDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="ReNumberDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="SplitDlg.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="FolderSizeDlg.cpp">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardPage.cpp">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionsDialog.cpp">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClCompile>
-    <ClCompile Include="TabOptionsDlg.cpp">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClCompile>
     <ClCompile Include="hotkeyctrlex.cpp">
       <Filter>Source Files\UI Classes</Filter>
     </ClCompile>
@@ -386,6 +329,66 @@
     <ClCompile Include="ShellTree.cpp">
       <Filter>Source Files\FolderTrees</Filter>
     </ClCompile>
+    <ClCompile Include="Dialogs\AddEditPatternDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\CleanDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\CopyMoveDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\EditFilterDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\EditFiltersDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\MergeDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\MultiRenameDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\NewFolderDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\OptionsDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\RenameDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\RenTrimDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\ReNumberDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\SelectDialog.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\SplitDlg.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\FolderSizeDlg.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\KeyboardPage.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\OptionsDialog.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\TabOptionsDlg.cpp">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="FileFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\RenaneReplace.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrowseForFolder.h">
@@ -407,9 +410,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FileInfo.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Filter.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FindMissing.h">
@@ -586,60 +586,6 @@
     <ClInclude Include="Sizebar\sizecbar.h">
       <Filter>Source Files\ResizableLib\SizeBar</Filter>
     </ClInclude>
-    <ClInclude Include="AddEditPatternDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="CleanDialog.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="CopyMoveDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="EditFilterDialog.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="EditFiltersDialog.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="MergeDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiRenameDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="NewFolderDialog.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="RenameDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="RenaneReplace.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="RenTrimDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="ReNumberDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectDialog.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="SplitDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="FolderSizeDlg.h">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardPage.h">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionsDialog.h">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="TabOptionsDlg.h">
-      <Filter>Source Files\Dialogs\Options</Filter>
-    </ClInclude>
     <ClInclude Include="hotkeyctrlex.h">
       <Filter>Source Files\UI Classes</Filter>
     </ClInclude>
@@ -747,6 +693,66 @@
     </ClInclude>
     <ClInclude Include="ShellTree.h">
       <Filter>Source Files\FolderTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\AddEditPatternDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\CleanDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\CopyMoveDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\EditFilterDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\EditFiltersDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\MergeDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\MultiRenameDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\NewFolderDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\OptionsDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\RenameDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\RenTrimDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\ReNumberDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\SelectDialog.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\SplitDlg.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\FolderSizeDlg.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\KeyboardPage.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\OptionsDialog.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\TabOptionsDlg.h">
+      <Filter>Source Files\Dialogs\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="FileFilter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\RenaneReplace.h">
+      <Filter>Source Files\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
