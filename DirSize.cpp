@@ -129,14 +129,12 @@ inline ULONGLONG GetSizeOnDisk2 (const TCHAR *parent_path, WIN32_FIND_DATA &file
 	return sizeonDisk;
 }
 
-bool CDirSize::GetDirInfoLock (const TCHAR *path, CDirInfo &dirinfo)
-{
+bool CDirSize::GetDirInfoLock (const TCHAR *path, CDirInfo &dirinfo) {
 	CGuard guard (m_SizeLock);
 	
-	dirinfo_it it = m_Map.find ((LPCTSTR)path);
+	dirinfo_it it = m_SizeMap.find ((LPCTSTR)path);
 		
-	if (it != m_Map.end ())
-	{
+	if (it != m_SizeMap.end ()) {
 		dirinfo = it->second;			
 		return true;
 	}	
@@ -317,7 +315,7 @@ void CDirSize::AddSize (const TCHAR* folder, const TCHAR* name , ULONGLONG size,
 	{
 		CGuard guard (m_SizeLock);
 
-		std::pair <dirinfo_it, bool> ret =  m_Map.insert (dirinfo_value((LPCTSTR)path, dr_info));
+		std::pair <dirinfo_it, bool> ret =  m_SizeMap.insert (dirinfo_value((LPCTSTR)path, dr_info));
 		if (ret.second == false)
 			ret.first->second  = dr_info;
 	}
@@ -486,8 +484,7 @@ void Split (CString &path, CString &parent, CString &name)
 	name = path.Right (len - pos-1);
 }
 
-void CDirSize::InvalidateName (const TCHAR *old_name, const TCHAR *new_name)
-{
+void CDirSize::InvalidateName (const TCHAR *old_name, const TCHAR *new_name) {
 	{
 		CGuard guard (m_SizeLock);
 
@@ -495,16 +492,17 @@ void CDirSize::InvalidateName (const TCHAR *old_name, const TCHAR *new_name)
 
 		//SureBackSlash (path);
 
-		dirinfo_it it = m_Map.find ((LPCTSTR)path);
-		if (it != m_Map.end ())
-		{
+		dirinfo_it it = m_SizeMap.find ((LPCTSTR)path);
+		if (it != m_SizeMap.end ()) {
 			CString parent, name;
 			CDirInfo dr_info = it->second;
-			m_Map.erase (it);
-			dirinfo_it it2 = m_Map.find (new_name);
-			if (it2 != m_Map.end ())
-				m_Map.erase(it2);
-			m_Map.insert (dirinfo_value(new_name, dr_info));
+			m_SizeMap.erase (it);
+			dirinfo_it it2 = m_SizeMap.find (new_name);
+
+			if (it2 != m_SizeMap.end ())
+				m_SizeMap.erase(it2);
+
+			m_SizeMap.insert (dirinfo_value(new_name, dr_info));
 		}
 	}
 
@@ -513,27 +511,25 @@ void CDirSize::InvalidateName (const TCHAR *old_name, const TCHAR *new_name)
 }
 
 
-void CDirSize::Invalidate (const TCHAR *invalidate_path, bool bDelete)
-{
+void CDirSize::Invalidate (const TCHAR *invalidate_path, bool bDelete) {
+
 	{
 		CGuard guard (m_SizeLock);
 
 		CString path = invalidate_path;
 		
 		// ignore Windows\config\software.log
-		if (path.CompareNoCase (csSoftwareLogPath) == 0) 
-		{			
+		if (path.CompareNoCase (csSoftwareLogPath) == 0) 		
 			return;
-		}
+		
 		
 		CString parent, name;
 
-		if (bDelete)
-		{
+		if (bDelete) {
 			Split (path, parent, name);
-			dirinfo_it it = m_Map.find ((LPCTSTR)path);
-			if (it != m_Map.end ())		
-				m_Map.erase (it);
+			dirinfo_it it = m_SizeMap.find ((LPCTSTR)path);
+			if (it != m_SizeMap.end ())		
+				m_SizeMap.erase (it);
 			path = parent;
 		}
 
@@ -546,13 +542,12 @@ void CDirSize::Invalidate (const TCHAR *invalidate_path, bool bDelete)
 				if (path.CompareNoCase(csWindowsPrefetch) == 0) 							
 					return;			
 					
-				dirinfo_it it = m_Map.find ((LPCTSTR)path);
-				if (it != m_Map.end ())
+				dirinfo_it it = m_SizeMap.find ((LPCTSTR)path);
+				if (it != m_SizeMap.end ())
 				{	
 					CGuard guard2 (m_StackLock);	
-					m_Map.erase (it);				
-					if (!IsInStack (parent, name))
-					{
+					m_SizeMap.erase (it);				
+					if (!IsInStack (parent, name)) {
 						FILETIME fTime;
 						GetLastWriteTime (parent, fTime);
 						m_Stack.push_back (CDirStackEl (parent, name, fTime));
@@ -560,32 +555,29 @@ void CDirSize::Invalidate (const TCHAR *invalidate_path, bool bDelete)
 				}
 				path = parent;
 			} while (path.GetLength () > 3);
-
 	}
 
 	gDriveViewer.MarkForUpdate ();
 	Notify (WM_EXP_UPDATE, 0, (LPARAM)invalidate_path);	
 }
 
-bool CDirSize::IsInStack (const TCHAR *path, const TCHAR *name)
-{
-	for (unsigned int i = 0; i < m_Stack.size (); i++)
-	{
+bool CDirSize::IsInStack (const TCHAR *path, const TCHAR *name) {
+
+	for (unsigned int i = 0; i < m_Stack.size (); i++) {
 		if (!_tcsicmp (name, m_Stack[i].m_FileName))
 			if (!_tcsicmp (path, m_Stack[i].m_Path))
 				return true;
 	}	
+
 	return false;
 }
 
 
-void CDirSize::NotifyViews (const TCHAR *filename) 
-{	
+void CDirSize::NotifyViews (const TCHAR *filename)  {	
 	Notify (WM_EXP_UPDATE, 0, (LPARAM)filename);	
 }
 
-bool CDirSize::IsStackEmpty ()
-{	
+bool CDirSize::IsStackEmpty () {	
 	CGuard guard (m_StackLock);	
 	bool ret = m_Stack.size () == 0;
 	return ret;
@@ -625,10 +617,9 @@ void CDirSize::Save ()
 
 	CGuard guard (m_SizeLock);
 
-	dirinfo_it 	it = m_Map.begin(); 
+	dirinfo_it 	it = m_SizeMap.begin(); 
 
-	while (it != m_Map.end())
-	{		
+	while (it != m_SizeMap.end()) {		
 		if (!it->second.m_bSubFolders)
 		{
 			CString tmp = it->first;
@@ -646,10 +637,9 @@ void CDirSize::GetDirInfoArrray (CDirInfoArray & arr)
 {
 	CGuard guard (m_SizeLock);
 
-	dirinfo_it 	it = m_Map.begin(); 
+	dirinfo_it 	it = m_SizeMap.begin(); 
 	dir_cache cache;
-	while (it != m_Map.end())
-	{			
+	while (it != m_SizeMap.end()) {			
 		{
 			ZeroMemory (&cache, sizeof (dir_cache));
 			cache.dirinfo = it->second;
@@ -661,8 +651,8 @@ void CDirSize::GetDirInfoArrray (CDirInfoArray & arr)
 }
 
 
-void CDirSize::Load ()
-{	
+void CDirSize::Load () {	
+
 	InOut log (_T("DirSize:Load"));
 
 	CSimpleFile file (GetLocalFile("DirSizeCache", "dat"), "rb");
@@ -672,13 +662,10 @@ void CDirSize::Load ()
 
 	CGuard guard (m_SizeLock);
 	dir_cache cache;
-	while (file.read (&cache, sizeof(dir_cache), 1) == 1)
-	{	
+	while (file.read (&cache, sizeof(dir_cache), 1) == 1) {	
 		int size = _tcslen (cache.folder);
 
 		if (size)
-			m_Map.insert (dirinfo_value(cache.folder, cache.dirinfo));
-	}
-
-	//TRACE ("Count - %d, Avg - %d", count, totalsSize / count);
+			m_SizeMap.insert (dirinfo_value(cache.folder, cache.dirinfo));
+	}	
 }

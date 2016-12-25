@@ -20,24 +20,20 @@
 
 extern CThreadPool gPool;
 
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-
 CRecBinViewer gRecBinViewer;
 
 #define MAX_COLUMN 4
 
-//#define _countof(array) (sizeof(array)/sizeof(array[0]))
-
+//-----------------------------------------------------------------------------
 CRecBinViewer::CRecBinViewer()
 :m_hWnd (NULL),
-m_bNeedUpdate (false)
-{
+ m_bNeedUpdate (false) {
     m_pFolder2		= NULL;
 	m_pRecycleBin	= NULL;
 
@@ -47,34 +43,31 @@ m_bNeedUpdate (false)
 	
 }
 
-CRecBinViewer::~CRecBinViewer()
-{
+//-----------------------------------------------------------------------------
+CRecBinViewer::~CRecBinViewer() {
 
 }
 
-void CRecBinViewer::Fill (const TCHAR *root) 
-{	
-    UpdateList ();
-	if (m_pGridCtrl)
-	{		
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Fill (const TCHAR *root)  {	
+  UpdateList ();
+	if (m_pGridCtrl) {		
 		m_pGridCtrl->SetRowCount(m_List.size () +1);
 		SetupGrid ();
 	}	
 }
 
-const TCHAR * CRecBinViewer::GetTitle () 
-{
+//-----------------------------------------------------------------------------
+const TCHAR * CRecBinViewer::GetTitle ()  {
     return _T("Recycle Bin");
 }
 
-void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo) 
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo)  {
 	pDispInfo->item.nState |= GVIS_READONLY;
 
-    if (pDispInfo->item.row == 0)
-	{
-		pDispInfo->item.strText = m_Headers[pDispInfo->item.col];
-		//pDispInfo->item.lfFont.lfWeight  = FW_BOLD;
+  if (pDispInfo->item.row == 0) {
+		pDispInfo->item.strText = m_Headers[pDispInfo->item.col];		
 		return ;
 	}
 
@@ -82,10 +75,9 @@ void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo)
     if (row >= static_cast<int>(m_List.size ()))
         return;
 
-	if (pDispInfo->item.col == 0 )
-	{
-		if (m_List[row].m_PIDL)
-		{
+	if (pDispInfo->item.col == 0 ) {
+
+		if (m_List[row].m_PIDL) {
 			SHFILEINFO		fi;
 
 			ZeroMemory (&fi, sizeof (fi));				
@@ -98,21 +90,17 @@ void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo)
 		
 	pDispInfo->item.crFgClr = GetSysColor (COLOR_BTNTEXT);
 
-    if (pDispInfo->item.col < static_cast<int>(m_List[row].m_Ar.size()))
-        pDispInfo->item.strText = m_List[row][pDispInfo->item.col];
-
-	/*if (pDispInfo->item.col == m_State.m_nSortColumn)
-		pDispInfo->item.crBkClr = RGB(247,247,247);  */
-
+  if (pDispInfo->item.col < static_cast<int>(m_List[row].m_Ar.size()))
+    pDispInfo->item.strText = m_List[row][pDispInfo->item.col];
+	
 	if (pDispInfo->item.col == m_State.m_nSortColumn)
-		pDispInfo->item.crBkClr = //RGB(247,247,247);             
-		HLS_TRANSFORM (GetSysColor(COLOR_WINDOW),0, 5);
+		pDispInfo->item.crBkClr = HLS_TRANSFORM (GetSysColor(COLOR_WINDOW),0, 5);
 
 	if (pDispInfo->item.nState & GVIS_SELECTED)
 		pDispInfo->item.crBkClr = GetSelectedColor();	
 }
 
-
+//-----------------------------------------------------------------------------
 struct SortByString
 {
 	SortByString (int Col, bool bAscending) :
@@ -133,6 +121,7 @@ struct SortByString
 	bool m_bAscending;
 };
 
+//-----------------------------------------------------------------------------
 struct SortByStringSize
 {
 	SortByStringSize (int Col, bool bAscending) :
@@ -165,8 +154,8 @@ struct SortByStringSize
 	bool m_bAscending;
 };
 
-void CRecBinViewer::Sort () 
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Sort () {	
 	if (m_State.m_nSortColumn == 3)
 		std::stable_sort (m_List.begin (), m_List.end (), SortByStringSize (m_State.m_nSortColumn, m_State.m_bAscending));	
 	else
@@ -174,68 +163,70 @@ void CRecBinViewer::Sort ()
 			std::stable_sort (m_List.begin (), m_List.end (), SortByString (m_State.m_nSortColumn, m_State.m_bAscending));	
 }
 
-bool CRecBinViewer::Sync (const TCHAR* folder , const TCHAR *name) 
-{
+//-----------------------------------------------------------------------------
+bool CRecBinViewer::Sync (const TCHAR* folder , const TCHAR *name) {
     return false;
 }
 
-bool CRecBinViewer::CanChangeTo (int iRow) 
-{
+//-----------------------------------------------------------------------------
+bool CRecBinViewer::CanChangeTo (int iRow) {
     return false;
 }
 
-CString  CRecBinViewer::GetPath (int iRow) 
-{
+//-----------------------------------------------------------------------------
+CString  CRecBinViewer::GetPath (int iRow) {
 	return m_List[iRow][0];
 }
 
+//-----------------------------------------------------------------------------
 CString  CRecBinViewer::GetPath(int iRow, bool &bFolder) {
   bFolder = false;
   return m_List[iRow][0];
 }
 
-const TCHAR*  CRecBinViewer::GetName (int iRow) 
-{	
+//-----------------------------------------------------------------------------
+const TCHAR*  CRecBinViewer::GetName (int iRow) {	
 	return m_List[iRow][0];    
 }
 
-
-bool CRecBinViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk)
-{
+//-----------------------------------------------------------------------------
+bool CRecBinViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk) {
     return false;
 }
 
+//-----------------------------------------------------------------------------
+void CRecBinViewer::InitInterfaces (void) {
 
-void CRecBinViewer::InitInterfaces (void)
-{
-	if (TRUE == GetFolder2 ())	
-		HeaderFolder2 ();	
-	else 
-		if (TRUE == GetFolder ())			
-				HeaderFolder ();
-			
+  if (TRUE == GetFolder2()) {
+    HeaderFolder2();
+  } else {
+    if (TRUE == GetFolder())
+      HeaderFolder();
+  }
+					
 	if (gFolderStateMan.IsIn (CONST_RECYCLEBIN))
 		gFolderStateMan.LoadState (CONST_RECYCLEBIN, m_State);
 	else
 		gFolderStateMan.SaveState (CONST_RECYCLEBIN, m_State);		
 }
 
-void CRecBinViewer::UpdateList (void)
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::UpdateList (void) {	
+
 	RemovePIDL ();
 
-    m_List.clear ();
+  m_List.clear ();
 
 	if (NULL != m_pFolder2)	
 		FillFolder2 ();	
-	else 
-		if (NULL != m_pRecycleBin)	
-			FillFolder ();	
+  else {
+    if (NULL != m_pRecycleBin)
+      FillFolder();
+  }		
 }
 
-
-void CRecBinViewer::GetName (STRRET str, CString &cs)
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::GetName (STRRET str, CString &cs) {
 	//ZeroMemory (szPath, sizeof (szPath));
 	switch (str.uType)
 	{
@@ -254,8 +245,9 @@ void CRecBinViewer::GetName (STRRET str, CString &cs)
 	
 }
 
-BOOL CRecBinViewer::GetFolder ()
-{
+//-----------------------------------------------------------------------------
+BOOL CRecBinViewer::GetFolder () {
+
 	BOOL			bReturn			= FALSE;
 	STRRET			strRet;
 	LPSHELLFOLDER	pDesktop		= NULL;
@@ -265,19 +257,17 @@ BOOL CRecBinViewer::GetFolder ()
 	HRESULT hr = SHGetDesktopFolder(&pDesktop);
 	
 	hr = SHGetSpecialFolderLocation (m_hWnd, CSIDL_BITBUCKET, &pidlRecycleBin);
-	if (NULL != m_pRecycleBin)
-	{
+	if (NULL != m_pRecycleBin) {
 		m_pRecycleBin->Release ();
 		m_pRecycleBin = NULL;
 	}
+
 	hr = pDesktop->BindToObject(pidlRecycleBin, NULL, IID_IShellFolder, (LPVOID *)&m_pRecycleBin);
-	if (SUCCEEDED (hr))
-	{
+	if (SUCCEEDED (hr)) {
 		bReturn = TRUE;
 	}
 
-	if (S_OK == pDesktop->GetDisplayNameOf (pidlRecycleBin, SHGDN_NORMAL, &strRet))
-	{
+	if (S_OK == pDesktop->GetDisplayNameOf (pidlRecycleBin, SHGDN_NORMAL, &strRet)) {
 		GetName (strRet, dspName);
 	}
 
@@ -287,22 +277,21 @@ BOOL CRecBinViewer::GetFolder ()
 	return bReturn;
 }
 
-void CRecBinViewer::HeaderFolder ()
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::HeaderFolder () {	
 	PSHELLDETAILS pDetails = NULL;
 	 	
 	HRESULT hr = m_pRecycleBin->CreateViewObject (m_hWnd, IID_IShellDetails, (LPVOID*)&pDetails);
 
 	m_State.m_Visible = 0;
 
-	if (SUCCEEDED (hr))
-	{
+	if (SUCCEEDED (hr)) {
+
 		CString csTemp;
 		SHELLDETAILS sd;
 		int iSubItem = 0;
 		
-		while (SUCCEEDED (hr))
-		{
+		while (SUCCEEDED (hr)) {
 			hr = pDetails->GetDetailsOf (NULL , iSubItem, &sd);
 			if (SUCCEEDED (hr))
 			{
@@ -316,12 +305,11 @@ void CRecBinViewer::HeaderFolder ()
 		}
 	}
 		
-	CoTaskMemFree(pDetails);
-	
+	CoTaskMemFree(pDetails);	
 }
 
-void CRecBinViewer::FillFolder ()
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::FillFolder () {	
 	LPENUMIDLIST	penumFiles		= NULL;
 	LPITEMIDLIST	pidl			= NULL;
 	PSHELLDETAILS	pDetails		= NULL;
@@ -338,43 +326,41 @@ void CRecBinViewer::FillFolder ()
 	
     CStringAr ar;
 
-	if (SUCCEEDED (hr))
-	{
-		while (penumFiles->Next(1, &pidl, NULL) != S_FALSE)
-		{
-            ar.clear ();		
-			
-			hr = S_OK;
-			iSubItem = 0;
-			
-			while (SUCCEEDED (hr))
-			{
-				hr = pDetails->GetDetailsOf (pidl , iSubItem, &sd);
-				if (SUCCEEDED (hr))
-				{
-					GetName (sd.str, csTemp);					
-                    ar.push_back (csTemp);	
-                    iSubItem++;
+	if (SUCCEEDED (hr)) {
 
-					if (iSubItem > MAX_COLUMN)
-						break;
-				}
+		while (penumFiles->Next(1, &pidl, NULL) != S_FALSE) {
+        ar.clear ();		
+			
+			  hr = S_OK;
+			  iSubItem = 0;
+			
+			  while (SUCCEEDED (hr)) {
+				  hr = pDetails->GetDetailsOf (pidl , iSubItem, &sd);
+				  if (SUCCEEDED (hr)) {
+					    GetName (sd.str, csTemp);					 
+              ar.push_back (csTemp);	
+              iSubItem++;
+
+					  if (iSubItem > MAX_COLUMN)
+						  break;
+				  }
 			}
-            m_List.push_back (CRecycleItem (ar, pidl));
+
+      m_List.push_back (CRecycleItem (ar, pidl));
 		}
 	}
 		
 	CoTaskMemFree (pDetails);
 	
-	if (NULL != penumFiles)
-	{
+	if (NULL != penumFiles) {
 		penumFiles->Release ();
 		penumFiles = NULL;
 	}
 }
 
-BOOL CRecBinViewer::GetFolder2 ()
-{
+//-----------------------------------------------------------------------------
+BOOL CRecBinViewer::GetFolder2 () {
+
 	BOOL			bReturn			= FALSE;
 	STRRET			strRet;
 	LPSHELLFOLDER	pDesktop		= NULL;
@@ -382,17 +368,14 @@ BOOL CRecBinViewer::GetFolder2 ()
 	CString			dspName;
 
 	
-	if (NULL != m_pFolder2)
-	{
+	if (NULL != m_pFolder2) {
 		m_pFolder2->Release ();
 		m_pFolder2 = NULL;
 	}
 	
 	if ((SUCCEEDED (SHGetDesktopFolder(&pDesktop))) &&
-		(SUCCEEDED (SHGetSpecialFolderLocation (m_hWnd, CSIDL_BITBUCKET, &pidlRecycleBin))))
-	{
-		if (SUCCEEDED (pDesktop->BindToObject(pidlRecycleBin, NULL, IID_IShellFolder2, (LPVOID *)&m_pFolder2)))
-		{
+		(SUCCEEDED (SHGetSpecialFolderLocation (m_hWnd, CSIDL_BITBUCKET, &pidlRecycleBin)))) {
+		if (SUCCEEDED (pDesktop->BindToObject(pidlRecycleBin, NULL, IID_IShellFolder2, (LPVOID *)&m_pFolder2))) {
 			if (S_OK == pDesktop->GetDisplayNameOf (pidlRecycleBin, SHGDN_NORMAL, &strRet))			
 				GetName (strRet, dspName);			
 			bReturn = TRUE;
@@ -406,8 +389,8 @@ BOOL CRecBinViewer::GetFolder2 ()
 	return bReturn;
 }
 
-void CRecBinViewer::HeaderFolder2 ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::HeaderFolder2 () {
 	CString csTemp;
 	HRESULT hr = S_OK;
 	SHELLDETAILS sd;
@@ -418,11 +401,10 @@ void CRecBinViewer::HeaderFolder2 ()
 
 	m_State.m_Visible = 0;
 
-	while (SUCCEEDED (hr))
-	{
+	while (SUCCEEDED (hr)) {
+
 		hr = m_pFolder2->GetDetailsOf (NULL , iSubItem, &sd);
-		if (SUCCEEDED (hr))
-		{
+		if (SUCCEEDED (hr)) {
 			GetName (sd.str, csTemp);			
 			m_Headers.push_back (csTemp);
             m_State.m_Visible |= 1 << iSubItem;
@@ -430,12 +412,11 @@ void CRecBinViewer::HeaderFolder2 ()
 			if (iSubItem > MAX_COLUMN)
 				break;
 		}
-	}
-    
+	}    
 }
 
-void CRecBinViewer::FillFolder2 ()
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::FillFolder2 () {	
 	CString			csTemp;
 	LPENUMIDLIST	penumFiles;
 	LPITEMIDLIST	pidl = NULL;
@@ -446,58 +427,36 @@ void CRecBinViewer::FillFolder2 ()
 
 	// Get the list of available objects
 	HRESULT hr = m_pFolder2->EnumObjects(m_hWnd, SHCONTF_FOLDERS | SHCONTF_NONFOLDERS| SHCONTF_INCLUDEHIDDEN, &penumFiles);
-	if (SUCCEEDED (hr))
-	{
+	if (SUCCEEDED (hr)) {
 		// Iterate through list
-		while (penumFiles->Next(1, &pidl, NULL) != S_FALSE)
-		{
-            ar.clear ();
-		//	iItem = m_List.InsertItem (iItem, EMPTYSTR);
-		//	m_List.SetItemData (iItem, (DWORD)pidl);
+		while (penumFiles->Next(1, &pidl, NULL) != S_FALSE) {
+          ar.clear ();
+			  	hr = S_OK;
+			    iSubItem = 0;
+			    while (SUCCEEDED (hr)) {
 
-			/*ZeroMemory (&fi, sizeof (fi));
-			hr = SHGetFileInfo ((LPCTSTR)pidl, 0, &fi, sizeof (fi), SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_PIDL);
-
-			if (SUCCEEDED (hr))
-			{
-				iIndex = fi.iIcon;
-				m_List.SetItem (iItem, 0, LVIF_IMAGE, NULL, iIndex, 0, 0, 0);
-			}*/
-
-			// We iterate now in all the available columns.
-			// Since it depends on the system, we "hope" that they are going to be as many 
-			// and in the same order as when we have added the column's headers.
-
-			hr = S_OK;
-			iSubItem = 0;
-			while (SUCCEEDED (hr))
-			{
-				hr = m_pFolder2->GetDetailsOf (pidl , iSubItem, &sd);
-				if (SUCCEEDED (hr))
-				{
-					GetName (sd.str, csTemp);					
-                    ar.push_back (csTemp);
-					//m_List.SetItemText (iItem, iSubItem , szTemp);
-					iSubItem ++;
+				    hr = m_pFolder2->GetDetailsOf (pidl , iSubItem, &sd);
+				    if (SUCCEEDED (hr)) {
+					    GetName (sd.str, csTemp);					
+              ar.push_back (csTemp);					
+					    iSubItem ++;
 					
-					if (iSubItem > MAX_COLUMN)
+					  if (iSubItem > MAX_COLUMN)
 						break;
 				}
 			}
-			m_List.push_back (CRecycleItem (ar, pidl));
-             //m_List.push_back (ar);
+			m_List.push_back (CRecycleItem (ar, pidl));             
 		}
 	}
 
-	if (NULL != penumFiles)
-	{
+	if (NULL != penumFiles) {
 		penumFiles->Release ();
 		penumFiles = NULL;
 	}	
 }
 
-LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam)
-{
+//-----------------------------------------------------------------------------
+LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam) {
 	LRESULT lReturn = 0;
 	SHNOTIFYSTRUCT shns;
 	TCHAR szBefore[MAX_PATH];
@@ -509,8 +468,7 @@ LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam)
 	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem1, szBefore);
 	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
 
-	switch (lParam)
-	{
+	switch (lParam) {
 		case SHCNE_RENAMEITEM          : //0x00000001L
 		case SHCNE_CREATE              : //0x00000002L
 		case SHCNE_DELETE              : //0x00000004L
@@ -540,8 +498,7 @@ LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam)
 	return lReturn;
 }
 
-LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam)
-{
+LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam) {
 	LRESULT lReturn = 0;
 	SHNOTIFYSTRUCT shns;
 	TCHAR szBefore[MAX_PATH];
@@ -552,8 +509,7 @@ LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam)
 	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem1, szBefore);
 	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
 	
-	switch (lParam)
-	{
+	switch (lParam) {
 		case SHCNE_RENAMEITEM          : //0x00000001L
 		case SHCNE_CREATE              : //0x00000002L
 		case SHCNE_DELETE              : //0x00000004L
@@ -584,8 +540,8 @@ LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam)
 	return lReturn;
 }
 
-void CRecBinViewer::Install (HWND hWnd)
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Install (HWND hWnd) {	
     InitInterfaces ();
 	m_hWnd = hWnd;
 	InstallRBinNotify ();
@@ -593,29 +549,26 @@ void CRecBinViewer::Install (HWND hWnd)
 	UpdateList ();
 }
 
-void CRecBinViewer::Remove  ()
-{
-	RemoveRBinNotify ();
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Remove  () {
+	
+  RemoveRBinNotify ();
 	RemoveShellNotify ();
 
-	if (NULL != m_pFolder2)
-	{
+	if (NULL != m_pFolder2) {
 		m_pFolder2->Release ();
 	}
 
-	if (NULL != m_pRecycleBin)
-	{
+	if (NULL != m_pRecycleBin) {
 		m_pRecycleBin->Release ();
 	}
 
 	m_pFolder2 = NULL;
 	m_pRecycleBin = NULL;
-
 }
 
-
-void CRecBinViewer::InstallRBinNotify ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::InstallRBinNotify () {
 	SHChangeNotifyEntry stPIDL;
 	LPITEMIDLIST ppidl;
 	
@@ -631,15 +584,13 @@ void CRecBinViewer::InstallRBinNotify ()
 		1,
 		&stPIDL);
 	
-	if(NULL == m_hNotifyRBin)
-	{
+	if(NULL == m_hNotifyRBin) {
 		TRACE(_T("Change Register Failed for RecycleBin"));
-	}
-	
+	}	
 }
 
-void CRecBinViewer::InstallShellNotify ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::InstallShellNotify () {
 	SHChangeNotifyEntry stPIDL;
 	LPITEMIDLIST ppidl;
 	
@@ -679,9 +630,7 @@ void CRecBinViewer::InstallShellNotify ()
 					&stPIDL);
 				iPos ++;
 				FindClose (hFindData);
-			}
-			else
-			{
+			} else {
 				ZeroMemory (&findData, sizeof (findData));
 				wsprintf (szPath, _T("%sRecycled"), static_cast<LPCWSTR>(ar[i].m_Path));
 				hFindData = FindFirstFile (szPath, &findData);
@@ -704,24 +653,23 @@ void CRecBinViewer::InstallShellNotify ()
 	}
 }
 
-void CRecBinViewer::RemoveRBinNotify ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::RemoveRBinNotify () {
 	SHChangeNotifyDeregister(m_hNotifyRBin);
 }
 
-void CRecBinViewer::RemoveShellNotify ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::RemoveShellNotify () {
 	int iPos = 0;	
-	while (iPos < _countof (m_pidlDrives))
-	{
-		if (NULL != m_hNotifyDrives[iPos])
-		{
+	while (iPos < _countof (m_pidlDrives)) {
+		if (NULL != m_hNotifyDrives[iPos]) {
 			SHChangeNotifyDeregister(m_hNotifyDrives[iPos]);
 		}
-		if (NULL != m_pidlDrives[iPos])
-		{
+
+		if (NULL != m_pidlDrives[iPos]) {
 			CoTaskMemFree (m_pidlDrives[iPos]);
 		}
+
 		iPos ++;
 	}
 
@@ -729,21 +677,21 @@ void CRecBinViewer::RemoveShellNotify ()
 	ZeroMemory (&m_hNotifyDrives, sizeof (m_hNotifyDrives));
 }
 
-void CRecBinViewer::RemovePIDL ()
-{	
-	for (unsigned int iPos = 0 ; iPos < m_List.size () ; iPos ++)
-	{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::RemovePIDL () {	
+
+	for (unsigned int iPos = 0 ; iPos < m_List.size () ; iPos ++) {
 		LPITEMIDLIST pidl = m_List[iPos].m_PIDL;
 
-		if (NULL != pidl)
-		{
+		if (NULL != pidl) {
 			CoTaskMemFree (pidl);
 		}
 	}	
 }
 
-BOOL CRecBinViewer::ExecCommand (int iItem, LPCTSTR lpszCommand)
-{
+//-----------------------------------------------------------------------------
+BOOL CRecBinViewer::ExecCommand (int iItem, LPCTSTR lpszCommand) {
+
 	if (iItem >= static_cast<int>(m_List.size ()))
 		return FALSE;
 
@@ -756,8 +704,7 @@ BOOL CRecBinViewer::ExecCommand (int iItem, LPCTSTR lpszCommand)
 	
 	if (NULL != m_pFolder2)	
 		hr = m_pFolder2->GetUIObjectOf (m_hWnd, 1, (LPCITEMIDLIST *)&pidl, IID_IContextMenu, NULL, (LPVOID *)&pCtxMenu);
-	
-	else	
+		else	
 		hr = m_pRecycleBin->GetUIObjectOf (m_hWnd, 1, (LPCITEMIDLIST *)&pidl, IID_IContextMenu, NULL, (LPVOID *)&pCtxMenu);
 	
 	if (SUCCEEDED (hr))
@@ -768,31 +715,29 @@ BOOL CRecBinViewer::ExecCommand (int iItem, LPCTSTR lpszCommand)
 	return bReturn;
 }
 
-
-void CRecBinViewer::UndeleteAll ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::UndeleteAll () {
 	for (unsigned int i = 0; i< m_List.size (); i++)
 		Undelete (i);
 }
 
-
-void CRecBinViewer::Undelete (int iPos)
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Undelete (int iPos) {
 	ExecCommand (iPos, _T("undelete"));
 }
 
-void CRecBinViewer::EmptyHelper ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::EmptyHelper () {
 	SHEmptyRecycleBin (m_hWnd, NULL, 0);
 }
 
-void CRecBinViewer::Empty ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Empty () {
 	gPool.StartThread(RECYCLEBIN_THREAD,  this, &CRecBinViewer::EmptyHelper);
 }
 
-bool CRecBinViewer::OnDrop (COleDataObject *object, DROPEFFECT dwEffect , const TCHAR *pTo)
-{
+//-----------------------------------------------------------------------------
+bool CRecBinViewer::OnDrop (COleDataObject *object, DROPEFFECT dwEffect , const TCHAR *pTo) {
 	CSelRowArray ar;
 
 	CString source_folder;	
@@ -806,33 +751,31 @@ bool CRecBinViewer::OnDrop (COleDataObject *object, DROPEFFECT dwEffect , const 
 	return FileOperation (AfxGetMainWnd(), ar, file_oper, FOF_ALLOWUNDO  , dest_folder) != 0;	
 }
 
-void CRecBinViewer::CheckUpdate ()
-{
-	if (m_bNeedUpdate)
-	{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::CheckUpdate () {
+	if (m_bNeedUpdate) {
 		Fill (EMPTYSTR);
 		m_bNeedUpdate = false;
 	}
 }
 
-BOOL CRecBinViewer::ExecCommandOnSelection (LPCTSTR lpszCommand)
-{
+//-----------------------------------------------------------------------------
+BOOL CRecBinViewer::ExecCommandOnSelection (LPCTSTR lpszCommand) {
+
 	if (!m_pGridCtrl)
 		return false;
 
 	int nItems = m_List.size();
 	LPITEMIDLIST *pidlArray = (LPITEMIDLIST *) malloc ( (nItems) * sizeof (LPITEMIDLIST));
 	int selCount = 0;
-	for (POSITION pos = m_pGridCtrl->m_SelectedCellMap.GetStartPosition(); pos != NULL; )
-    {
-		DWORD key;
-        CCellID cell;
-        m_pGridCtrl->m_SelectedCellMap.GetNextAssoc(pos, key, (CCellID&)cell);
-		if (cell.col == 0)  
-		{
-			pidlArray[selCount] =  m_List[cell.row -1].m_PIDL;
-			selCount++;
-		}		
+	for (POSITION pos = m_pGridCtrl->m_SelectedCellMap.GetStartPosition(); pos != NULL; ) {
+		  DWORD key;
+      CCellID cell;
+      m_pGridCtrl->m_SelectedCellMap.GetNextAssoc(pos, key, (CCellID&)cell);
+		  if (cell.col == 0) {
+			  pidlArray[selCount] =  m_List[cell.row -1].m_PIDL;
+			  selCount++;
+		  }		
     }
 
 	HRESULT hr = S_OK;
@@ -854,14 +797,13 @@ BOOL CRecBinViewer::ExecCommandOnSelection (LPCTSTR lpszCommand)
 	return bReturn;
 }
 
-void CRecBinViewer::DeleteSelection () 
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::DeleteSelection () {
 	ExecCommandOnSelection (_T("Delete"));
 }
 
-
-BOOL CRecBinViewer::ExecCommand (LPCONTEXTMENU pCtxMenu,  LPCTSTR lpszCommand)
-{
+//-----------------------------------------------------------------------------
+BOOL CRecBinViewer::ExecCommand (LPCONTEXTMENU pCtxMenu,  LPCTSTR lpszCommand) {
 	UINT uiID = UINT (-1);
 	UINT uiCommand = 0;
 	UINT uiMenuFirst = 1;
@@ -877,33 +819,25 @@ BOOL CRecBinViewer::ExecCommand (LPCONTEXTMENU pCtxMenu,  LPCTSTR lpszCommand)
 
 	iMenuMax = GetMenuItemCount(hmenuCtx);
 	
-	for (iMenuPos = 0 ; iMenuPos < iMenuMax; iMenuPos++)
-	{
+	for (iMenuPos = 0 ; iMenuPos < iMenuMax; iMenuPos++) {
 		GetMenuString(hmenuCtx, iMenuPos, szMenuItem, MAX_PATH, MF_BYPOSITION) ;
 	
 		uiID = GetMenuItemID(hmenuCtx, iMenuPos) ;
 		
-		if ((uiID == -1) || (uiID == 0))
-		{
+		if ((uiID == -1) || (uiID == 0)) {
 			
-		}
-		else
-		{
+		} else {
 			hr = pCtxMenu->GetCommandString(uiID - 1, GCS_VERB, NULL, (LPSTR)verb, MAX_PATH);
-			if (FAILED (hr))
-			{
+			if (FAILED (hr)) {
 				verb[0] = TCHAR ('\0') ;
-			}
-			else
-			{
+			} else {
 				if (0 == _tcsicmp (verb, lpszCommand))				
 					uiCommand = uiID - 1;				
 			}			
 		}
 	}
 	
-	if ((UINT)-1 != uiCommand)
-	{
+	if ((UINT)-1 != uiCommand) {
 		CMINVOKECOMMANDINFO cmi;			
 		ZeroMemory(&cmi, sizeof(CMINVOKECOMMANDINFO));
 		cmi.cbSize			= sizeof(CMINVOKECOMMANDINFO);
@@ -919,13 +853,13 @@ BOOL CRecBinViewer::ExecCommand (LPCONTEXTMENU pCtxMenu,  LPCTSTR lpszCommand)
 	return false;
 }
 
-CString CRecBinViewer::GetText (int row, int col)
-{
+//-----------------------------------------------------------------------------
+CString CRecBinViewer::GetText (int row, int col) {
 	return m_List[row][col];
 }
 
-void CRecBinViewer::ContextMenu (CView* pView, CSelRowArray &ar, CPoint &pt) 
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::ContextMenu (CView* pView, CSelRowArray &ar, CPoint &pt)  {
 	CShellContextMenu scm;
 	IShellFolder*psfRecycle = NULL;
 	
@@ -949,11 +883,11 @@ void CRecBinViewer::ContextMenu (CView* pView, CSelRowArray &ar, CPoint &pt)
 	scm.ShowContextMenu (pView, pt);
 	if (psfRecycle)
 		psfRecycle->Release ();
-	
 }
 
-void CRecBinViewer::Properties (CSelRowArray &ar)
-{	
+//-----------------------------------------------------------------------------
+void CRecBinViewer::Properties (CSelRowArray &ar) {	
+
 	CShellContextMenu scm;
 	IShellFolder*psfRecycle = NULL;
 	
@@ -979,8 +913,8 @@ void CRecBinViewer::Properties (CSelRowArray &ar)
 		psfRecycle->Release ();
 }
 
-void CRecBinViewer::FillHeader()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::FillHeader() {
 	m_State.m_Widths[0] = 200;
 	m_State.m_Widths[1] = 120;
 	m_State.m_Widths[2] = 120;
@@ -988,8 +922,8 @@ void CRecBinViewer::FillHeader()
 	m_State.m_Widths[4] = 120;		
 }
 
-void CRecBinViewer::OnClose ()
-{
+//-----------------------------------------------------------------------------
+void CRecBinViewer::OnClose () {
 	SaveState (CONST_RECYCLEBIN);
 }
 

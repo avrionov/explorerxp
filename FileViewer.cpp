@@ -209,9 +209,11 @@ struct SortByAttrib {
   bool m_bAscending;
 };
 
-CFileViewer::CFileViewer() : m_bCheckForCutFiles(false) {}
+CFileViewer::CFileViewer() : m_bCheckForCutFiles(false) {
+}
 
-CFileViewer::~CFileViewer() {}
+CFileViewer::~CFileViewer() {
+}
 
 void CFileViewer::GetFolder(fast_array<CFileInfo> &array, const TCHAR *path) {
   InOut log(_T("GetFolder %s"), path);

@@ -1,14 +1,14 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/*  Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+*/
 
 #include "stdafx.h"
 #include "DriveViewer.h"
@@ -33,20 +33,18 @@ static TCHAR *Headers[] = {_T("Name"), _T("Type"), _T("Total Size"), _T("Free Si
 
 CDriveViewer gDriveViewer;
 
-CDriveViewer::CDriveViewer()
-{
+CDriveViewer::CDriveViewer() {
 	FillHeader();
 	m_bGetState = false;
 }
 
-CDriveViewer::~CDriveViewer()
-{
+CDriveViewer::~CDriveViewer() {
 
 }
 
-void CDriveViewer::GetDrives ()
-{	
-	CDriveArray drArray;
+void CDriveViewer::GetDrives () {	
+	
+  CDriveArray drArray;
 	::GetDrives (drArray);
 
 	setDrives(drArray);
@@ -57,9 +55,8 @@ void CDriveViewer::setDrives(const CDriveArray& drives_array) {
 	m_Array.assign(drives_array.begin(), drives_array.end());
 }
 
-void CDriveViewer::Fill (const TCHAR *root) 
-{
-	//GetDrives (m_Array);
+void CDriveViewer::Fill (const TCHAR *root)  {
+	
 	gPool.StopThread(DRIVES_THREAD);
 	gPool.StartThreadAndWait(DRIVES_THREAD, this, &CDriveViewer::GetDrives);
 	
@@ -77,19 +74,18 @@ void CDriveViewer::Fill (const TCHAR *root)
 	SetupGrid ();	
 }
 
-const TCHAR * CDriveViewer::GetTitle () 
-{
+const TCHAR * CDriveViewer::GetTitle ()  {
 	return CONST_MYCOMPUTER;
 }
 
-void CDriveViewer::GridCallBack (GV_DISPINFO *pDispInfo) 
-{
+void CDriveViewer::GridCallBack (GV_DISPINFO *pDispInfo)  {
+
+  CGuard guard(m_lock);
+
 	pDispInfo->item.nState |= GVIS_READONLY;
 
-	if (pDispInfo->item.row == 0)
-	{
-		pDispInfo->item.strText = Headers[pDispInfo->item.col];
-	//	pDispInfo->item.lfFont.lfWeight  = FW_BOLD;
+	if (pDispInfo->item.row == 0) {
+		pDispInfo->item.strText = Headers[pDispInfo->item.col];	
 		return ;
 	}
 
@@ -97,14 +93,13 @@ void CDriveViewer::GridCallBack (GV_DISPINFO *pDispInfo)
 	int col = pDispInfo->item.col;
 
 	
-	if (row > static_cast<int>(m_Array.size()))
-	{
+	if (row > static_cast<int>(m_Array.size())) {
 		TRACE (_T("Asking for %d from %d !!!!\n"), row, m_Array.size ());
 		return;
 	}
 	
-	switch (pDispInfo->item.col)
-	{
+	switch (pDispInfo->item.col) {
+
 		case 0:
 			{
 				pDispInfo->item.iImage = m_Array[row].m_nImage;
@@ -128,11 +123,6 @@ void CDriveViewer::GridCallBack (GV_DISPINFO *pDispInfo)
 
 	}
 	
-	 /*pDispInfo->item.crFgClr = GetSysColor (COLOR_BTNTEXT);
-
-	 if (pDispInfo->item.col == m_State.m_nSortColumn)
-			pDispInfo->item.crBkClr = RGB(247,247,247);  */
-
 	if (pDispInfo->item.col == m_State.m_nSortColumn)
 		pDispInfo->item.crBkClr = //RGB(247,247,247);             
 		HLS_TRANSFORM (GetSysColor(COLOR_WINDOW),0, 5);
@@ -150,14 +140,10 @@ struct SortByName
 		:m_bAscending (bAscending)
 	{	}
 
-	bool operator () (CDriveInfo &d1, CDriveInfo &d2)
-	{
-		if (m_bAscending)		
-		{
+	bool operator () (CDriveInfo &d1, CDriveInfo &d2) {
+		if (m_bAscending)	 		{
 				return _tcsicmp (d1.m_Path, d2.m_Path) <= 0;
-		}		
-		else
-		{
+		}	else {
 			return _tcsicmp (d1.m_Path, d2.m_Path) >= 0;						
 		}				
 	}
@@ -172,18 +158,14 @@ struct SortByType
 		:m_bAscending (bAscending)
 	{	}
 
-	bool operator () (CDriveInfo &d1, CDriveInfo &d2)
-	{
-		if (m_bAscending)		
-		{
+	bool operator () (CDriveInfo &d1, CDriveInfo &d2) {
+		if (m_bAscending) 		{
 				int result = _tcsicmp (d1.m_Type, d2.m_Type);
 				if (result == 0)
 					return _tcsicmp (d1.m_Path, d2.m_Path) <= 0;
 
 				return result <= 0;
-		}		
-		else
-		{
+		}	else {
 			int result = _tcsicmp (d1.m_Type, d2.m_Type);
 			if (result == 0)
 				return _tcsicmp (d1.m_Path, d2.m_Path) >= 0;						
@@ -196,8 +178,8 @@ struct SortByType
 };
 
 
-bool sort_by_free_size_a (const CDriveInfo d1, const CDriveInfo d2)
-{
+bool sort_by_free_size_a (const CDriveInfo d1, const CDriveInfo d2) {
+
 	if (d1.m_FreeSpace < d2.m_FreeSpace)
 		return true;
 
@@ -218,8 +200,8 @@ bool sort_by_free_size_d (const CDriveInfo d1, const CDriveInfo d2)
 		return _tcsicmp (d1.m_Path, d2.m_Path) <= 0;
 }
 
-bool sort_by_total_size_a (const CDriveInfo d1, const CDriveInfo d2)
-{
+bool sort_by_total_size_a (const CDriveInfo d1, const CDriveInfo d2) {
+
 	if (d1.m_TotalSize < d2.m_TotalSize)
 		return true;
 
@@ -229,8 +211,8 @@ bool sort_by_total_size_a (const CDriveInfo d1, const CDriveInfo d2)
 	return _tcsicmp (d1.m_Path, d2.m_Path) <= 0;
 }
 
-bool sort_by_total_size_d (const CDriveInfo d1, const CDriveInfo d2)
-{		
+bool sort_by_total_size_d (const CDriveInfo d1, const CDriveInfo d2) {		
+
 		if (d1.m_TotalSize < d2.m_TotalSize)
 			return false;
 
@@ -240,8 +222,8 @@ bool sort_by_total_size_d (const CDriveInfo d1, const CDriveInfo d2)
 		return _tcsicmp (d1.m_Path, d2.m_Path) <= 0;
 }
 
-void CDriveViewer::Sort ()
-{
+void CDriveViewer::Sort () {
+
 	switch (m_State.m_nSortColumn)
 	{
 		case 0:	
@@ -264,13 +246,12 @@ void CDriveViewer::Sort ()
 	}
 }
 
-bool CDriveViewer::Sync (const TCHAR* folder , const TCHAR *name) 
-{
+bool CDriveViewer::Sync (const TCHAR* folder , const TCHAR *name) {
 	return false;
 }
 
-void GetDrives (CDriveArray &array)
-{
+void GetDrives (CDriveArray &array) {
+
 	array.clear ();
 
 	IShellFolder   *psfDesktop;
@@ -382,33 +363,32 @@ const TCHAR* CDriveInfo::as_text (int i)
 	}	
 }
 
-bool CDriveViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk)
-{
-    size = m_Array[iRow].m_TotalSize;
+bool CDriveViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk) {
+
+  CGuard guard(m_lock);
+  size = m_Array[iRow].m_TotalSize;
 	sizeOnDisk = 0;	
 	return true;
 }
 
-void CDriveViewer::CheckUpdate ()
-{
-	if (m_bNeedUpdate)
-	{
+void CDriveViewer::CheckUpdate () {
+
+	if (m_bNeedUpdate) {
 		TRACE (_T("Check Update Dr Viewer\n"));
 		Fill (EMPTYSTR);
 		m_bNeedUpdate = false;
 	}
 }
 
-CString CDriveViewer::GetText (int row, int col)
-{
+CString CDriveViewer::GetText (int row, int col) {
+  CGuard guard(m_lock);
 	return m_Array[row].as_text (col);
 }
 
-void CDriveViewer::FillHeader()
-{	
+void CDriveViewer::FillHeader() {	
+
 	m_State.m_Visible = 0;
-	for (int i = 0; i < 4; i++)
-	{
+	for (int i = 0; i < 4; i++) {
 		m_Headers.push_back (Headers[i]);
 		m_State.m_Visible |= 1 << i;
 	}
@@ -426,15 +406,13 @@ void CDriveViewer::FillHeader()
 }
 
 
-
-void CDriveViewer::OnClose ()
-{
+void CDriveViewer::OnClose () {
 	SaveState (CONST_MYCOMPUTER);
 }
 
-CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path)
-{
-	CDriveArray drArray;
+CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path) {
+
+  CDriveArray drArray;
 	::GetDrives(drArray);
 			
 	static CString info;
@@ -443,17 +421,14 @@ CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path)
 	if (drArray.size() == 0)
 		MarkForUpdate();
 
-	for (int i = 0; i < static_cast<int>(drArray.size()); i++ )
-	{
+	for (int i = 0; i < static_cast<int>(drArray.size()); i++ ) {
+
 	  if (drArray[i].m_nType == DRIVE_FIXED)
-		  if (PathIsSameRoot (path, drArray[i].m_Path))
-		  {
-			  //info += m_Array[i].as_text(0);
-			  //info += m_Array[i].m_Path;
-			  //info += "  ";
+		  if (PathIsSameRoot (path, drArray[i].m_Path)) {
+		
 			  TCHAR buf[128];
 			  StrFormatByteSize64 (drArray[i].m_FreeSpace, buf, 127);
-			  //info += m_Array[i].as_text(0);
+		
 			  if (*path && path[0] > 0) {
 			     info += path[0];
 				 info += TEXT(": ");

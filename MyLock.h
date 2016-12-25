@@ -52,8 +52,7 @@ class CGuard
 		{
 			_lock.Unlock ();
 		};
-
-
+    
 	private:
 		CMyLock& _lock;
 

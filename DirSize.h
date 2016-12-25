@@ -125,15 +125,21 @@ public:
 	void Load ();
 	void GetDirInfoArrray (CDirInfoArray & arr);
 
-	CDirInfoMap m_Map;
-	CDirStack	m_Stack;
-	
+  CMyLock m_SizeLock;
+	CDirInfoMap m_SizeMap;
+
+  
+  CMyLock m_StackLock;
+  	CDirStack	m_Stack;
+
+  CMyLock m_wndLock;
 	std::vector <HWND> m_Wnds;
+
 	CViewAr   m_Views;
 	CDirectoryChangeWatcher m_Watcher;
-	CMyLock m_SizeLock;
-	CMyLock m_wndLock;	
-	CMyLock m_StackLock;
+	
+	
+	
 	CDirSizHandlerAr m_Handlers;
 	CDriveArray m_Drives;
 };
