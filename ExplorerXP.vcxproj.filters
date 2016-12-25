@@ -170,24 +170,6 @@
     <ClCompile Include="DirSizeChangeHandler.cpp">
       <Filter>Source Files\DirChanges</Filter>
     </ClCompile>
-    <ClCompile Include="DocSelect.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
-    <ClCompile Include="MainBarDropTarget.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
-    <ClCompile Include="MainToolBar.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
-    <ClCompile Include="TabDropTarget.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolBarEx.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowTabCtrl.cpp">
-      <Filter>Source Files\Bars</Filter>
-    </ClCompile>
     <ClCompile Include="DriveTree.cpp">
       <Filter>Source Files\FolderTrees</Filter>
     </ClCompile>
@@ -299,21 +281,6 @@
     <ClCompile Include="Persist\PersistMDIFrame.cpp">
       <Filter>Source Files\Persist</Filter>
     </ClCompile>
-    <ClCompile Include="ACEdit.cpp">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClCompile>
-    <ClCompile Include="ACListWnd.cpp">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClCompile>
-    <ClCompile Include="AddressBar.cpp">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClCompile>
-    <ClCompile Include="ComboBoxFolder.cpp">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClCompile>
-    <ClCompile Include="PathEdit.cpp">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClCompile>
     <ClCompile Include="FileMerge.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
@@ -388,6 +355,39 @@
     </ClCompile>
     <ClCompile Include="Dialogs\RenaneReplace.cpp">
       <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar\ACEdit.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar\ACListWnd.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar\AddressBar.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar\ComboBoxFolder.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBar\PathEdit.cpp">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\DocSelect.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\MainBarDropTarget.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\MainToolBar.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\TabDropTarget.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\ToolBarEx.cpp">
+      <Filter>Source Files\Bars</Filter>
+    </ClCompile>
+    <ClCompile Include="Bars\WindowTabCtrl.cpp">
+      <Filter>Source Files\Bars</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -510,24 +510,6 @@
     </ClInclude>
     <ClInclude Include="DirSizeChangeHandler.h">
       <Filter>Source Files\DirChanges</Filter>
-    </ClInclude>
-    <ClInclude Include="DocSelect.h">
-      <Filter>Source Files\Bars</Filter>
-    </ClInclude>
-    <ClInclude Include="MainBarDropTarget.h">
-      <Filter>Source Files\Bars</Filter>
-    </ClInclude>
-    <ClInclude Include="MainToolBar.h">
-      <Filter>Source Files\Bars</Filter>
-    </ClInclude>
-    <ClInclude Include="TabDropTarget.h">
-      <Filter>Source Files\Bars</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolBarEx.h">
-      <Filter>Source Files\Bars</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowTabCtrl.h">
-      <Filter>Source Files\Bars</Filter>
     </ClInclude>
     <ClInclude Include="DriveTree.h">
       <Filter>Source Files\FolderTrees</Filter>
@@ -655,21 +637,6 @@
     <ClInclude Include="Persist\PersistMDIFrame.h">
       <Filter>Source Files\Persist</Filter>
     </ClInclude>
-    <ClInclude Include="ACEdit.h">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClInclude>
-    <ClInclude Include="ACListWnd.h">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressBar.h">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClInclude>
-    <ClInclude Include="ComboBoxFolder.h">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClInclude>
-    <ClInclude Include="PathEdit.h">
-      <Filter>Source Files\AddressBar</Filter>
-    </ClInclude>
     <ClInclude Include="FileMerge.h">
       <Filter>Source Files\Tools</Filter>
     </ClInclude>
@@ -753,6 +720,39 @@
     </ClInclude>
     <ClInclude Include="Dialogs\RenaneReplace.h">
       <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar\ACEdit.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar\ACListWnd.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar\AddressBar.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar\ComboBoxFolder.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBar\PathEdit.h">
+      <Filter>Source Files\AddressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\DocSelect.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\MainBarDropTarget.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\MainToolBar.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\TabDropTarget.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\ToolBarEx.h">
+      <Filter>Source Files\Bars</Filter>
+    </ClInclude>
+    <ClInclude Include="Bars\WindowTabCtrl.h">
+      <Filter>Source Files\Bars</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

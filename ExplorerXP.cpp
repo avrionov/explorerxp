@@ -28,7 +28,6 @@
 #include "ShortcutManager.h"
 
 
-
 extern CDirSize dirs;
 
 #ifdef _DEBUG

@@ -14,7 +14,7 @@
 #include "stdafx.h"
 #include "explorerxp.h"
 #include "GenericDropTarget.h"
-#include "MainToolBar.h"
+#include "Bars\MainToolBar.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE

@@ -13,7 +13,7 @@
 #include "stdafx.h"
 #include "TreeCtrlFolder.h"
 #include "resource.h"
-#include "ComboBoxFolder.h"
+#include "AddressBar\ComboBoxFolder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

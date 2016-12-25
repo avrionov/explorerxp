@@ -17,10 +17,10 @@
 #pragma once
 
 #include "Sizebar\SizableReBar.h"
-#include "docselect.h"
-#include "AddressBar.h"
+#include "Bars\docselect.h"
+#include "Bars\MainToolbar.h"
 #include "MainFolder.h"
-#include "MainToolbar.h"
+#include "AddressBar\AddressBar.h"
 #include "Persist\PersistFrames.h"
 #include "FavTree.h"
 #include "ResizableLib\ResizableDialog.h"
