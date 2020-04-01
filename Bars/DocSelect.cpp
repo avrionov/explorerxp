@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -23,7 +23,7 @@
 
 #include "debug_new.h"
 
-#define ID_TABHEIGHT 19
+#define ID_TABHEIGHT 22
 //#define DS_HEIGHT				ID_TABHEIGHT+4		// Default
 //is 22.
 //#define DS_WIDTH				110		// Default is
@@ -95,8 +95,9 @@ int CDocSelector::OnCreate(LPCREATESTRUCT lpCreateStruct) {
     return -1;
 
   //    m_ViewTabImages.Create(16, 16, ILC_MASK, 5, 5);
-  DWORD dwStyle = TCS_TOOLTIPS | TCS_SINGLELINE | TCS_FOCUSNEVER |
+  DWORD dwStyle = TCS_TOOLTIPS | TCS_SINGLELINE | TCS_FOCUSNEVER | 
                   TCS_FORCELABELLEFT /*| TCS_MULTILINE*/;
+
   if (!ThemeLibLoaded)
     dwStyle |= TCS_BUTTONS | TCS_FLATBUTTONS;
   else

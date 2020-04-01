@@ -1,20 +1,14 @@
-/*
- * Copyright (c) 2005 Citrix Systems, Inc.
- * All Rights Reserved Worldwide.
- * 
- * THIS PROGRAM IS CONFIDENTIAL AND PROPRIETARY TO EXPERTCITY 
- * AND CONSTITUTES A VALUABLE TRADE SECRET.  Any unauthorized use,
- * reproduction, modification, or disclosure of this program is 
- * strictly prohibited.  Any use of this program by an authorized 
- * licensee is strictly subject to the terms and conditions, 
- * including confidentiality obligations, set forth in the applicable
- * License and Co-Branding Agreement between Expertcity, Inc. and 
- * the licensee.
- *
- * $Header: $
- * $NoKeywords: $
- */
-
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
 
 #include "stdafx.h"
 #include "MemBuffer.h"

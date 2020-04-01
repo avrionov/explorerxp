@@ -152,7 +152,9 @@
 #define IDC_LIST1                       1034
 #define IDC_LIST                        1034
 #define IDC_LAST_SEP                    1035
+#define IDC_HARMONDALE3                 1035
 #define IDC_WILDCARDS                   1036
+#define IDC_HARMONDALE4                 1036
 #define IDC_COMBO1                      1038
 #define IDC_MULTIPLAYER                 1038
 #define IDC_PATTERNS                    1038

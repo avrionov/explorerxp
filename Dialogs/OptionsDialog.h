@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,10 +33,12 @@ protected:
   DECLARE_MESSAGE_MAP()
 public:
   BOOL m_bVert;
-  BOOL m_bHorz;
-  afx_msg void OnBnClickedOk();
+  BOOL m_bHorz;  
   BOOL m_bAtStartNone;
   BOOL m_bHiddenFiles;
+  BOOL m_bShowExeIcons;
+
+  afx_msg void OnBnClickedOk();
   virtual BOOL OnApply();
   virtual void OnOK();
   void GetFromDlg();
@@ -44,4 +46,5 @@ public:
   afx_msg void OnBnClickedHorizontal();
   afx_msg void OnBnClickedVertical();
   afx_msg void OnBnClickedAtstartnone();
+  afx_msg void OnBnClickedShowExeIcons();
 };

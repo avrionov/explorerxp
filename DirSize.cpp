@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -14,7 +14,7 @@
 #include "stdafx.h"
 #include "DirSize.h"
 #include "DirSizeChangeHandler.h"
-#include "DriveViewer.h"
+#include "Viewers\DriveViewer.h"
 #include "ExplorerXPView.h"
 #include "fast_array.h"
 #include "SimpleFile.h"

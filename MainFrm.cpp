@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -20,8 +20,8 @@
 #include "dirsize.h"
 #include "ExplorerXPDoc.h"
 #include "ExplorerXPView.h"
-#include "RecBinViewer.h"
-#include "DriveViewer.h"
+#include "Viewers\RecBinViewer.h"
+#include "Viewers\DriveViewer.h"
 #include "DBT.H"
 #include "OptionsDialog.h"
 #include "Options.h"
@@ -259,6 +259,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_FolderBar.SetSCBStyle(m_FolderBar.GetSCBStyle() | SCBS_SIZECHILD);
 
+	/*
 	CRect rectDummy(0, 0, 0, 0);
 	const DWORD dwTreeStyle = WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS | TVS_SHOWSELALWAYS | WS_BORDER;
 
@@ -266,16 +267,16 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	{
 		TRACE0("Failed to create Folder bar child\n");
 		return -1;		// fail to create
-	}
+	}*/
 
 	
-	//if (!m_DriveTree.Create(style, CRect(0, 0, 0, 0), &m_FolderBar, ID_DRIVETREE))
-	//{
-	//	TRACE0("Failed to create Folder bar child\n");
-	//	return -1;		// fail to create
-	//}
+	if (!m_DriveTree.Create(style, CRect(0, 0, 0, 0), &m_FolderBar, ID_DRIVETREE))
+	{
+		TRACE0("Failed to create Folder bar child\n");
+		return -1;		// fail to create
+	}
 
-   // m_DriveTree.ModifyStyleEx(0, WS_EX_CLIENTEDGE);
+    //m_DriveTree.ModifyStyleEx(0, WS_EX_CLIENTEDGE);
 	
 	
 	m_FolderBar.SetBarStyle(m_FolderBar.GetBarStyle() | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
@@ -691,7 +692,7 @@ LRESULT CMainFrame::OnShellNotify (WPARAM wParam, LPARAM lParam)
 	gDriveViewer.MarkForUpdate ();
 	return 0;
 }
-
+  
 void pidlToString( LPCITEMIDLIST lpIL, CString& retStr )
 {
 	static TCHAR buffer [MAX_PATH*32 + 2];

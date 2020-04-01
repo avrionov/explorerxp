@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -59,6 +59,8 @@ void CGridList::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		return;
 	}
 
+	// fix grid search issues TODO
+	//m_LookStr = "";
 	if ( ((nChar >= 'A') && (nChar <= 'Z')) || (nChar >= '0' && nChar <= '9') )
 	{
 		CCellID next;
@@ -113,8 +115,7 @@ void CGridList::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 					next.row = 1;
 			}
 		}
-        
-		
+        	
 
 		if( !bFoundVisible)
 		{

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Unicode Debug|Win32">
-      <Configuration>Unicode Debug</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Unicode Release - Opt|Win32">
-      <Configuration>Unicode Release - Opt</Configuration>
+    <ProjectConfiguration Include="Release - Opt|Win32">
+      <Configuration>Release - Opt</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Unicode Release|Win32">
-      <Configuration>Unicode Release</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -21,39 +21,39 @@
     <ProjectGuid>{9F841482-902E-49D1-93CE-F88DBDC62096}</ProjectGuid>
     <RootNamespace>ExplorerXP</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
   </ImportGroup>
@@ -61,15 +61,13 @@
   <PropertyGroup>
     <_ProjectFileVersion>11.0.50214.1</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
-    <OutDir>..\bin2\</OutDir>
-    <IntDir>..\bin\ExplorerXP___Win32_Unicode_Release\</IntDir>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>ExplorerXP</TargetName>
     <TargetExt>.exe</TargetExt>
     <LinkIncremental>false</LinkIncremental>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">
     <OutDir>..\bin\</OutDir>
     <IntDir>..\bin\ExplorerXP___Win32_Unicode_Release\</IntDir>
     <TargetName>ExplorerXP</TargetName>
@@ -77,16 +75,13 @@
     <LinkIncremental>false</LinkIncremental>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
-    <OutDir>..\bin\</OutDir>
-    <IntDir>..\bin\ExplorerXP___Win32_Unicode_Debug\</IntDir>
-    <TargetName>ExplorerXPD</TargetName>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetExt>.exe</TargetExt>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -122,6 +117,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ShowIncludes>false</ShowIncludes>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -152,7 +148,7 @@
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -221,7 +217,7 @@
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -245,6 +241,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Dialogs;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -278,36 +275,36 @@
     <ClCompile Include="Bars\ToolBarEx.cpp" />
     <ClCompile Include="Bars\WindowTabCtrl.cpp" />
     <ClCompile Include="BrowseForFolder.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
-    <ClCompile Include="Charts.cpp" />
     <ClCompile Include="ChildFrm.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ClipboardFiles.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="Dialogs\AddEditPatternDlg.cpp" />
+    <ClCompile Include="Dialogs\Charts.cpp" />
     <ClCompile Include="Dialogs\CleanDialog.cpp" />
     <ClCompile Include="Dialogs\CopyMoveDlg.cpp" />
     <ClCompile Include="Dialogs\EditFilterDialog.cpp" />
     <ClCompile Include="Dialogs\EditFiltersDialog.cpp" />
+    <ClCompile Include="Dialogs\FindMissing.cpp" />
     <ClCompile Include="Dialogs\FolderSizeDlg.cpp" />
     <ClCompile Include="Dialogs\KeyboardPage.cpp" />
     <ClCompile Include="Dialogs\MergeDlg.cpp" />
     <ClCompile Include="Dialogs\MultiRenameDlg.cpp" />
     <ClCompile Include="Dialogs\NewFolderDialog.cpp" />
     <ClCompile Include="Dialogs\OptionsDialog.cpp" />
-    <ClCompile Include="Dialogs\OptionsDlg.cpp" />
     <ClCompile Include="Dialogs\RenameDlg.cpp" />
     <ClCompile Include="Dialogs\RenaneReplace.cpp" />
     <ClCompile Include="Dialogs\RenTrimDlg.cpp" />
@@ -316,235 +313,211 @@
     <ClCompile Include="Dialogs\SplitDlg.cpp" />
     <ClCompile Include="Dialogs\TabOptionsDlg.cpp" />
     <ClCompile Include="DirSize.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ExplorerXP.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="FileFilter.cpp" />
     <ClCompile Include="FileInfo.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="FileShellAttributes.cpp" />
     <ClCompile Include="FolderStateManager.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GenericDropTarget.cpp" />
     <ClCompile Include="globals.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridList.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GroupManager.cpp" />
     <ClCompile Include="History.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="Options.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="RenameInsert.cpp" />
     <ClCompile Include="Shell32.cpp" />
     <ClCompile Include="ShellContextMenu.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ShellTree.cpp" />
     <ClCompile Include="ShortcutManager.cpp" />
     <ClCompile Include="StdAfx.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Create</PrecompiledHeader>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Create</PrecompiledHeader>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">false</ShowIncludes>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">false</ShowIncludes>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Create</PrecompiledHeader>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ShowIncludes>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\FontMapper.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\GridCell.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\GridCellBase.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\GridCtrl.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">false</PreprocessToFile>
-      <PreprocessSuppressLineNumbers Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">false</PreprocessSuppressLineNumbers>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessSuppressLineNumbers>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\GridDropTarget.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\InPlaceEdit.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="GridCtrl_src\TitleTip.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="DriveViewer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="FileViewer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="RecBinViewer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-    </ClCompile>
-    <ClCompile Include="Viewer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ExplorerXPDoc.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ExplorerXPView.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">false</ShowIncludes>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">false</ShowIncludes>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">false</ShowIncludes>
     </ClCompile>
     <ClCompile Include="DirChanges\DelayedDirectoryChangeHandler.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="DirChanges\DirectoryChanges.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="DirSizeChangeHandler.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="DriveTree.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="FavTree.cpp" />
     <ClCompile Include="MainFolder.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">false</ShowIncludes>
-      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">false</ShowIncludes>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">false</ShowIncludes>
     </ClCompile>
     <ClCompile Include="MainTreeDropTarget.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="TreeCtrlFolder.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableDialog.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableGrip.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableLayout.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableMinMax.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableMsgSupport.cpp" />
     <ClCompile Include="ResizableLib\ResizableState.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="ResizableLib\ResizableVersion.cpp" />
     <ClCompile Include="ResizableLib\ResizableWndState.cpp" />
@@ -555,85 +528,88 @@
     <ClCompile Include="hotkeyctrlex.cpp" />
     <ClCompile Include="HoverButton.cpp" />
     <ClCompile Include="HyperLink.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="MenuButton.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="Subclass.cpp" />
     <ClCompile Include="Themes.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="TreeCtrlEx.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
+    <ClCompile Include="Viewers\DriveViewer.cpp" />
+    <ClCompile Include="Viewers\FileViewer.cpp" />
+    <ClCompile Include="Viewers\RecBinViewer.cpp" />
+    <ClCompile Include="Viewers\Viewer.cpp" />
     <ClCompile Include="WinClasses.cpp" />
     <ClCompile Include="MyLock.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="PropContainer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="SimpleFile.cpp" />
     <ClCompile Include="SingleInstance.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="SplitPath.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="SysImageList.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="TextUtil.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="TGABitmap.cpp" />
     <ClCompile Include="ThreadPool.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="XWinVer.cpp" />
     <ClCompile Include="Persist\PersistFrameImpl.cpp" />
     <ClCompile Include="Persist\PersistMDIFrame.cpp" />
     <ClCompile Include="FileMerge.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
     <ClCompile Include="FileSplit.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Disabled</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Full</Optimization>
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Full</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
     </ClCompile>
-    <ClCompile Include="FindMissing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddressBar\ACEdit.h" />
@@ -648,22 +624,22 @@
     <ClInclude Include="Bars\ToolBarEx.h" />
     <ClInclude Include="Bars\WindowTabCtrl.h" />
     <ClInclude Include="BrowseForFolder.h" />
-    <ClInclude Include="Charts.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClipboardFiles.h" />
     <ClInclude Include="debug_new.h" />
     <ClInclude Include="Dialogs\AddEditPatternDlg.h" />
+    <ClInclude Include="Dialogs\Charts.h" />
     <ClInclude Include="Dialogs\CleanDialog.h" />
     <ClInclude Include="Dialogs\CopyMoveDlg.h" />
     <ClInclude Include="Dialogs\EditFilterDialog.h" />
     <ClInclude Include="Dialogs\EditFiltersDialog.h" />
+    <ClInclude Include="Dialogs\FindMissing.h" />
     <ClInclude Include="Dialogs\FolderSizeDlg.h" />
     <ClInclude Include="Dialogs\KeyboardPage.h" />
     <ClInclude Include="Dialogs\MergeDlg.h" />
     <ClInclude Include="Dialogs\MultiRenameDlg.h" />
     <ClInclude Include="Dialogs\NewFolderDialog.h" />
     <ClInclude Include="Dialogs\OptionsDialog.h" />
-    <ClInclude Include="Dialogs\OptionsDlg.h" />
     <ClInclude Include="Dialogs\RenameDlg.h" />
     <ClInclude Include="Dialogs\RenaneReplace.h" />
     <ClInclude Include="Dialogs\RenTrimDlg.h" />
@@ -676,7 +652,6 @@
     <ClInclude Include="FileFilter.h" />
     <ClInclude Include="FileInfo.h" />
     <ClInclude Include="FileShellAttributes.h" />
-    <ClInclude Include="FindMissing.h" />
     <ClInclude Include="FolderStateManager.h" />
     <ClInclude Include="GenericDropTarget.h" />
     <ClInclude Include="globals.h" />
@@ -685,7 +660,6 @@
     <ClInclude Include="GroupManager.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="History.h" />
-    <ClInclude Include="ListControlMem.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="RenameInsert.h" />
@@ -693,7 +667,12 @@
     <ClInclude Include="ShellContextMenu.h" />
     <ClInclude Include="ShellTree.h" />
     <ClInclude Include="ShortcutManager.h" />
+    <ClInclude Include="Sizebar\GlobalData.h" />
     <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="Viewers\DriveViewer.h" />
+    <ClInclude Include="Viewers\FileViewer.h" />
+    <ClInclude Include="Viewers\RecBinViewer.h" />
+    <ClInclude Include="Viewers\Viewer.h" />
     <ClInclude Include="wclassdefines.h" />
     <ClInclude Include="GridCtrl_src\CellRange.h" />
     <ClInclude Include="GridCtrl_src\FontMapper.h" />
@@ -703,10 +682,6 @@
     <ClInclude Include="GridCtrl_src\GridDropTarget.h" />
     <ClInclude Include="GridCtrl_src\InPlaceEdit.h" />
     <ClInclude Include="GridCtrl_src\TitleTip.h" />
-    <ClInclude Include="DriveViewer.h" />
-    <ClInclude Include="FileViewer.h" />
-    <ClInclude Include="RecBinViewer.h" />
-    <ClInclude Include="Viewer.h" />
     <ClInclude Include="ExplorerXPDoc.h" />
     <ClInclude Include="ExplorerXPView.h" />
     <ClInclude Include="DirChanges\DelayedDirectoryChangeHandler.h" />
@@ -760,14 +735,14 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\ExplorerXP.exe.manifest">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Release - Opt|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">true</ExcludedFromBuild>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ExplorerXP.rc">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_DEBUG</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

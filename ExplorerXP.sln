@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExplorerXP", "ExplorerXP.vcxproj", "{9F841482-902E-49D1-93CE-F88DBDC62096}"
 EndProject
@@ -11,14 +11,17 @@ Global
 		Unicode Release|Win32 = Unicode Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release - Opt|Win32.ActiveCfg = Unicode Release - Opt|Win32
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release - Opt|Win32.Build.0 = Unicode Release - Opt|Win32
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
-		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Debug|Win32.ActiveCfg = Debug|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Debug|Win32.Build.0 = Debug|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release - Opt|Win32.ActiveCfg = Release - Opt|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release - Opt|Win32.Build.0 = Release - Opt|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release|Win32.ActiveCfg = Release|Win32
+		{9F841482-902E-49D1-93CE-F88DBDC62096}.Unicode Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80E2CEEC-3D4E-4E29-AD17-753A1C803791}
 	EndGlobalSection
 EndGlobal

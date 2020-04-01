@@ -137,18 +137,6 @@
     <ClCompile Include="GridCtrl_src\TitleTip.cpp">
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
-    <ClCompile Include="DriveViewer.cpp">
-      <Filter>Source Files\Viewers</Filter>
-    </ClCompile>
-    <ClCompile Include="FileViewer.cpp">
-      <Filter>Source Files\Viewers</Filter>
-    </ClCompile>
-    <ClCompile Include="RecBinViewer.cpp">
-      <Filter>Source Files\Viewers</Filter>
-    </ClCompile>
-    <ClCompile Include="Viewer.cpp">
-      <Filter>Source Files\Viewers</Filter>
-    </ClCompile>
     <ClCompile Include="ExplorerXPDoc.cpp">
       <Filter>Source Files\Views &amp; Docs</Filter>
     </ClCompile>
@@ -281,9 +269,6 @@
     <ClCompile Include="FileSplit.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="FindMissing.cpp">
-      <Filter>Source Files\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="FileShellAttributes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -312,9 +297,6 @@
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="Dialogs\NewFolderDialog.cpp">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogs\OptionsDlg.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="Dialogs\RenameDlg.cpp">
@@ -383,10 +365,25 @@
     <ClCompile Include="Bars\WindowTabCtrl.cpp">
       <Filter>Source Files\Bars</Filter>
     </ClCompile>
-    <ClCompile Include="Charts.cpp">
+    <ClCompile Include="RenameInsert.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="RenameInsert.cpp">
+    <ClCompile Include="Viewers\DriveViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewers\FileViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewers\RecBinViewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewers\Viewer.cpp">
+      <Filter>Source Files\Viewers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Charts.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\FindMissing.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -409,9 +406,6 @@
     <ClInclude Include="FileInfo.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FindMissing.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="FolderStateManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -428,9 +422,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="History.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListControlMem.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="MainFrm.h">
@@ -477,18 +468,6 @@
     </ClInclude>
     <ClInclude Include="GridCtrl_src\TitleTip.h">
       <Filter>Source Files\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="DriveViewer.h">
-      <Filter>Source Files\Viewers</Filter>
-    </ClInclude>
-    <ClInclude Include="FileViewer.h">
-      <Filter>Source Files\Viewers</Filter>
-    </ClInclude>
-    <ClInclude Include="RecBinViewer.h">
-      <Filter>Source Files\Viewers</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewer.h">
-      <Filter>Source Files\Viewers</Filter>
     </ClInclude>
     <ClInclude Include="ExplorerXPDoc.h">
       <Filter>Source Files\Views &amp; Docs</Filter>
@@ -679,9 +658,6 @@
     <ClInclude Include="Dialogs\NewFolderDialog.h">
       <Filter>Source Files\Dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="Dialogs\OptionsDlg.h">
-      <Filter>Source Files\Dialogs</Filter>
-    </ClInclude>
     <ClInclude Include="Dialogs\RenameDlg.h">
       <Filter>Source Files\Dialogs</Filter>
     </ClInclude>
@@ -748,10 +724,28 @@
     <ClInclude Include="Bars\WindowTabCtrl.h">
       <Filter>Source Files\Bars</Filter>
     </ClInclude>
-    <ClInclude Include="Charts.h">
+    <ClInclude Include="RenameInsert.h">
       <Filter>Source Files\Dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="RenameInsert.h">
+    <ClInclude Include="Viewers\DriveViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewers\FileViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewers\RecBinViewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewers\Viewer.h">
+      <Filter>Source Files\Viewers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sizebar\GlobalData.h">
+      <Filter>Source Files\ResizableLib\SizeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Charts.h">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\FindMissing.h">
       <Filter>Source Files\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>

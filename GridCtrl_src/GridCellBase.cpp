@@ -207,11 +207,6 @@ BOOL CGridCellBase::Draw(CDC* pDC, int nRow, int nCol, CRect rect,  BOOL bEraseB
 			/*TextBkClr = ::GetSysColor(COLOR_HIGHLIGHT);						
             TextClr = ::GetSysColor(COLOR_HIGHLIGHTTEXT);*/
 
-
-			//TextBkClr = ::GetSysColor(COLOR_INFOBK);						
-			//TextBkClr = ::GetSysColor(COLOR_HIGHLIGHT);						
-			//TextBkClr = HLS_TRANSFORM(::GetSysColor(COLOR_HIGHLIGHT), 75, 0);
-         //   TextClr = ::GetSysColor(COLOR_INFOTEXT);
             bEraseBkgnd = TRUE;
         }
 
@@ -268,20 +263,6 @@ BOOL CGridCellBase::Draw(CDC* pDC, int nRow, int nCol, CRect rect,  BOOL bEraseB
     }
     else if ((GetState() & GVIS_SELECTED))
     {
-/*
-        rect.right++; rect.bottom++;    // FillRect doesn't draw RHS or bottom
-			
-//        pDC->FillSolidRect(rect, ::GetSysColor(COLOR_HIGHLIGHT));
-//        rect.right--; rect.bottom--;
-//        pDC->SetTextColor(::GetSysColor(COLOR_HIGHLIGHTTEXT));
-
-		COLORREF color = HLS_TRANSFORM(::GetSysColor(COLOR_HIGHLIGHT), 75, 0);
-		pDC->FillSolidRect(rect, color);
-		//pDC->FillSolidRect(rect, ::GetSysColor(COLOR_INFOBK));
-        rect.right--; rect.bottom--;
-		pDC->SetTextColor(TextClr);
-        //pDC->SetTextColor(::GetSysColor(COLOR_INFOTEXT));
-		*/
 		rect.right++; rect.bottom++;    // FillRect doesn't draw RHS or bottom
 		CBrush brush(TextBkClr);
 		pDC->FillRect(rect, &brush);
@@ -323,7 +304,7 @@ BOOL CGridCellBase::Draw(CDC* pDC, int nRow, int nCol, CRect rect,  BOOL bEraseB
             CPen lightpen(PS_SOLID, 1,  ::GetSysColor(COLOR_3DHIGHLIGHT)),
                 darkpen(PS_SOLID,  1, ::GetSysColor(COLOR_3DDKSHADOW)),
                 *pOldPen = pDC->GetCurrentPen();
-			
+			/*
 			rect.left --;
 			//rect.bottom++;    // FillRect doesn't draw RHS or bottom
 
@@ -342,14 +323,28 @@ BOOL CGridCellBase::Draw(CDC* pDC, int nRow, int nCol, CRect rect,  BOOL bEraseB
             //pDC->LineTo(rect.left, rect.top);
             //pDC->LineTo(rect.right, rect.bottom);
 
-			rect.right++; 
+			rect.right++; */
+            /*
             pDC->SelectObject(&darkpen);
-            //pDC->MoveTo(rect.right, rect.top);
+            pDC->MoveTo(rect.right, rect.top);
 			pDC->MoveTo(rect.right, rect.bottom);
             pDC->LineTo(rect.left, rect.bottom);
 
 			pDC->MoveTo(rect.right, rect.top);
             pDC->LineTo(rect.left, rect.top);
+            */
+
+            /*pDC->SelectObject(&lightpen);
+            pDC->MoveTo(rect.right, rect.top);
+            pDC->LineTo(rect.left, rect.top);
+            pDC->LineTo(rect.left, rect.bottom);*/
+
+            pDC->SelectObject(&darkpen);
+            pDC->MoveTo(rect.right, rect.top);
+            pDC->LineTo(rect.right, rect.bottom);
+            pDC->LineTo(rect.left-1, rect.bottom);
+
+
 
             pDC->SelectObject(pOldPen);
             rect.DeflateRect(1,1);

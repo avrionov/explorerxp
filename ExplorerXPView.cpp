@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -36,6 +36,8 @@
 #include "FindMissing.h"
 #include "GroupManager.h"
 #include "Charts.h"
+#include <filesystem>
+
 
 volatile DWORD CExplorerXPView::m_ThreadHandle = 200;
 
@@ -201,6 +203,7 @@ BOOL CExplorerXPView::PreCreateWindow(CREATESTRUCT& cs)
 	cs.dwExStyle &= ~WS_EX_RIGHTSCROLLBAR;
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
 
+	cs.style |= WS_BORDER;
 	return TRUE;
 }
 
@@ -1542,6 +1545,10 @@ bool Rename (const TCHAR *src, const TCHAR *dst, FILEOP_FLAGS fFlags)
 	if (_tcscmp (src, dst) == 0)
 		return true;
 
+	std::filesystem::rename(src, dst);
+
+	return true;
+
 	TCHAR *pFrom = AllocateNullPath (src, size);
 	
 	SHFILEOPSTRUCT fo;
@@ -1579,7 +1586,7 @@ void RenameFiles (CSelRowArray &ar, const TCHAR *path)
 			for (unsigned int i = 0; i < ar.size (); i++)
 			{
 				CString cs = path +  dlg.m_ArNew[i].m_Name;
-				Rename (ar[i].m_Path, cs, FOF_ALLOWUNDO);
+				Rename (ar[i].m_Path, cs, FOF_ALLOWUNDO);				
 			}
 		}		
 	}

@@ -1,4 +1,4 @@
-/* Copyright 2002-2016 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -14,7 +14,6 @@
 #include "ExplorerXP.h"
 #include "OptionsDialog.h"
 #include "Options.h"
-#include "optionsdialog.h"
 #include "DirSize.h"
 #include "globals.h"
 #include "MainFolder.h"
@@ -32,6 +31,7 @@ COptionsDialog::COptionsDialog()
   m_bHorz = gOptions.m_bHLines;
   m_bAtStartNone = gOptions.m_OnStart;
   m_bHiddenFiles = gOptions.m_bShowHidden;
+  m_bShowExeIcons = gOptions.m_bShowExeIcons;
   m_psp.dwFlags &= ~PSP_HASHELP; // Lose the Help button
 }
 
@@ -43,6 +43,7 @@ void COptionsDialog::DoDataExchange(CDataExchange *pDX) {
   DDX_Check(pDX, IDC_HORIZONTAL, m_bHorz);
   DDX_Radio(pDX, IDC_ATSTARTNONE, m_bAtStartNone);
   DDX_Check(pDX, IDC_HIDDENFILES, m_bHiddenFiles);
+  DDX_Check(pDX, IDC_NOEXECUTABLESICONS, m_bShowExeIcons);
 }
 
 BEGIN_MESSAGE_MAP(COptionsDialog, baseOptions)
@@ -50,6 +51,7 @@ ON_BN_CLICKED(IDC_HIDDENFILES, OnBnClickedHiddenFiles)
 ON_BN_CLICKED(IDC_HORIZONTAL, OnBnClickedHorizontal)
 ON_BN_CLICKED(IDC_VERTICAL, OnBnClickedVertical)
 ON_BN_CLICKED(IDC_ATSTARTNONE, OnBnClickedAtstartnone)
+ON_BN_CLICKED(IDC_NOEXECUTABLESICONS, OnBnClickedShowExeIcons)
 END_MESSAGE_MAP()
 
 // COptionsDialog message handlers
@@ -61,6 +63,7 @@ void COptionsDialog::GetFromDlg() {
   gOptions.m_bVLines = m_bVert;
   gOptions.m_bHLines = m_bHorz;
   gOptions.m_OnStart = m_bAtStartNone;
+  gOptions.m_bShowExeIcons = m_bShowExeIcons;
 
   if (gOptions.m_bShowHidden != m_bHiddenFiles) {
     gOptions.m_bShowHidden = m_bHiddenFiles;
@@ -93,6 +96,8 @@ void COptionsDialog::OnBnClickedHorizontal() { SetModified(); }
 
 void COptionsDialog::OnBnClickedVertical() { SetModified(); }
 
-void COptionsDialog::OnBnClickedAtstartnone() {
-  // TODO: Add your control notification handler code here
-}
+void COptionsDialog::OnBnClickedAtstartnone() { SetModified(); };
+
+void COptionsDialog::OnBnClickedShowExeIcons() { SetModified(); };
+
+
