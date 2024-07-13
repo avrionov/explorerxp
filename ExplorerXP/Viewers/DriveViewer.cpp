@@ -134,7 +134,7 @@ void CDriveViewer::GridCallBack (GV_DISPINFO *pDispInfo)  {
 		HLS_TRANSFORM (GetSysColor(COLOR_WINDOW),0, 5);
 
 	if (pDispInfo->item.nState & GVIS_SELECTED)
-			pDispInfo->item.crBkClr = GetSelectedColor();	
+			pDispInfo->item.crBkClr = GetSelectedColorBackground();
 
 }
 

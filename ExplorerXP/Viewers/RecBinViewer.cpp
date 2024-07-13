@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,6 +17,7 @@
 #include "ShellContextMenu.h"
 #include "Shell32.h"
 #include "ThreadPool.h"
+#include <thread>
 
 extern CThreadPool gPool;
 
@@ -97,7 +98,7 @@ void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo)  {
 		pDispInfo->item.crBkClr = HLS_TRANSFORM (GetSysColor(COLOR_WINDOW),0, 5);
 
 	if (pDispInfo->item.nState & GVIS_SELECTED)
-		pDispInfo->item.crBkClr = GetSelectedColor();	
+		pDispInfo->item.crBkClr = GetSelectedColorBackground();
 }
 
 //-----------------------------------------------------------------------------
@@ -213,7 +214,7 @@ void CRecBinViewer::InitInterfaces (void) {
 //-----------------------------------------------------------------------------
 void CRecBinViewer::UpdateList (void) {	
 
-	RemovePIDL ();
+  RemovePIDL ();
 
   m_List.clear ();
 
@@ -546,7 +547,10 @@ void CRecBinViewer::Install (HWND hWnd) {
 	m_hWnd = hWnd;
 	InstallRBinNotify ();
 	InstallShellNotify ();
-	UpdateList ();
+
+	std::thread updateThread(&CRecBinViewer::UpdateList, this);
+	updateThread.detach();
+	//UpdateList ();
 }
 
 //-----------------------------------------------------------------------------

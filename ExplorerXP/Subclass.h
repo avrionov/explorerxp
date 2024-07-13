@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -85,8 +85,8 @@ protected:
 	void SetRedraw(BOOL bRedraw = TRUE) { ::SendMessage(m_hWndHooked, WM_SETREDRAW, bRedraw, 0); }
 	virtual void Redraw() const { Invalidate(); }
 
-	virtual BOOL PostMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0) const;
-	virtual BOOL SendMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0) const;
+	//virtual BOOL PostMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0) const;
+	virtual LRESULT SendMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0) const;
 
 	static LRESULT CALLBACK HookWndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -127,10 +127,10 @@ protected:
 	inline CWnd* ScGetCWnd() { return m_subclass.GetCWnd(); }
 	inline HWND ScGetHwnd() { return m_subclass.GetHwnd(); }
 
-	inline BOOL ScPostMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0)
-		{ return m_subclass.PostMessage(message, wParam, lParam); }
+	//inline BOOL ScPostMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0)
+	//	{ return m_subclass.PostMessage(message, wParam, lParam); }
 
-	BOOL ScSendMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0)
+	LRESULT ScSendMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0)
 		{ return m_subclass.SendMessage(message, wParam, lParam); }
 
 protected:

@@ -2,11 +2,11 @@
   
 SetCompressor lzma
 
-!define SOURCE_PATH "C:\dev\ExplorerXP\Setup"
+!define SOURCE_PATH "C:\dev\ExplorerXP\ExplorerXP\Setup"
 !define BIN_PATH  "C:\dev\bin2"
 
 ;Icon "${SOURCE_PATH}\nsis1-install.ico"
-Icon "C:\dev\ExplorerXP\res\ExplorerXP.ico"
+Icon "C:\dev\ExplorerXP\ExplorerXP\res\ExplorerXP.ico"
 
 ;XPStyle on
 
@@ -28,6 +28,19 @@ SetCompress force
 ;Output File Name
 OutFile "explorerxpsetup_110.exe"
 BrandingText "http://www.explorerxp.com"
+VIProductVersion 1.1.0.0
+VIAddVersionKey ProductName "${EXPLORERXP}"
+VIAddVersionKey Comments "ExplorerXP - Fast tabbed file explorer"
+VIAddVersionKey CompanyName ExplorerXP.com
+VIAddVersionKey LegalCopyright ExplorerXP.com
+VIAddVersionKey FileDescription "ExplorerXP - Fast tabbed file explorer"
+VIAddVersionKey FileVersion 1.1.0.0
+VIAddVersionKey ProductVersion 1.1.0.0
+VIAddVersionKey InternalName "explorerxpsetup.exe"
+VIAddVersionKey LegalTrademarks "PortableApps.com is a Trademark of Rare Ideas, LLC."
+
+
+
 
 ;The Default Installation Directory
 InstallDir "$PROGRAMFILES\ExplorerXP"
@@ -56,7 +69,7 @@ FunctionEnd
 
 Section "Install (required)"
   ;Install Files
-	SectionIn RO
+   SectionIn RO
   SetOutPath $INSTDIR
   SetCompress Auto
   SetOverwrite On

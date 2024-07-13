@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -18,7 +18,7 @@
 
 #include "FileInfo.h"
 #include "InOut.h"
-#include "XWinver.h"
+//#include "XWinver.h"
 
 //#defines 
 // used for drag & drop   and drag scroll
@@ -226,7 +226,7 @@ typedef std::vector <int> IntAr;
 
 COLORREF HLS_TRANSFORM (COLORREF rgb, int percent_L, int percent_S);
 
-bool isWindowsXP();
+
 char* GetLocalFile (const char *filename, const char *ext);
 
 #define DELIM  _T("|*|")
@@ -243,9 +243,19 @@ bool IsNotInFOP ();
 bool GetLastWriteTime (const TCHAR *path, FILETIME &writetime);
 void InitSoftwareLogPath ();
 
-extern CXWinVersion gWinVersion;
+//extern CXWinVersion gWinVersion;
 
 bool ifNotJunctionPoint(DWORD fAttribs);
 bool ifNotJunctionPoint(CFileFind& ff);
+
+// Handy functions
+#define IsSHIFTpressed() ( (GetKeyState(VK_SHIFT) & (1 << (sizeof(SHORT)*8-1))) != 0   )
+#define IsCTRLpressed()  ( (GetKeyState(VK_CONTROL) & (1 << (sizeof(SHORT)*8-1))) != 0 )
+#define IsAltpressed()  ( (GetKeyState(VK_MENU) & (1 << (sizeof(SHORT)*8-1))) != 0 )
+
+bool isWindowsXPorLater();
+
+#define EMPTYSTR _T("")
+#define SLASH    _T('\\')
 
 #endif 

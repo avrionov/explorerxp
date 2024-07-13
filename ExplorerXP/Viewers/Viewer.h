@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -66,9 +66,10 @@ public:
 	void SetGrid (CGridCtrl*pGrid) { m_pGridCtrl = pGrid;}
 	void SetSortColumn (int nColumn) { m_State.m_nSortColumn = nColumn;}
 	void SetSortDir (bool bDir)  { m_State.m_bAscending = bDir;	}
-	virtual int GetColumnCount () { return m_Headers.size () -1;};
+	virtual size_t GetColumnCount () { return m_Headers.size () -1;};
 	
-	COLORREF GetSelectedColor ();
+	COLORREF GetSelectedColorBackground ();
+	COLORREF GetSelectedColorText();
 	
 protected:
 	CGridCtrl* m_pGridCtrl;

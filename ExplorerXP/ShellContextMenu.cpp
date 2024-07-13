@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -175,13 +175,13 @@ UINT CShellContextMenu::ShowContextMenu(CWnd *pWnd, CPoint pt)
 	if (FAILED(hResult)) 
 		return 0;
  			
-	m_pOldWndProc = (WNDPROC) SetWindowLongPtr  (pWnd->m_hWnd, GWL_WNDPROC, (LONG_PTR)&CShellContextMenu::HookWndProc);			
+	m_pOldWndProc = (WNDPROC) SetWindowLongPtr  (pWnd->m_hWnd, GWLP_WNDPROC, (LONG_PTR)&CShellContextMenu::HookWndProc);
 	g_IContext3 = (LPCONTEXTMENU3) pContextMenu;
 	
 	UINT idCommand = m_pMenu->TrackPopupMenu (TPM_RETURNCMD | TPM_LEFTALIGN, pt.x, pt.y, pWnd);
 
 	if (m_pOldWndProc) 
-		SetWindowLongPtr  (pWnd->m_hWnd, GWL_WNDPROC, (LONG_PTR) m_pOldWndProc);
+		SetWindowLongPtr  (pWnd->m_hWnd, GWLP_WNDPROC, (LONG_PTR) m_pOldWndProc);
 
 	if (idCommand >= MIN_ID && idCommand <= MAX_ID)	// see if returned idCommand belongs to shell menu entries
 	{
@@ -254,7 +254,7 @@ void CShellContextMenu::InvokeCommand (const TCHAR *command)
 			cmi.lpVerb = (LPSTR)MAKEINTRESOURCE(idCommand);
 			cmi.nShow = SW_SHOWNORMAL;
 		
-			HRESULT res = pContextMenu->InvokeCommand (&cmi);
+			//HRESULT res = pContextMenu->InvokeCommand (&cmi);
 		}	
 	}
 	catch (...)
@@ -287,7 +287,7 @@ void CShellContextMenu::SetObjects(CStringArray &strArray)
 	CoTaskMemFree (pidl);
 	
 	IShellFolder * psfFolder = NULL;
-	nItems = strArray.GetSize ();
+	nItems = static_cast<int>(strArray.GetSize ());
 	m_pidlArray = (LPITEMIDLIST *) realloc (m_pidlArray, (nItems) * sizeof (LPITEMIDLIST));
 	for (int i = 0; i < nItems; i++)
 	{
@@ -379,7 +379,7 @@ void CShellContextMenu::NewMenu (CString path, CPoint pt, CWnd *pWnd)
 
 	gOldWndProc = NULL;
 	
-	gOldWndProc = (WNDPROC) SetWindowLongPtr(pWnd->m_hWnd, GWL_WNDPROC, (LONG_PTR)CShellContextMenu::NewMenuHookWndProc);
+	gOldWndProc = (WNDPROC) SetWindowLongPtr(pWnd->m_hWnd, GWLP_WNDPROC, (LONG_PTR)CShellContextMenu::NewMenuHookWndProc);
 	g_IContext3 = (LPCONTEXTMENU3) pContextMenu;
 
 	int count = pPopup->GetMenuItemCount();
@@ -401,7 +401,7 @@ void CShellContextMenu::NewMenu (CString path, CPoint pt, CWnd *pWnd)
 		info.cch = 99;		
 		info.fMask = MIIM_STATE | MIIM_STRING | MIIM_ID |MIIM_FTYPE | MIIM_BITMAP | MIIM_DATA ;
 		m_pMenu->GetMenuItemInfo(i, &info, TRUE);
-		DWORD Error = GetLastError ();
+		//DWORD Error = GetLastError ();
 		newPopup->InsertMenuItem (i+1, &info, TRUE);
 	}
 
@@ -409,7 +409,7 @@ void CShellContextMenu::NewMenu (CString path, CPoint pt, CWnd *pWnd)
 	int result = pPopup->TrackPopupMenu (TPM_RETURNCMD | TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, pWnd);
 
 	if (gOldWndProc) 
-		SetWindowLongPtr (pWnd->m_hWnd, GWL_WNDPROC, (LONG_PTR) gOldWndProc);
+		SetWindowLongPtr (pWnd->m_hWnd, GWLP_WNDPROC, (LONG_PTR) gOldWndProc);
 
 	bool bInvoked = false;
 	if ( (result >= MIN_ID) && (result <= MAX_ID))

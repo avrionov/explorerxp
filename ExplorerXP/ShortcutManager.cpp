@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -410,7 +410,7 @@ void CShortcutManager::LoadSettings() {
 
 void CShortcutManager::SaveSettings() {
   AfxGetApp()->WriteProfileInt(_T("KeyboardShortcuts"), _T("NumItems"),
-                               m_mapID2Shortcut.GetCount());
+                               static_cast<int>(m_mapID2Shortcut.GetCount()));
 
   POSITION pos = m_mapID2Shortcut.GetStartPosition();
   int nItem = 0;
@@ -469,7 +469,7 @@ BOOL CShortcutManager::LoadAccel(UINT idAccel) {
     if ((!lpAccel[i].fVirt & FVIRTKEY)) {
       key = MapVirtualKey(lpAccel[i].key, 0);
     }
-    WORD wScanCode = MapVirtualKey(lpAccel[i].key, 0);
+    //WORD wScanCode = MapVirtualKey(lpAccel[i].key, 0);
     WORD wModifiers = (bCtrl ? HOTKEYF_CONTROL : 0) |
                       (bShift ? HOTKEYF_SHIFT : 0) |
                       (bAlt ? HOTKEYF_ALT : 0) /*|
@@ -477,7 +477,7 @@ BOOL CShortcutManager::LoadAccel(UINT idAccel) {
 
     DWORD dwOtherShortcut = 0;
     if (!m_mapID2Shortcut.Lookup(lpAccel[i].cmd, dwOtherShortcut))
-      AddShortcut(lpAccel[i].cmd, key, wModifiers);
+      AddShortcut(lpAccel[i].cmd, static_cast<WORD>(key), wModifiers);
   }
 
   ::LocalFree(lpAccel);

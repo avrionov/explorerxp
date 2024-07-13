@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -230,7 +230,7 @@ CString CDocSelector::MakeTabName(const TCHAR *name) {
   cs = path;
 
   if (gOptions.m_bLimitChars)
-    if (cs.GetLength() > gOptions.m_CharLimit) {
+    if (cs.GetLength() > static_cast<int>(gOptions.m_CharLimit)) {
       cs = cs.Right(gOptions.m_CharLimit);
       cs.Insert(0, _T("..."));
     }
@@ -332,9 +332,9 @@ bool CDocSelector::SelectDocument(const TCHAR *document_name) {
     ASSERT_KINDOF(CMDIChildWnd, pViewAt);
 
     if (_tcsicmp(szLabel, document_name) == 0) {
-      BOOL bMaximized;
+    //  BOOL bMaximized;
       CMDIFrameWnd *pMDIFrame = static_cast<CMDIFrameWnd *>(AfxGetMainWnd());
-      CMDIChildWnd *pActiveChild = pMDIFrame->MDIGetActive(&bMaximized);
+      //CMDIChildWnd *pActiveChild = pMDIFrame->MDIGetActive(&bMaximized);
 
       /*if (bMaximized) {
         DisableSync();

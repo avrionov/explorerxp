@@ -154,37 +154,11 @@ IMPLEMENT_DYNCREATE(CGridCtrl, CWnd)
 // Why doesn't windows give us this function???
 UINT GetMouseScrollLines()
 {
-    int nScrollLines = 3;            // reasonable default
+   int nScrollLines = 3;            // reasonable default
 
-#ifndef _WIN32_WCE
-    // Do things the hard way in win95
-    OSVERSIONINFO VersionInfo;
-    VersionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-    if (!GetVersionEx(&VersionInfo) || 
-        (VersionInfo.dwPlatformId == VER_PLATFORM_WIN32_WINDOWS && VersionInfo.dwMinorVersion == 0))
-    {
-        HKEY hKey;
-        if (RegOpenKeyEx(HKEY_CURRENT_USER,  _T("Control Panel\\Desktop"),
-            0, KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS)
-        {
-            TCHAR szData[128];
-            DWORD dwKeyDataType;
-            DWORD dwDataBufSize = sizeof(szData);
-            
-            if (RegQueryValueEx(hKey, _T("WheelScrollLines"), NULL, &dwKeyDataType,
-                (LPBYTE) &szData, &dwDataBufSize) == ERROR_SUCCESS)
-            {
-                nScrollLines = _tcstoul(szData, NULL, 10);
-            }
-            RegCloseKey(hKey);
-        }
-    }
-    // win98 or greater
-    else
-           SystemParametersInfo (SPI_GETWHEELSCROLLLINES, 0, &nScrollLines, 0);
-#endif
+   SystemParametersInfo (SPI_GETWHEELSCROLLLINES, 0, &nScrollLines, 0);
 
-    return nScrollLines;
+   return nScrollLines;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -791,7 +765,7 @@ void CGridCtrl::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 
 // For drag-selection. Scrolls hidden cells into view
 // TODO: decrease timer interval over time to speed up selection over time
-void CGridCtrl::OnTimer(UINT nIDEvent)
+void CGridCtrl::OnTimer(UINT_PTR nIDEvent)
 {
   //  ASSERT(nIDEvent == WM_LBUTTONDOWN);
 
@@ -1300,7 +1274,7 @@ LRESULT CGridCtrl::OnImeChar(WPARAM wCharCode, LPARAM)
 {
     // EFW - BUG FIX
     if (!IsCTRLpressed() && m_MouseMode == MOUSE_NOTHING && wCharCode != VK_ESCAPE) 
-        OnEditCell(m_idCurrentCell.row, m_idCurrentCell.col, CPoint( -1, -1), wCharCode);
+        OnEditCell(m_idCurrentCell.row, m_idCurrentCell.col, CPoint( -1, -1), static_cast<UINT>(wCharCode));
     return 0;
 }
 
@@ -1330,8 +1304,8 @@ void CGridCtrl::OnEndInPlaceEdit(NMHDR* pNMHDR, LRESULT* pResult)
     case VK_PRIOR:
     case VK_HOME:
     case VK_END:
-        OnKeyDown(pgvItem->lParam, 0, 0);
-        OnEditCell(m_idCurrentCell.row, m_idCurrentCell.col, CPoint( -1, -1), pgvItem->lParam);
+        OnKeyDown(static_cast<UINT>(pgvItem->lParam), 0, 0);
+        OnEditCell(m_idCurrentCell.row, m_idCurrentCell.col, CPoint( -1, -1), static_cast<UINT>(pgvItem->lParam));
     }
 
     *pResult = 0;
@@ -2139,7 +2113,7 @@ void CGridCtrl::SetSelectedRange(int nMinRow, int nMinCol, int nMaxRow, int nMax
 }
 
 // SetSelectedRangeFast
-void CGridCtrl::SetSelectedRangeFast(int nMinRow, int nMinCol, int nMaxRow, int nMaxCol, BOOL bSelectCells)
+void CGridCtrl::SetSelectedRangeFast(int nMinRow, int nMinCol, int nMaxRow, size_t nMaxCol, BOOL bSelectCells)
 {
     if (!m_bEnableSelection)
         return;
@@ -5799,8 +5773,8 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
     TRACE0("CGridCtrl::OnLButtonDblClk\n");
 
-    CCellID cell = GetCellFromPt(point);
-    if( !IsValid( cell) )
+    CCellID cellID = GetCellFromPt(point);
+    if( !IsValid( cellID) )
     {
         //ASSERT(FALSE);
         return;
@@ -5813,27 +5787,27 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 #endif
     {
         CPoint start;
-        if (!GetCellOrigin(0, cell.col, &start))
+        if (!GetCellOrigin(0, cellID.col, &start))
             return;
 
         if (point.x - start.x < m_nResizeCaptureRange)     // Clicked right of border
-            cell.col--;
+            cellID.col--;
 
         //  ignore columns that are hidden and look left towards first visible column
         BOOL bFoundVisible = FALSE;
-        while( cell.col >= 0)
+        while( cellID.col >= 0)
         {
-            if( GetColumnWidth( cell.col) > 0)
+            if( GetColumnWidth( cellID.col) > 0)
             {
                 bFoundVisible = TRUE;
                 break;
             }
-            cell.col--;
+            cellID.col--;
         }
         if( !bFoundVisible)
             return;
 
-        AutoSizeColumn(cell.col, GetAutoSizeStyle());
+        AutoSizeColumn(cellID.col, GetAutoSizeStyle());
         Invalidate();
     }
 #ifdef _WIN32_WCE
@@ -5843,44 +5817,44 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 #endif
     {
         CPoint start;
-        if (!GetCellOrigin(0, cell.col, &start))
+        if (!GetCellOrigin(0, cellID.col, &start))
             return;
 
         if (point.y - start.y < m_nResizeCaptureRange)     // Clicked below border
-            cell.row--;
+            cellID.row--;
 
         //  ignore rows that are hidden and look up towards first visible row
         BOOL bFoundVisible = FALSE;
-        while( cell.row >= 0)
+        while( cellID.row >= 0)
         {
-            if( GetRowHeight( cell.row) > 0)
+            if( GetRowHeight( cellID.row) > 0)
             {
                 bFoundVisible = TRUE;
                 break;
             }
-            cell.row--;
+            cellID.row--;
         }
         if( !bFoundVisible)
             return;
 
-        AutoSizeRow(cell.row);
+        AutoSizeRow(cellID.row);
         Invalidate();
     }
     else if (m_MouseMode == MOUSE_NOTHING)
     {
         CPoint pointClickedRel;
-        pointClickedRel = GetPointClicked( cell.row, cell.col, point);
+        pointClickedRel = GetPointClicked( cellID.row, cellID.col, point);
 
         CGridCellBase* pCell = NULL;
-        if (IsValid(cell))
-            pCell = GetCell(cell.row, cell.col);
+        if (IsValid(cellID))
+            pCell = GetCell(cellID.row, cellID.col);
 
         // Clicked in the text area? Only then will cell selection work
         BOOL bInTextArea = FALSE;
         if (pCell)
         {
             CRect rectCell;
-            if (GetCellRect(cell.row, cell.col, rectCell) && pCell->GetTextRect(rectCell))
+            if (GetCellRect(cellID.row, cellID.col, rectCell) && pCell->GetTextRect(rectCell))
                 bInTextArea = rectCell.PtInRect(point);
         }
 
@@ -5897,12 +5871,12 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
                 OnEditCell(cell.row, cell.col, pointClickedRel, VK_LBUTTON);
         }*/
 
-        if (IsValid(cell))
+        if (IsValid(cellID))
         {
-            CGridCellBase* pCell = GetCell(cell.row, cell.col);
+            CGridCellBase* pCell = GetCell(cellID.row, cellID.col);
             if (pCell)
                 pCell->OnDblClick(pointClickedRel);
-            SendMessageToParent(cell.row, cell.col, GVN_DBLCLK);
+            SendMessageToParent(cellID.row, cellID.col, GVN_DBLCLK);
         }
     }
 

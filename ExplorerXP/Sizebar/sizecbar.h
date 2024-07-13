@@ -122,7 +122,7 @@ public:
 protected:
     // implementation helpers
     UINT GetEdgeHTCode(int nEdge);
-    BOOL GetEdgeRect(CRect rcWnd, UINT nHitTest, CRect& rcEdge);
+    BOOL GetEdgeRect(CRect rcWnd, UINT nHitTest, CRect& rcEdge) const;
     virtual void StartTracking(UINT nHitTest, CPoint point);
     virtual void StopTracking();
     virtual void OnTrackUpdateSize(CPoint& point);

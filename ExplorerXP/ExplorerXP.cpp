@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -160,7 +160,7 @@ BOOL CExplorerXPApp::InitInstance()
 	InitSoftwareLogPath ();
 
 	gOptions.Load ();
-//	gFolderStateMan.Load();
+	gFolderStateMan.Load();
 	gGroupManager.Load ();
 	dirs.Load();
 	
@@ -222,12 +222,14 @@ BOOL CExplorerXPApp::InitInstance()
 	}
 
 	LoadFilters ();
-	dirs.Start ();
+	//dirs.Start ();
 
 	LoadDefaultTabs();
 	
-	gShortcutManager.Initialize ();
-	gShortcutManager.LoadAccel(IDR_MAINFRAME);
+	// 64bit conversion
+
+	//gShortcutManager.Initialize ();
+	//gShortcutManager.LoadAccel(IDR_MAINFRAME);
 
 	if (!cmdInfo.m_strFileName.IsEmpty ())
 	{
@@ -343,7 +345,7 @@ BOOL CAboutDlg::OnInitDialog()
 {
   CDialog::OnInitDialog();
 
-  m_Version = "1.10";
+  m_Version = "1.11";
   m_Time = data;
   UpdateData (FALSE);
 

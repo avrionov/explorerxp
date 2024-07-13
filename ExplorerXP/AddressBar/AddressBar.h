@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -9,10 +9,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
-#ifndef __ADDRESS_BAR_H__
-#define __ADDRESS_BAR_H__
-
 
 #pragma once
 
@@ -45,13 +41,12 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CAddressBar)
-	afx_msg LONG OnInitDialog( UINT, LONG ); 
+	afx_msg LRESULT OnInitDialog( WPARAM, LPARAM ); 
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()	
 };
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(AFX_ADDRESSBAR_H__21B0E1EF_BAC0_4A92_A162_9C2450C3B5F3__INCLUDED_)
+
+

@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -434,28 +434,28 @@ long CDirectoryChangeHandler::ReleaseReferenceToWatcher(CDirectoryChangeWatcher 
 //
 void CDirectoryChangeHandler::On_FileAdded(const CString & strFileName)
 { 
-	TRACE(_T("The following file was added: %s\n"), strFileName);
+	TRACE(_T("The following file was added: %s\n"), static_cast<LPCWSTR>(strFileName));
 }
 
 void CDirectoryChangeHandler::On_FileRemoved(const CString & strFileName)
 {
-	TRACE(_T("The following file was removed: %s\n"), strFileName);
+	TRACE(_T("The following file was removed: %s\n"), static_cast<LPCWSTR>(strFileName));
 }
 
 void CDirectoryChangeHandler::On_FileModified(const CString & strFileName)
 {
-	TRACE(_T("The following file was modified: %s\n"), strFileName);
+	TRACE(_T("The following file was modified: %s\n"), static_cast<LPCWSTR>(strFileName));
 }
 
 void CDirectoryChangeHandler::On_FileNameChanged(const CString & strOldFileName, const CString & strNewFileName)
 {
-	TRACE(_T("The file %s was RENAMED to %s\n"), strOldFileName, strNewFileName);
+	TRACE(_T("The file %s was RENAMED to %s\n"), static_cast<LPCWSTR>(strOldFileName), static_cast<LPCWSTR>(strNewFileName));
 }
 void CDirectoryChangeHandler::On_ReadDirectoryChangesError(DWORD dwError, const CString & strDirectoryName)
 {
 	TRACE(_T("WARNING!!!!!\n") );
 	TRACE(_T("An error has occurred on a watched directory!\n"));
-	TRACE(_T("This directory has become unwatched! -- %s \n"), strDirectoryName);
+	TRACE(_T("This directory has become unwatched! -- %s \n"), static_cast<LPCWSTR>(strDirectoryName));
 	TRACE(_T("ReadDirectoryChangesW has failed! %d"), dwError);
 	ASSERT( FALSE );//you should override this function no matter what. an error will occur someday.
 }
@@ -463,14 +463,14 @@ void CDirectoryChangeHandler::On_ReadDirectoryChangesError(DWORD dwError, const 
 void CDirectoryChangeHandler::On_WatchStarted(DWORD dwError, const CString & strDirectoryName)
 {	
 	if( dwError == 0 )
-		TRACE(_T("A watch has begun on the following directory: %s\n"), strDirectoryName);
+		TRACE(_T("A watch has begun on the following directory: %s\n"), static_cast<LPCWSTR>(strDirectoryName));
 	else
-		TRACE(_T("A watch failed to start on the following directory: (Error: %d) %s\n"),dwError, strDirectoryName);
+		TRACE(_T("A watch failed to start on the following directory: (Error: %d) %s\n"),dwError, static_cast<LPCWSTR>(strDirectoryName));
 }
 
 void CDirectoryChangeHandler::On_WatchStopped(const CString & strDirectoryName)
 {
-	TRACE(_T("The watch on the following directory has stopped: %s\n"), strDirectoryName);
+	TRACE(_T("The watch on the following directory has stopped: %s\n"), static_cast<LPCWSTR>(strDirectoryName));
 }
 
 bool CDirectoryChangeHandler::On_FilterNotification(DWORD /*dwNotifyAction*/, LPCTSTR /*szFileName*/, LPCTSTR /*szNewFileName*/)
@@ -674,7 +674,7 @@ PARAMETERS:
 	//double check that it's really a directory
 	if( !IsDirectory( strDirToWatch ) )
 	{
-		TRACE(_T("ERROR: CDirectoryChangeWatcher::WatchDirectory() -- %s is not a directory!\n"), strDirToWatch);
+		TRACE(_T("ERROR: CDirectoryChangeWatcher::WatchDirectory() -- %s is not a directory!\n"), static_cast<LPCWSTR>(strDirToWatch));
 		::SetLastError(ERROR_BAD_PATHNAME);
 		return ERROR_BAD_PATHNAME;
 	}
@@ -1397,7 +1397,7 @@ UINT __cdecl CDirectoryChangeWatcher::MonitorDirectoryChanges(LPVOID lpvThis)
         // through the io port's completion key
         if( !GetQueuedCompletionStatus( pThis->m_hCompPort,
                                    &numBytes,
-                                   (LPDWORD) &pdi,//<-- completion Key
+                                   (PULONG_PTR) &pdi,//<-- completion Key
                                    &lpOverlapped,
                                    INFINITE) )
 		{//The io completion request failed...

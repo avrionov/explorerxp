@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -30,7 +30,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-CXWinVersion gWinVersion;
+// CXWinVersion gWinVersion;
 
 CDirSize dirs;
 CThreadPool gPool;
@@ -130,7 +130,10 @@ void StartSizeThread() {
   }
 }
 
-void StopSizeThread() { dirs.ClearStack(); }
+void StopSizeThread() { 
+    dirs.ClearStack(); 
+    gPool.StopThread(CYCLER_THREAD);
+}
 
 bool GetDirSize(const TCHAR *parent_folder, const TCHAR *folder,
                 ULONGLONG &size, ULONGLONG &sizeondisk, FILETIME &fTime) {
@@ -159,7 +162,7 @@ void SyncUI(const TCHAR *path) {
     return;
 
   CMainFrame *pFrame = ((CMainFrame *)AfxGetMainWnd());
-  pFrame->m_wndDlgBar.SetFolder(path);
+  pFrame->m_AddressBar.SetFolder(path);
   m_DriveTree.Find(path);
 }
 
@@ -543,7 +546,7 @@ TCHAR *AllocateNullPath(const TCHAR *str, int &buf_size) {
 UINT __cdecl FileOperationInternal(LPVOID info) {
   AddFOPThread();
   SHFILEOPSTRUCT *fo = (SHFILEOPSTRUCT *)info;
-  SHFileOperation(fo);
+  auto ret = SHFileOperation(fo);
 
   delete[](TCHAR *)fo->pFrom;
 
@@ -696,16 +699,6 @@ void TabFrom(int idView, int idDirection) {
   pWnd->TabFrom(idView, idDirection);
 }
 
-bool isWindowsXP() {
-  OSVERSIONINFO osvi;
-  osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-
-  if (!GetVersionEx(&osvi))
-    return false; // this is bad.
-
-  return (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT &&
-          osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 1);
-}
 
 char *GetLocalFile(const char *new_name, const char *new_ext) {
   static CHAR f_name[_SPLIT_MAX_PATH];
@@ -954,4 +947,37 @@ void gradientFill(CDC *pDC, RECT rc, COLORREF clrStart, COLORREF clrEnd,
 
   pDC->GradientFill(vert, 2, &gRect, 1,
                     bHorizontal ? GRADIENT_FILL_RECT_H : GRADIENT_FILL_RECT_V);
+}
+
+bool isWindowsXPorLater() {
+
+    
+    OSVERSIONINFOEX osvi;
+    DWORDLONG dwlConditionMask = 0;
+    BYTE op = VER_GREATER_EQUAL;
+
+    // Initialize the OSVERSIONINFOEX structure.
+
+    ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
+    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+    osvi.dwMajorVersion = 5;
+    osvi.dwMinorVersion = 1;
+    osvi.wServicePackMajor = 0;
+    osvi.wServicePackMinor = 0;
+
+    // Initialize the condition mask.
+
+    VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, op);
+    VER_SET_CONDITION(dwlConditionMask, VER_MINORVERSION, op);
+    VER_SET_CONDITION(dwlConditionMask, VER_SERVICEPACKMAJOR, op);
+    VER_SET_CONDITION(dwlConditionMask, VER_SERVICEPACKMINOR, op);
+
+    // Perform the test.
+
+    return VerifyVersionInfo(
+        &osvi,
+        VER_MAJORVERSION | VER_MINORVERSION |
+        VER_SERVICEPACKMAJOR | VER_SERVICEPACKMINOR,
+        dwlConditionMask);
+    
 }

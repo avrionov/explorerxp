@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -50,6 +50,8 @@ void CFolderState::LimitedEq (const CFolderState &state)
 {
 	memcpy (&m_Widths,  state.m_Widths, sizeof (m_Widths));
 	m_Visible = state.m_Visible;
+	m_bAscending = state.m_bAscending;
+	m_nSortColumn = state.m_nSortColumn;
 }
 
 CFolderStateManager::CFolderStateManager(void)
@@ -144,6 +146,18 @@ void CFolderStateManager::Save ()
 
 		file.write_line("Widths|*|");
 		file.write_line(pszA);
+		file.write_line("\r\n");
+
+		file.write_line("SortColumn|*|");
+		sprintf(pszA, "%lX", it->second.m_nSortColumn);
+		file.write_line(pszA);
+		file.write_line("\r\n");
+
+		file.write_line("Asceding|*|");
+		sprintf(pszA, "%lX", it->second.m_bAscending);
+		file.write_line(pszA);
+		file.write_line("\r\n");
+
 		file.write_line("\r\n\r\n");
 		++it;
 	}
@@ -162,7 +176,7 @@ void CFolderStateManager::AddSection (PropContainer &folder_props, int count, co
 			wsprintf (buf, _T("%04d "), state.m_Widths[i]);
 			widths += buf;
 		}
-	section->addValues (2, _T("Widths"), widths);
+	section->addValues (2, _T("Widths"), static_cast<LPCTSTR>(widths));
 }
 
 void loadStrAr (CString &line, CStringAr &ar, CString delim) {
@@ -235,6 +249,22 @@ void CFolderStateManager::Load ()
 						}
 				}
 
+			line = file.read_line(len);
+
+			if (line && len > 13)
+				if (line[0] == 'S')
+				{
+					sscanf(line + 13, "%lX", &state.m_nSortColumn);
+				}
+
+			line = file.read_line(len);
+
+			if (line && len > 11)
+				if (line[0] == 'A')
+				{
+					sscanf(line + 11, "%lX", &state.m_bAscending);
+				}
+
 			if (!folder.IsEmpty ())
 				m_Map.insert (CFolderState_value (folder, state));	
 		}
@@ -242,60 +272,6 @@ void CFolderStateManager::Load ()
 next_line:		
 		line = file.read_line(len);
 	}
-	/*PropContainer folder_props;
-	folder_props.setDelim (DELIM);
-	folder_props.load (GetStateFileName());
-
-	for (unsigned int i = 0; i < folder_props.size (); i++)
-	{
-		CFolderState state;
-		PropSection &section = folder_props[i];
-		std::vector <CStringAr> & values = section.values ();
-		CString folder ;
-		folder.Empty ();
-		if (values.size () >=3 )
-		{
-			if (values[0].size() >= 2)
-				folder = values[0][1];
-
-			if (values[1].size() >= 2)
-				_stscanf (values[1][1], _T("%lX"), &state.m_Visible);
-
-			if (values[2].size() >= 2)
-			{
-				CStringAr ar;
-				loadStrAr (values[2][1], ar, " ");
-
-				for (unsigned int i = 0; i < min (MAX_FOLDERCOLONMS, ar.size()); i++)					
-					swscanf (ar[i], _T("%d"), &state.m_Widths[i]);	
-			}
-				
-			
-		}*/
-		/*for (unsigned int j = 0; j < values.size (); j++)
-			if (values[j].size () >=2 )
-			{
-				if (values[j][0] == _T("Folder"))
-					folder = values[j][1];
-
-				if (values[j][0] == _T("Visible"))
-				{
-					_stscanf (values[j][1], _T("%lX"), &state.m_Visible);					
-				}
-
-				if (values[j][0] == _T("Widths"))
-				{
-					CStringAr ar;
-					loadStrAr (values[j][1], ar, " ");
-
-					for (unsigned int i = 0; i < min (MAX_FOLDERCOLONMS, ar.size()); i++)					
-						 swscanf (ar[i], _T("%d"), &state.m_Widths[i]);											
-				}
-			}*/
-
-		/*	if (!folder.IsEmpty ())
-				m_Map.insert (CFolderState_value (folder, state));			 
-	}*/
 
 	CFolderState_it it= m_Map.find (DEFAULT_FOLDER);
 	if (it != m_Map.end ())	

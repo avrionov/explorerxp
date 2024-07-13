@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -79,9 +79,9 @@ void CMainToolBar::Init() {
                     true }, };
 
   // ID_IMAGE_TOOLBAR_TGA
-  SetBitmaps(gWinVersion.IsXPorLater() ? ID_IMAGE_TOOLBAR_TGA : IDR_BUTTONBAR,
+  SetBitmaps(isWindowsXPorLater() ? ID_IMAGE_TOOLBAR_TGA : IDR_BUTTONBAR,
              0, 0,
-             gWinVersion.IsXPorLater() ? ID_IMAGE_TOOLBAR_TGA : IDR_BUTTONBAR,
+             isWindowsXPorLater() ? ID_IMAGE_TOOLBAR_TGA : IDR_BUTTONBAR,
              0, 0, ioLargeIcons, RGB(255, 255, 255));
 
   SetButtons(sizeof(tbButtons) / sizeof(tbButtons[0]), tbButtons,
@@ -93,16 +93,16 @@ void CMainToolBar::Init() {
 bool CMainToolBar::HasButtonText(UINT nID) {
   return false;
 
-  switch (nID) {
-	  // case ID_BACK:
-	  case ID_SEARCH:
-	  case ID_FOLDERTREE:
-	  case ID_FAVS:
-		return true;
+  //switch (nID) {
+	 // // case ID_BACK:
+	 // case ID_SEARCH:
+	 // case ID_FOLDERTREE:
+	 // case ID_FAVS:
+		//return true;
 
-	  default:
-		return false;
-  }
+	 // default:
+		//return false;
+  //}
 }
 
 bool CMainToolBar::PassThroughTip(UINT nID) {

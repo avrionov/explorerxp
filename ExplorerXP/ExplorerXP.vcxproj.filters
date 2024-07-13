@@ -254,9 +254,6 @@
     <ClCompile Include="ThreadPool.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="XWinVer.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Persist\PersistFrameImpl.cpp">
       <Filter>Source Files\Persist</Filter>
     </ClCompile>
@@ -385,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="Dialogs\FindMissing.cpp">
       <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternMatchBar.cpp">
+      <Filter>Source Files\Bars</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -598,9 +598,6 @@
     <ClInclude Include="ThreadPool.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="XWinVer.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Persist\PersistFrameImpl.h">
       <Filter>Source Files\Persist</Filter>
     </ClInclude>
@@ -747,6 +744,9 @@
     </ClInclude>
     <ClInclude Include="Dialogs\FindMissing.h">
       <Filter>Source Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternMatchBar.h">
+      <Filter>Source Files\Bars</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

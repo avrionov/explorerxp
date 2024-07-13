@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -33,12 +33,12 @@ public:
 		//TRACE(_T("-> %s\n"), (LPCTSTR)m_FuncName);
 		wsprintf (buf, _T("-> %s\n"), (LPCTSTR)m_FuncName);
 		OutputDebugString (buf);
-		m_TimeOut = m_timeIn = GetTickCount ();
+		m_TimeOut = m_timeIn = GetTickCount64 ();
 	}
 
 	~InOut ()
 	{
-		m_TimeOut = GetTickCount ();
+		m_TimeOut = GetTickCount64 ();
 		
 		double span = (m_TimeOut  - m_timeIn) / 1000.0f;
 
@@ -58,8 +58,8 @@ public:
 	
 protected:
 	CString m_FuncName;
-	DWORD m_timeIn;
-	DWORD m_TimeOut;
+	ULONGLONG m_timeIn;
+	ULONGLONG m_TimeOut;
 	TCHAR buf[4096];
 };
 

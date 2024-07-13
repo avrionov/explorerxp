@@ -1,5 +1,5 @@
 
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -34,8 +34,6 @@ TCHAR CPersistFrameImpl::m_profileBarState[]	= _T( "BarState" );
 CPersistFrameImpl::CPersistFrameImpl( CFrameWnd* pWnd, LPCTSTR szHeading /*= NULL*/, bool bBarStates /*= false*/ )
 {
 	m_pWnd = pWnd;
-
-	m_wndpl.length = sizeof(WINDOWPLACEMENT);
 	
 	if( szHeading != NULL ) {
 		SetProfileHeading( szHeading );
@@ -58,11 +56,13 @@ void	CPersistFrameImpl::Load()
 {
 	ASSERT( m_pWnd != NULL );
 
-    WINDOWPLACEMENT	m_wndpl;
+    WINDOWPLACEMENT	wndpl;
+	wndpl.length = sizeof(WINDOWPLACEMENT);
+
 	CString			strText;
 
-	m_pWnd->GetWindowPlacement( &m_wndpl );
-	CRect	rect = m_wndpl.rcNormalPosition;
+	m_pWnd->GetWindowPlacement( &wndpl );
+	CRect	rect = wndpl.rcNormalPosition;
 
 	//	Gets current window position and minimized/maximized status from Registry
 	strText = AfxGetApp()->GetProfileString( m_profileHeading, s_profileRect );
@@ -92,26 +92,26 @@ void	CPersistFrameImpl::Load()
     ::SystemParametersInfo( SPI_GETWORKAREA, 0, &rMaxWA, 0 );
 
 	//	Make the window have new settings
-	m_wndpl.showCmd = m_nCmdShow;
-	m_wndpl.flags = flags;
-	m_wndpl.ptMinPosition = CPoint(0, 0);
-	m_wndpl.ptMaxPosition = CPoint( -::GetSystemMetrics(SM_CXBORDER),
+	wndpl.showCmd = m_nCmdShow;
+	wndpl.flags = flags;
+	wndpl.ptMinPosition = CPoint(0, 0);
+	wndpl.ptMaxPosition = CPoint( -::GetSystemMetrics(SM_CXBORDER),
 									-::GetSystemMetrics(SM_CYBORDER) );
-	m_wndpl.rcNormalPosition = rect;
+	wndpl.rcNormalPosition = rect;
 
-	 if( ( m_wndpl.rcNormalPosition.left >= rMaxWA.left ) &&
-                ( m_wndpl.rcNormalPosition.top >= rMaxWA.top ) &&
-                ( m_wndpl.rcNormalPosition.right <= rMaxWA.right ) &&
-                ( m_wndpl.rcNormalPosition.bottom <= rMaxWA.bottom ) )
+	 if( ( wndpl.rcNormalPosition.left >= rMaxWA.left ) &&
+                ( wndpl.rcNormalPosition.top >= rMaxWA.top ) &&
+                ( wndpl.rcNormalPosition.right <= rMaxWA.right ) &&
+                ( wndpl.rcNormalPosition.bottom <= rMaxWA.bottom ) )
 	 {
-			m_pWnd->SetWindowPlacement( &m_wndpl );
+			m_pWnd->SetWindowPlacement( &wndpl );
 	 }
 
 
 	if( m_bManageBarStates )
 	{
 		CString	cTmp;
-		cTmp.Format(_T("%s\\%s"), m_profileHeading, m_profileBarState );
+		cTmp.Format(_T("%s\\%s"), static_cast<LPCTSTR>(m_profileHeading), static_cast<LPCTSTR>(m_profileBarState));
 		m_pWnd->LoadBarState( cTmp );
 	}
 }
@@ -126,21 +126,22 @@ void	CPersistFrameImpl::Save()
 	BOOL			bIconic = FALSE;
 	BOOL			bMaximized = FALSE;
 
-	WINDOWPLACEMENT	m_wndpl;
+	WINDOWPLACEMENT	wndpl;
+	wndpl.length = sizeof(WINDOWPLACEMENT);
 
 	//	Gets current window position and minimized/maximized status
-	m_pWnd->GetWindowPlacement( &m_wndpl );
-	if( m_wndpl.showCmd == SW_SHOWNORMAL ) {
+	m_pWnd->GetWindowPlacement( &wndpl );
+	if( wndpl.showCmd == SW_SHOWNORMAL ) {
 		bIconic = FALSE;
 		bMaximized = FALSE;
 	}
-	else if( m_wndpl.showCmd == SW_SHOWMAXIMIZED) {
+	else if( wndpl.showCmd == SW_SHOWMAXIMIZED) {
 		bIconic = FALSE;
 		bMaximized = TRUE;
 	} 
-	else if( m_wndpl.showCmd == SW_SHOWMINIMIZED) {
+	else if( wndpl.showCmd == SW_SHOWMINIMIZED) {
 		bIconic = TRUE;
-		if( m_wndpl.flags ) {
+		if( wndpl.flags ) {
 			bMaximized = TRUE;
 		}
 		else {
@@ -150,10 +151,10 @@ void	CPersistFrameImpl::Save()
 	
 	//	Save the state into Registry
 	strText.Format( _T("%04d %04d %04d %04d"),
-			m_wndpl.rcNormalPosition.left,
-			m_wndpl.rcNormalPosition.top,
-			m_wndpl.rcNormalPosition.right,
-			m_wndpl.rcNormalPosition.bottom );
+			wndpl.rcNormalPosition.left,
+			wndpl.rcNormalPosition.top,
+			wndpl.rcNormalPosition.right,
+			wndpl.rcNormalPosition.bottom );
 	AfxGetApp()->WriteProfileString( m_profileHeading, s_profileRect, strText );
 	AfxGetApp()->WriteProfileInt( m_profileHeading, s_profileIcon, bIconic );
 	AfxGetApp()->WriteProfileInt( m_profileHeading, s_profileMax, bMaximized );
@@ -161,7 +162,7 @@ void	CPersistFrameImpl::Save()
 	if( m_bManageBarStates )
 	{
 		CString	cTmp;
-		cTmp.Format( _T("%s\\%s"), m_profileHeading, m_profileBarState );
+		cTmp.Format( _T("%s\\%s"), static_cast<LPCTSTR>(m_profileHeading), static_cast<LPCTSTR>(m_profileBarState));
 		m_pWnd->SaveBarState( cTmp );
 	}
 }

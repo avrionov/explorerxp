@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -277,10 +277,12 @@ void CFileViewer::Fill(const TCHAR *root) {
   m_pGridCtrl->SetRedraw(FALSE);
   CString tmpRoot = root;
   SureBackSlash(tmpRoot);
-  if (root && (m_Root != tmpRoot) && (!m_Root.IsEmpty()))
+  //if (root && (m_Root != tmpRoot) && (!m_Root.IsEmpty()))
+  if (root )
     SaveState(m_Root);
 
-  if (m_Root != tmpRoot)
+  if (root )
+  //if (m_Root != tmpRoot)
     gFolderStateMan.LoadState(tmpRoot, m_State);
 
   m_Root = tmpRoot;
@@ -351,12 +353,15 @@ void CFileViewer::GridCallBack(GV_DISPINFO *pDispInfo) {
       pDispInfo->item.crFgClr = GetSysColor(COLOR_BTNTEXT);
   }
 
-  if (pDispInfo->item.col == m_State.m_nSortColumn)
-    pDispInfo->item.crBkClr =
-        HLS_TRANSFORM(GetSysColor(COLOR_WINDOW), 0, -5); // RGB(247,247,247);
+  //if (pDispInfo->item.col == m_State.m_nSortColumn)
+  //   pDispInfo->item.crBkClr =
+  //      HLS_TRANSFORM(GetSysColor(COLOR_WINDOW), 0, -35); // RGB(247,247,247);
 
-  if (pDispInfo->item.nState & GVIS_SELECTED)
-    pDispInfo->item.crBkClr = GetSelectedColor();
+  if (pDispInfo->item.nState & GVIS_SELECTED) {
+      pDispInfo->item.crBkClr = GetSelectedColorBackground();
+      //pDispInfo->item.crFgClr = GetSelectedColorText();          
+  }
+    
 }
 
 void CFileViewer::Sort() {

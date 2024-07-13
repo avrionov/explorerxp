@@ -130,7 +130,7 @@ UINT CResizableLayout::AddAnchorCallback()
 
 	// add to the list
 	LAYOUTINFO layout;
-	layout.nCallbackID = m_listLayoutCB.GetCount() + 1;
+	layout.nCallbackID = static_cast<UINT>(m_listLayoutCB.GetCount()) + 1;
 	m_listLayoutCB.AddTail(layout);
 	return layout.nCallbackID;
 }
@@ -180,8 +180,8 @@ void CResizableLayout::ArrangeLayout() const
 	UINT uFlags;
 	LAYOUTINFO layout;
 	CRect rectParent, rectChild;
-	int count = m_listLayout.GetCount();
-	int countCB = m_listLayoutCB.GetCount();
+	int count = static_cast<int>(m_listLayout.GetCount());
+	int countCB = static_cast<int>(m_listLayoutCB.GetCount());
 
 	if (count + countCB == 0)
 		return;

@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -103,10 +103,10 @@ void CGridList::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 			while( next.row != iOrig)
 			{
-				CGridCellBase	*cell = GetCell (next.row, 0);
-				CString text = cell->GetText (); // never return NULL
-				text.MakeLower();
-				if (text[0] == (char)nChar)
+				CGridCellBase	*nextCell = GetCell (next.row, 0);
+				CString nextCellText = nextCell->GetText (); // never return NULL
+				nextCellText.MakeLower();
+				if (nextCellText[0] == (char)nChar)
 				//if (text.Find (tmpLook) == 0)			
 				{
 					bFoundVisible = TRUE;
@@ -132,11 +132,11 @@ void CGridList::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			m_LookStr.MakeLower();
 			while( next.row != iOrig)
 			{
-				CGridCellBase	*cell = GetCell (next.row, 0);
-				CString text = cell->GetText (); // never return NULL
-				text.MakeLower();
+				CGridCellBase	*nextCell = GetCell (next.row, 0);
+				CString nextCellText = nextCell->GetText (); // never return NULL
+				nextCellText.MakeLower();
 
-				if (text.Find (m_LookStr) == 0)
+				if (nextCellText.Find (m_LookStr) == 0)
 				//if(text && (text[0] == nChar) || text[0] == tolower (nChar) )
 				{
 					bFoundVisible = TRUE;

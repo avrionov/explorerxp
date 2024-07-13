@@ -164,7 +164,6 @@ BEGIN
         MENUITEM "&About ExplorerXP...",        ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "ExplorerXP Homepage",         ID_HELP_EXPLORERXPHOMEPAGE
-        MENUITEM "Community",                   ID_HELP_COMMUNITY
         MENUITEM SEPARATOR
         MENUITEM "&Help",                       ID_HELP_HELP
     END
@@ -242,6 +241,13 @@ BEGIN
         MENUITEM "Open Command Window Here\t\\", ID_COMMANDS_CMD
         MENUITEM "Find Duplicates",             ID_COMMANDS_FINDDUPLICATES
         MENUITEM "Show Charts",                 ID_COMMANDS_SHOWCHARTS
+        MENUITEM SEPARATOR
+        MENUITEM "Sort By Name\tCtrl+1",        ID_COMMANDS_SORTBYCOLUMN1
+        MENUITEM "Sort By Size\tCtrl+2",        ID_COMMANDS_SORTBYCOLUMN2
+        MENUITEM "Sort By Size on Disk\tCtrl+3", ID_COMMANDS_SORTBYCOLUMN3
+        MENUITEM "Sort By Type\tCtrl+4",        ID_COMMANDS_SORTBYCOLUMN4
+        MENUITEM "Sort By Date\tCtrl+5",        ID_COMMANDS_SORTBYCOLUMN5
+        MENUITEM "Sort By Attibutes\tCtrl+6",   ID_COMMANDS_SORTBYCOLUMN6
     END
     POPUP "&Groups"
     BEGIN
@@ -285,7 +291,6 @@ BEGIN
         MENUITEM "&About ExplorerXP...",        ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "ExplorerXP Homepage",         ID_HELP_EXPLORERXPHOMEPAGE
-        MENUITEM "Community",                   ID_HELP_COMMUNITY
         MENUITEM SEPARATOR
         MENUITEM "&Help",                       ID_HELP_HELP
     END
@@ -408,6 +413,7 @@ BEGIN
     VK_F4,          ID_ADDRESSSHOWDROPDOWN, VIRTKEY, NOINVERT
     "L",            ID_COMMANDS_CLEAN,      VIRTKEY, CONTROL, NOINVERT
     VK_OEM_5,       ID_COMMANDS_CMD,        VIRTKEY, NOINVERT
+    VK_SUBTRACT,    ID_COMMANDS_FINDMISSING, VIRTKEY, ALT, NOINVERT
     "M",            ID_COMMANDS_MERGE,      VIRTKEY, CONTROL, NOINVERT
     "S",            ID_COMMANDS_SPLIT,      VIRTKEY, CONTROL, NOINVERT
     "C",            ID_COPY,                VIRTKEY, CONTROL, NOINVERT
@@ -438,7 +444,12 @@ BEGIN
     VK_PRIOR,       ID_UP,                  VIRTKEY, CONTROL, NOINVERT
     VK_TAB,         ID_WINDOW_NEXT,         VIRTKEY, CONTROL, NOINVERT
     VK_TAB,         ID_WINDOW_PREVIOUS,     VIRTKEY, SHIFT, CONTROL, NOINVERT
-    VK_SUBTRACT,    ID_COMMANDS_FINDMISSING, VIRTKEY, ALT, NOINVERT
+    "1",            ID_COMMANDS_SORTBYCOLUMN1, VIRTKEY, CONTROL, NOINVERT
+    "2",            ID_COMMANDS_SORTBYCOLUMN2, VIRTKEY, CONTROL, NOINVERT
+    "3",            ID_COMMANDS_SORTBYCOLUMN3, VIRTKEY, CONTROL, NOINVERT
+    "4",            ID_COMMANDS_SORTBYCOLUMN4, VIRTKEY, CONTROL, NOINVERT
+    "5",            ID_COMMANDS_SORTBYCOLUMN5, VIRTKEY, CONTROL, NOINVERT
+    "6",            ID_COMMANDS_SORTBYCOLUMN6, VIRTKEY, CONTROL, NOINVERT
 END
 
 
@@ -460,15 +471,10 @@ BEGIN
     CONTROL         IDB_LOGO,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE,0,0,243,68
     LTEXT           "Built on:",IDC_HARMONDALE2,14,91,27,12
     LTEXT           "Version:",IDC_HARMONDALE3,14,80,27,12
-    LTEXT           "Copyright: © 2002 - 2020  Nikolay Avrionov.  All Rights Reserved.",IDC_HARMONDALE4,14,126,216,12
+    LTEXT           "© 2002 - 2021  Nikolay Avrionov.  All Rights Reserved.",IDC_HARMONDALE4,14,126,216,12
 END
 
-IDR_MAINFRAME DIALOGEX 0, 0, 170, 13
-STYLE DS_SETFONT | WS_CHILD
-FONT 8, "Tahoma", 0, 0, 0x0
-BEGIN
-    COMBOBOX        IDC_ADDRESS,1,0,168,100,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
-END
+
 
 IDD_RENAME DIALOGEX 0, 0, 291, 113
 STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
@@ -822,6 +828,19 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,76,135,50,14
     LISTBOX         IDC_LIST_WINDOWS,7,7,299,122,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
+IDR_MAINFRAME DIALOGEX 0, 0, 170, 20
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "Tahoma", 0, 0, 0x0
+BEGIN
+COMBOBOX        IDC_ADDRESS, 1, 0, 168, 100, CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+END
+
+IDR_PATTERNMATCH DIALOGEX 0, 0, 170, 20
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "Tahoma", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_ADDRESS,1,0,168,100,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -830,8 +849,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,53,381
- PRODUCTVERSION 1,0,53,381
+ FILEVERSION 1,11,0,0
+ PRODUCTVERSION 1,11,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x29L
@@ -848,14 +867,14 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "www.explorerxp.com"
             VALUE "FileDescription", "ExplorerXP "
-            VALUE "FileVersion", "1, 0, 8, 0"
+            VALUE "FileVersion", "1.11.0.0"
             VALUE "InternalName", "ExplorerXP"
-            VALUE "LegalCopyright", "Copyright (C) 2002 - 2010 Nikolay Avrionov"
-            VALUE "LegalTrademarks", "Copyright (C) 2002 - 2010 Nikolay Avrionov"
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2021 Nikolay Avrionov"
+            VALUE "LegalTrademarks", "Copyright (C) 2002 - 2021 Nikolay Avrionov"
             VALUE "OriginalFilename", "ExplorerXP.EXE"
             VALUE "PrivateBuild", "0"
             VALUE "ProductName", "ExplorerXP Application"
-            VALUE "ProductVersion", "1, 0, 8, 0"
+            VALUE "ProductVersion", "1.11.0.0"
             VALUE "SpecialBuild", "0"
         END
     END
@@ -1045,6 +1064,11 @@ BEGIN
 
     IDD_DIALOG_WINLIST, DIALOG
     BEGIN
+    END
+
+    IDR_PATTERNMATCH, DIALOG
+    BEGIN
+        TOPMARGIN, 1
     END
 END
 #endif    // APSTUDIO_INVOKED

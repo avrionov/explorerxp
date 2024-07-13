@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,7 +34,7 @@ public:
   CString  GetPath(int iRow, bool& bFolder);
 	const TCHAR *  GetName (int iRow) ;
 	
-	int GetCount () { return m_Array.size ();}
+	int GetCount () { return static_cast<int>(m_Array.size ());}
 	bool GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk);
 
 	bool CanPaste () { return true;};

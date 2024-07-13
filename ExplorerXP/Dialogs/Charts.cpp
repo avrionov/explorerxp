@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -84,7 +84,7 @@ BOOL CCharts::OnInitDialog()
 		if (IsDirectory (m_Array[i].folder))
 		{
 			item.mask = LVIF_TEXT | LVIF_IMAGE;
-			item.iItem = i;
+			item.iItem = static_cast<int>(i);
 			item.iSubItem = 0;	
 			item.iImage = CFileShellAttributes::GetFileIcon (m_Array[i].folder);
 			item.pszText = (LPTSTR)(LPCTSTR)m_Array[i].folder;

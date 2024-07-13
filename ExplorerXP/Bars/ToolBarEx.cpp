@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -140,8 +140,8 @@ void CToolBarEx::SetIconOptions( EIconOptions eIconOptions, bool bUpdate /*=true
     VERIFY( tbCtrl.SetBitmapSize( szIcon ) );
 
     UINT nIDCold = ( eIconOptions == ioSmallIcons ) ? m_nIDSmallCold : m_nIDLargeCold;
-    UINT nIDHot  = ( eIconOptions == ioSmallIcons ) ? m_nIDSmallHot  : m_nIDLargeHot;
-    UINT nIDDisabled  = ( eIconOptions == ioSmallIcons ) ? m_nIDSmallDisabled  : m_nIDLargeDisabled;
+   // UINT nIDHot  = ( eIconOptions == ioSmallIcons ) ? m_nIDSmallHot  : m_nIDLargeHot;
+   // UINT nIDDisabled  = ( eIconOptions == ioSmallIcons ) ? m_nIDSmallDisabled  : m_nIDLargeDisabled;
 
     ASSERT( nIDCold != ( UINT )-1 );    // at least there must be "cold" imagelist
 
@@ -150,17 +150,17 @@ void CToolBarEx::SetIconOptions( EIconOptions eIconOptions, bool bUpdate /*=true
 	
 
 	HIMAGELIST hImageList;
-	if (gWinVersion.IsXPorLater ()) 
+	if (isWindowsXPorLater())
 	{
 		m_tgaCold.loadFromResource (nIDCold );
 		hImageList = ImageList_Create (szIcon.cx, szIcon.cy, ILC_COLOR32,  0, 0);
-		int ret = ImageList_Add (hImageList, m_tgaCold.getHBITMAP(), m_tgaCold.getHBITMAP());
+		/*int ret = */ ImageList_Add(hImageList, m_tgaCold.getHBITMAP(), m_tgaCold.getHBITMAP());
 	} 
 	else
 	{
 		hImageList = ImageList_Create (szIcon.cx, szIcon.cy, ILC_COLOR8 | ILC_MASK,  0, 0);
 		HBITMAP hBmp = ::LoadBitmap( AfxGetResourceHandle(), MAKEINTRESOURCE(nIDCold));
-		int ret = ImageList_AddMasked (hImageList, hBmp, m_clrMask);
+		/*int ret = */ ImageList_AddMasked(hImageList, hBmp, m_clrMask);
 	}
 	m_imageListCold.Attach(hImageList);
 
@@ -334,7 +334,7 @@ bool CToolBarEx::PassThroughTip (UINT nID)
 	return false;
 }
 
-bool CToolBarEx::HasButtonTip( UINT nID )
+bool CToolBarEx::HasButtonTip(UINT_PTR nID )
 {
     switch ( m_eTextOptions )
     {
@@ -723,7 +723,7 @@ void CToolBarEx::ChangeButtonText (int nID, const TCHAR *text)
 	memset (&tbinfo, 0, sizeof (tbinfo));
 	tbinfo.cbSize = sizeof (tbinfo);
 	tbinfo.dwMask = TBIF_TEXT;
-	tbinfo.cchText = _tcslen (text);
+	tbinfo.cchText = static_cast<int>(_tcslen (text));
 	tbinfo.pszText = (LPTSTR) text;
 
 	tbCtrl.SetButtonInfo (nID, &tbinfo);
@@ -950,7 +950,7 @@ void CToolBarPopup::Show( UINT nFlags, const CRect& rc )
     ShowWindow( SW_SHOWNOACTIVATE );
 }
 
-void CToolBarPopup::OnKeyDown( UINT nChar )
+void CToolBarPopup::OnKeyDown( WPARAM nChar )
 {
     switch ( nChar )
     {

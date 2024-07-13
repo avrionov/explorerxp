@@ -632,7 +632,7 @@ CSize CGridCellBase::GetTextExtent(LPCTSTR szText, CDC* pDC /*= NULL*/)
         size = rect.Size();
     }
     else
-        size = pDC->GetTextExtent(szText, _tcslen(szText));
+        size = pDC->GetTextExtent(szText, static_cast<int>(_tcslen(szText)));
 
     TEXTMETRIC tm;
     pDC->GetTextMetrics(&tm);

@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -185,7 +185,7 @@ void CACListWnd::Init(CWnd *pWnd) {
   SetScroller();
   m_pEditParent = (CEdit *)pWnd;
 
-  m_lCount = m_DisplayList.size();
+  m_lCount = static_cast<long>(m_DisplayList.size());
   m_VertBar.SetScrollPos(0, FALSE);
   SetProp();
 
@@ -500,7 +500,7 @@ int CACListWnd::FindStringExact(int nStartAfter, LPCTSTR lpszString) {
 int CACListWnd::FindString(int nStartAfter, LPCTSTR lpszString) {
   CString m_Str1, m_Str2 = lpszString;
 
-  long m_AktCount = m_DisplayList.size();
+  auto m_AktCount = m_DisplayList.size();
 
   if (!m_pEditParent) {
     ShowWindow(SW_HIDE);
@@ -535,7 +535,7 @@ int CACListWnd::FindString(int nStartAfter, LPCTSTR lpszString) {
     }
   }
 
-  m_lCount = m_DisplayList.size();
+  m_lCount = static_cast<long>(m_DisplayList.size());
   if (m_lCount) {
     CRect rcWnd;
     int iHeight;
@@ -626,7 +626,7 @@ void CACListWnd::OnNcLButtonDown(UINT nHitTest, CPoint point) {
 /*********************************************************************/
 
 CString CACListWnd::GetString() {
-  int i = m_DisplayList.size();
+  auto i = m_DisplayList.size();
 
   if (!i)
     return EMPTYSTR;
@@ -685,7 +685,7 @@ void CACListWnd::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar *pScrollBar) {
 
 /*********************************************************************/
 
-CString CACListWnd::GetNextString(int nChar) {
+CString CACListWnd::GetNextString(WPARAM nChar) {
   switch (nChar) {
   case VK_DOWN:
     m_lSelItem++;
@@ -740,7 +740,7 @@ void CACListWnd::OnMouseMove(UINT nFlags, CPoint point) {
 
 /*********************************************************************/
 
-void CACListWnd::OnTimer(UINT nIDEvent) {
+void CACListWnd::OnTimer(UINT_PTR nIDEvent) {
   CWnd::OnTimer(nIDEvent);
 
   CRect m_ParentRect1;

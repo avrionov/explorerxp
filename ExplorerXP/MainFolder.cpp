@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -441,7 +441,7 @@ void CMainFolder::StartTimer (HTREEITEM hITem)
 	SetTimer (EXPAND_TIMER, 940, NULL);
 }
 
-void CMainFolder::OnTimer(UINT nIDEvent) 
+void CMainFolder::OnTimer(UINT_PTR nIDEvent)
 {
 	if (nIDEvent == EXPAND_TIMER)
 	{
@@ -726,7 +726,7 @@ UINT CMainFolder::AddDirectoryNodes (HTREEITEM hItem, CString& strPathName)
 					strFileName = (LPCTSTR) &fd.cFileName;
 					int nIcon = CFileShellAttributes::GetFileIcon (strPathName + strFileName);
 					
-					max_len = max(max_len, _tcsclen(fd.cFileName));
+					max_len = max(max_len, static_cast<int>(_tcsclen(fd.cFileName)));
 					HTREEITEM hChild = InsertItem ((LPCTSTR) &fd.cFileName, nIcon, nIcon, hItem, TVI_SORT);
 					if (fd.dwFileAttributes & FILE_ATTRIBUTE_COMPRESSED)
 						SetItemColor(hChild, RGB(0,0, 255));								

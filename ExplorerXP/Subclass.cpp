@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -243,17 +243,17 @@ LRESULT CALLBACK CSubclassWnd::HookWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARA
 	curMsg = oldMsg;			// pop state
 	return lr;
 }
-
-BOOL CSubclassWnd::PostMessage(UINT message, WPARAM wParam, LPARAM lParam) const
-{
-	if (IsValid())
-		return ::PostMessage(m_hWndHooked, message, wParam, lParam);
-
-	// else
-	return FALSE;
-}
-
-BOOL CSubclassWnd::SendMessage(UINT message, WPARAM wParam, LPARAM lParam) const
+//
+//BOOL CSubclassWnd::PostMessage(UINT message, WPARAM wParam, LPARAM lParam) const
+//{
+//	if (IsValid())
+//		return ::PostMessage(m_hWndHooked, message, wParam, lParam);
+//
+//	// else
+//	return FALSE;
+//}
+//
+LRESULT CSubclassWnd::SendMessage(UINT message, WPARAM wParam, LPARAM lParam) const
 {
 	if (IsValid())
 		return ::SendMessage(m_hWndHooked, message, wParam, lParam);
@@ -370,7 +370,7 @@ void CSubclassWndMap::Add(HWND hwnd, CSubclassWnd* pSubclassWnd)
 		// If this is the first hook added, subclass the window
 		//WNDPROC wndProc = (WNDPROC)GetWindowLong(hwnd, GWL_WNDPROC);
 
-		pSubclassWnd->m_pOldWndProc = (WNDPROC)SetWindowLong(hwnd, GWL_WNDPROC, (DWORD)CSubclassWnd::HookWndProc);
+		pSubclassWnd->m_pOldWndProc = (WNDPROC)SetWindowLong(hwnd, GWLP_WNDPROC, (LONG)CSubclassWnd::HookWndProc);
 	} 
 	else 
 	{
@@ -403,7 +403,7 @@ void CSubclassWndMap::Remove(CSubclassWnd* pUnHook)
 		{
 			// This is the last hook for this window: restore wnd proc
 			RemoveKey(hwnd);
-			SetWindowLong(hwnd, GWL_WNDPROC, (DWORD)pHook->m_pOldWndProc);
+			SetWindowLong(hwnd, GWLP_WNDPROC, (LONG)pHook->m_pOldWndProc);
 		}
 	} 
 	else 

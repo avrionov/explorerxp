@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -57,13 +57,13 @@ void CFolderSizeDlg::GetFromDlg()
 {
 	BOOL bNeedUpdate = FALSE;
 
-	if (gOptions.m_SizeIn != m_SizeIn)
+	if (gOptions.m_SizeIn != static_cast<DWORD>(m_SizeIn))
 	{
 		gOptions.m_SizeIn = m_SizeIn;
 		bNeedUpdate = TRUE;
 	}
 
-	if (gOptions.m_FolderSizeMode != m_FolderMode)
+	if (gOptions.m_FolderSizeMode != static_cast<DWORD>(m_FolderMode))
 	{
 		gOptions.m_FolderSizeMode = m_FolderMode;
 		if (gOptions.m_FolderSizeMode == FOLDERSIZE_MANUAL)

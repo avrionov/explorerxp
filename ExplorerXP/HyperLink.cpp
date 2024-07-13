@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -117,8 +117,8 @@ END_MESSAGE_MAP()
 void CHyperLink::OnClicked()
 {
     m_bOverControl = FALSE;
-    int result = (int)GotoURL(m_strURL, SW_SHOW);
-    m_bVisited = (result > HINSTANCE_ERROR);
+    auto const result = reinterpret_cast<INT_PTR>(GotoURL(m_strURL, SW_SHOW));
+    m_bVisited = result > HINSTANCE_ERROR;
     if (!m_bVisited)
     {
         MessageBeep(MB_ICONEXCLAMATION);     // Unable to follow link
@@ -160,7 +160,7 @@ void CHyperLink::OnMouseMove(UINT nFlags, CPoint point)
     CStatic::OnMouseMove(nFlags, point);
 }
 
-void CHyperLink::OnTimer(UINT nIDEvent) 
+void CHyperLink::OnTimer(UINT_PTR nIDEvent)
 {
     CPoint p(GetMessagePos());
     ScreenToClient(&p);
@@ -345,8 +345,9 @@ HINSTANCE CHyperLink::GotoURL(LPCTSTR url, int showcmd)
     // First try ShellExecute()
     HINSTANCE result = ShellExecute(NULL, _T("open"), url, NULL,NULL, showcmd);
 
+    auto const convertedResult = reinterpret_cast<INT_PTR>(result);
     // If it failed, get the .htm regkey and lookup the program
-    if ((UINT)result <= HINSTANCE_ERROR) {
+    if (convertedResult <= HINSTANCE_ERROR) {
 
         if (GetRegKey(HKEY_CLASSES_ROOT, _T(".htm"), key) == ERROR_SUCCESS) {
             lstrcat(key, _T("\\shell\\open\\command"));

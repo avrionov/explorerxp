@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -158,7 +158,7 @@ void CACEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 
 /*********************************************************************/
 
-bool CACEdit::HandleKey(UINT nChar, bool m_bFromChild) {
+bool CACEdit::HandleKey(WPARAM nChar, bool m_bFromChild) {
   if (nChar == VK_TAB) {
     if (IsSHIFTpressed())
       TabFrom(ADDRESS_BAR, BACKWARD);
@@ -388,11 +388,10 @@ int CACEdit::FindSepRightPos(int pos) {
 }
 
 /*********************************************************************/
-
-LONG CACEdit::OnUpdateFromList(UINT lParam, LONG /*wParam*/) {
+ LRESULT CACEdit::OnUpdateFromList(WPARAM wParam, LPARAM /*lParam*/) {
   UpdateData(TRUE);
 
-  if (lParam == WM_KEYDOWN) {
+  if (wParam == WM_KEYDOWN) {
     HandleKey(VK_DOWN, true);
   }
 

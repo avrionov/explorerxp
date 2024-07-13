@@ -1,0 +1,11 @@
+[Settings]
+NumFields =1
+Title="Settings"
+
+[Field 1]
+Type=CheckBox
+Text=xoxo
+Left=-1
+Top=-1
+Right=-20
+Bottom=-20

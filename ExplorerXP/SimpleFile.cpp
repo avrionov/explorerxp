@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -84,14 +84,14 @@ char *CSimpleFile::read_line (int &len)
 	if (m_CurPos >= m_Length)
 		return NULL;
 
-	int i = m_CurPos;
+	size_t i =m_CurPos;
 
 	while (m_buf[i] != '\n' && 
 		   m_buf[i] != '\r' &&
 		   m_buf[i] != 0)
 			i++;
 	
-	len = i - m_CurPos;
+	len = static_cast<int>(i - m_CurPos);
 
 again:
 	if (m_buf[i] == '\n')
@@ -118,7 +118,7 @@ void CSimpleFile::write_line (char *line)
 	if (!line)
 		return;
 
-	int len = strlen (line);
+	size_t len = strlen (line);
 
 	write (line, len, 1);
 }

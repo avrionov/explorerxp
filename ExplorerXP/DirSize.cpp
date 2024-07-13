@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -44,7 +44,9 @@ void GetFolder (fast_array <WIN32_FIND_DATA> &array, const TCHAR *path)
 
 	HANDLE hFind;
 	
-	hFind = FindFirstFile(mask, &array[0]);
+	hFind = FindFirstFileEx(mask, FindExInfoStandard, &array[0], FindExSearchNameMatch, NULL, FIND_FIRST_EX_LARGE_FETCH);
+
+	//hFind = FindFirstFile(mask, &array[0]);
 	
 	if (hFind == INVALID_HANDLE_VALUE)
 		return;
@@ -234,7 +236,7 @@ bool CDirSize::GetDir (CString &path, CString &file, FILETIME &time)
 
 	if (! m_Stack.empty ())
 	{	
-		unsigned int end = m_Stack.size () -1;
+		auto end = m_Stack.size () -1;
 		path = m_Stack[end].m_Path;
 		file = m_Stack[end].m_FileName;
 		time = m_Stack[end].m_Time;
@@ -285,7 +287,7 @@ void CDirSize::Cycler ()
 		if (!m_StackLock.isLocked())
 			if (GetDir (path, file, fTime))
 			{	
-				TRACE(_T("Cycler GetSizeInternal %s %s\n"), path, file); 	
+				TRACE(_T("Cycler GetSizeInternal %s %s\n"), static_cast<LPCWSTR>(path), static_cast<LPCWSTR>(file));
 				GetSizeInternal (path, file, size, sizeOndisk, fTime);
 				bShowReady = false;
 			}
@@ -311,6 +313,7 @@ void CDirSize::AddSize (const TCHAR* folder, const TCHAR* name , ULONGLONG size,
 
 	path += name;		
 
+	// TODO - fix it , crash on exit
 	TRACE(_T("Add Size - %s %d %d\n"), (LPCTSTR)path, fTime.dwHighDateTime, fTime.dwLowDateTime);
 	{
 		CGuard guard (m_SizeLock);
@@ -663,7 +666,7 @@ void CDirSize::Load () {
 	CGuard guard (m_SizeLock);
 	dir_cache cache;
 	while (file.read (&cache, sizeof(dir_cache), 1) == 1) {	
-		int size = _tcslen (cache.folder);
+		auto size = _tcslen (cache.folder);
 
 		if (size)
 			m_SizeMap.insert (dirinfo_value(cache.folder, cache.dirinfo));

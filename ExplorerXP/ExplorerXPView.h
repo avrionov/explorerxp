@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -138,6 +138,8 @@ public:
 	void SkipResize (BOOL bSkip) { m_bSkipSize = bSkip;};
 	CString GetRoot () { return m_Root;	}
 
+	void SortByColumn(int sortColumn);
+
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -207,7 +209,7 @@ protected:
 	afx_msg void OnUpdateRename(CCmdUI* pCmdUI);
 	afx_msg void OnNewfolder();
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnRefresh();
 	afx_msg void OnUpdateRefresh(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateUp(CCmdUI* pCmdUI);
@@ -264,6 +266,15 @@ public:
 	afx_msg void OnCommandsFindmissing();
 	afx_msg void OnCommandsFindduplicates();
 	afx_msg void OnCommandsShowcharts();
+
+
+	afx_msg void  OnCommandToolsSort1();
+	afx_msg void  OnCommandToolsSort2();
+	afx_msg void  OnCommandToolsSort3();
+	afx_msg void  OnCommandToolsSort4();
+	afx_msg void  OnCommandToolsSort5();
+	afx_msg void  OnCommandToolsSort6();
+	afx_msg void  OnUpdateToolsSort(CCmdUI* pCmdUI);
 };
 
 #ifndef _DEBUG  // debug version in ExplorerXPView.cpp

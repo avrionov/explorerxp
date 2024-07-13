@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -168,7 +168,7 @@ CString CDriveTree::GetPathFromItem(HTREEITEM hItem) {
     HTREEITEM hParent = GetParentItem(hItem);
 
     if (hParent == m_hParent) {
-      DWORD data = GetItemData(hItem);
+      DWORD data = static_cast<DWORD>(GetItemData(hItem));
       string = m_Array[data].m_Path;
     } else
       string = GetItemStr(hItem);
@@ -582,8 +582,8 @@ void CDriveTree::RefreshDirectory(CString path, HTREEITEM hItem) {
               /*else
                       SetItemColor(hChild, colorWnd);		*/
 
-              CString strPathName = GetPathFromItem(hChild);
-              SetButtonState(hChild, strPathName);
+              CString strChildPathName = GetPathFromItem(hChild);
+              SetButtonState(hChild, strChildPathName);
               list.AddTail(strFileName);
             }
           }
@@ -649,52 +649,53 @@ bool GetFirstFolder(CString &path, CString &name) {
 
 void CDriveTree::Find(const TCHAR *folder, bool bExpand) {
   return;
-  if (_tcsicmp(folder, CONST_MYCOMPUTER) == 0) {
-    SelectItem(m_hParent);
-    return;
-  }
 
-  CString path = folder;
-  SureBackSlash(path);
-  CString name;
-  path.MakeLower();
+  //if (_tcsicmp(folder, CONST_MYCOMPUTER) == 0) {
+  //  SelectItem(m_hParent);
+  //  return;
+  //}
 
-  GetFirstFolder(path, name);
+  //CString path = folder;
+  //SureBackSlash(path);
+  //CString name;
+  //path.MakeLower();
 
-  // find the root folder first;
-  HTREEITEM hItem = GetChildItem(m_hParent);
-  while (hItem != NULL) {
-    DWORD data = GetItemData(hItem);
-    CString csTemp = m_Array[data].m_Path;
-    csTemp.MakeLower();
-    if (csTemp == name)
-      break;
+  //GetFirstFolder(path, name);
 
-    hItem = GetNextItem(hItem, TVGN_NEXT);
-  }
+  //// find the root folder first;
+  //HTREEITEM hItem = GetChildItem(m_hParent);
+  //while (hItem != NULL) {
+  //  DWORD data = GetItemData(hItem);
+  //  CString csTemp = m_Array[data].m_Path;
+  //  csTemp.MakeLower();
+  //  if (csTemp == name)
+  //    break;
 
-  while (!path.IsEmpty() && hItem != NULL) {
-    Expand(hItem, TVE_EXPAND);
-    GetFirstFolder(path, name);
-    name.Delete(name.GetLength() - 1);
-    HTREEITEM hChild = GetChildItem(hItem);
-    while (hChild != NULL) {
-      if (name.CompareNoCase(GetItemStr(hChild)) == 0) {
-        hItem = hChild;
-        break;
-      }
+  //  hItem = GetNextItem(hItem, TVGN_NEXT);
+  //}
 
-      hChild = GetNextItem(hChild, TVGN_NEXT);
-    }
-  }
+  //while (!path.IsEmpty() && hItem != NULL) {
+  //  Expand(hItem, TVE_EXPAND);
+  //  GetFirstFolder(path, name);
+  //  name.Delete(name.GetLength() - 1);
+  //  HTREEITEM hChild = GetChildItem(hItem);
+  //  while (hChild != NULL) {
+  //    if (name.CompareNoCase(GetItemStr(hChild)) == 0) {
+  //      hItem = hChild;
+  //      break;
+  //    }
 
-  m_bNotSelect = true;
-  if (hItem != NULL) {
-    SelectItem(hItem);
-    if (bExpand)
-      Expand(hItem, TVE_EXPAND);
-  }
-  m_bNotSelect = false;
+  //    hChild = GetNextItem(hChild, TVGN_NEXT);
+  //  }
+  //}
+
+  //m_bNotSelect = true;
+  //if (hItem != NULL) {
+  //  SelectItem(hItem);
+  //  if (bExpand)
+  //    Expand(hItem, TVE_EXPAND);
+  //}
+  //m_bNotSelect = false;
 }
 
 BOOL CDriveTree::PopulateItem(HTREEITEM hParent) { return TRUE; }

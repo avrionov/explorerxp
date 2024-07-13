@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -153,6 +153,21 @@ BEGIN_MESSAGE_MAP(CExplorerXPView, CView)
 	ON_COMMAND(ID_COMMANDS_FINDMISSING, OnCommandsFindmissing)
 	ON_COMMAND(ID_COMMANDS_FINDDUPLICATES, OnCommandsFindduplicates)
 	ON_COMMAND(ID_COMMANDS_SHOWCHARTS, OnCommandsShowcharts)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN1, OnCommandToolsSort1)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN2, OnCommandToolsSort2)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN3, OnCommandToolsSort3)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN4, OnCommandToolsSort4)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN5, OnCommandToolsSort5)
+	ON_COMMAND(ID_COMMANDS_SORTBYCOLUMN6, OnCommandToolsSort6)
+
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN1, OnUpdateToolsSort)
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN2, OnUpdateToolsSort)
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN3, OnUpdateToolsSort)
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN4, OnUpdateToolsSort)
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN5, OnUpdateToolsSort)
+	ON_UPDATE_COMMAND_UI(ID_COMMANDS_SORTBYCOLUMN6, OnUpdateToolsSort)
+	
+	
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -599,6 +614,7 @@ void CExplorerXPView::OnForward()
 
 void CExplorerXPView::OnCopy() 
 {
+	TRACE("OnCopy");
 	CopyToClipboard (DROPEFFECT_COPY);
 }
 
@@ -1099,6 +1115,7 @@ void CExplorerXPView::OnDragLeave()
 
 void CExplorerXPView::OnEditPaste() 
 {
+	TRACE("OnPaste");
 	COleDataObject object;
 	object.AttachClipboard ();
 	FileOperation (&object);	
@@ -1539,7 +1556,7 @@ LPARAM CExplorerXPView::OnRecBinUpdate (WPARAM wp, LPARAM lp)
 
 bool Rename(const CString& src, const CString& dst, FILEOP_FLAGS fFlags)
 {
-	int size = 0;
+	// int size = 0;
 
 	// same ?
 	if (src.Compare(dst) == 0)
@@ -1548,7 +1565,8 @@ bool Rename(const CString& src, const CString& dst, FILEOP_FLAGS fFlags)
 	std::filesystem::path src1 = src.GetString();
 	std::filesystem::path dst1 = dst.GetString();
 	try {
-		std::filesystem::rename(src1, dst1);
+		if (std::filesystem::exists(dst1) == false) 
+			std::filesystem::rename(src1, dst1);
 	}
 	catch (std::filesystem::filesystem_error& e) {
 		auto errorCode = e.code();		
@@ -1757,7 +1775,7 @@ void CExplorerXPView::OnSetFocus(CWnd* pOldWnd)
 	m_pGridCtrl->SetFocus ();	
 }
 
-void CExplorerXPView::OnTimer(UINT nIDEvent) 
+void CExplorerXPView::OnTimer(UINT_PTR nIDEvent)
 {
 	if (m_iTimerID == nIDEvent)
 	{
@@ -2162,7 +2180,7 @@ void CExplorerXPView::OnCopyclipboard()
 
 	if (ar.size () >= 1)	
 	{
-		for (int i = ar.size() - 1; i >= 0; i--)
+		for (size_t i = ar.size() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < m_pViewer->GetColumnCount (); j++)
 			{
@@ -2413,7 +2431,7 @@ void CExplorerXPView::OnEditCopyfilenametoclipboard()
 
 	if (ar.size () >= 1)	
 	{
-		for (int i = ar.size() - 1; i >= 0; i--)
+		for (size_t i = ar.size() - 1; i >= 0; i--)
 		{
 
 			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
@@ -2459,7 +2477,7 @@ void CExplorerXPView::OnEditCopyfullpathnamesastext()
 
 	if (ar.size () >= 1)	
 	{
-		for (int i = ar.size() - 1; i >= 0; i--)
+		for (size_t i = ar.size() - 1; i >= 0; i--)
 		{
 			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
 			tmp.TrimLeft ();
@@ -2601,6 +2619,7 @@ void CExplorerXPView::OnEditMovetotabs()
 	CMainFrame *pFrame = (CMainFrame*) AfxGetMainWnd();
 	CStringAr  tabs;
 	pFrame->GetTabs(tabs);
+	sort(tabs.begin(), tabs.end());
 
 	CMenu menu;
 	menu.CreatePopupMenu();
@@ -2707,3 +2726,69 @@ void CExplorerXPView::OnCommandsShowcharts()
 
 	charts.DoModal ();
 }
+
+void CExplorerXPView::SortByColumn(int sortColumn) {
+	
+
+	//m_pViewer->SetSortDir(m_pGridCtrl->GetSortAscending() == TRUE);
+	
+	int currentSortColumn = m_pGridCtrl->GetSortColumn();
+    
+	SaveSelection();
+
+	if (currentSortColumn == sortColumn) {
+		bool bSort = ! m_pGridCtrl->GetSortAscending();
+		m_pViewer->SetSortDir( bSort);
+		m_pGridCtrl->SetSortAscending(bSort);
+	} else {
+		m_pViewer->SetSortDir(TRUE);
+		m_pGridCtrl->SetSortAscending(TRUE);
+	}
+	
+	m_pViewer->SetSortColumn(sortColumn);
+	m_pGridCtrl->SetSortColumn(sortColumn);
+	Sort();
+	RestoreSelection();
+	Invalidate();
+}
+
+
+// sort by name
+void  CExplorerXPView::OnCommandToolsSort1() {
+	SortByColumn(0);
+}
+
+//sort by size
+void  CExplorerXPView::OnCommandToolsSort2() {
+	SortByColumn(1);
+}
+
+//sort by size on disk
+void  CExplorerXPView::OnCommandToolsSort3() {
+	SortByColumn(2);
+}
+
+//sort by type
+void  CExplorerXPView::OnCommandToolsSort4() {
+	SortByColumn(3);
+}
+
+void  CExplorerXPView::OnCommandToolsSort5() {
+	SortByColumn(4);
+}
+
+void  CExplorerXPView::OnCommandToolsSort6() {
+	SortByColumn(5);
+}
+
+void  CExplorerXPView::OnUpdateToolsSort(CCmdUI* pCmdUI) {
+
+	// disable the sort order for My Computer folder & Recycle Bin
+
+	// quick and dirty way to identify the file viewer
+	if (m_pViewer->CanPaste())
+		pCmdUI->Enable(TRUE);
+	else
+		pCmdUI->Enable(FALSE);
+}
+

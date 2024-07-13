@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -92,7 +92,7 @@ void CFilter::clearExt ()
 	m_Ext.clear ();
 }
 
-int CFilter::size ()
+size_t CFilter::size ()
 {
 	return m_Ext.size ();
 }
@@ -165,14 +165,14 @@ CString CFilterMan::getString (const TCHAR *entry)
   	return AfxGetApp()->GetProfileString(szSection, entry);
 }
 
-int CFilterMan::size ()
+size_t CFilterMan::size ()
 {
 	return m_Filters.size ();
 }
 
 void CFilterMan::save ()
 {
-	writeInt (szCount, m_Filters.size ());
+	writeInt (szCount, static_cast<int>(m_Filters.size ()));
 	for (unsigned int i = 0; i < m_Filters.size (); i++)
 	{
 	   CString name; name.Format (szFilterName, i);

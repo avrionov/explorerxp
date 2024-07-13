@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -35,7 +35,7 @@ public:
 	void AddSearchString(LPCTSTR lpszString);
 	void RemoveAll(){m_SearchList.clear(); m_DisplayList.clear();}
 	CString GetString();
-	CString GetNextString(int m_iChar);
+	CString GetNextString(WPARAM m_iChar);
 
 	
 	void SortSearchList(){SortList(m_SearchList);}
@@ -79,7 +79,7 @@ protected:
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO FAR* lpMMI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
@@ -92,7 +92,7 @@ protected:
 	CEdit *m_pEditParent;
 	LOGFONT logfont;
 
-	int m_nIDTimer;
+	UINT_PTR m_nIDTimer;
 	long m_lTopIndex,m_lCount,m_ItemHeight,m_VisibleItems,m_lSelItem;
 
 	int HitTest(CPoint point);

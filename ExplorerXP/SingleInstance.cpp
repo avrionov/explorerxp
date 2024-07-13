@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -52,14 +52,16 @@ BOOL CSingleInstance::CreateMutex(CCommandLineInfo &cmdInfo) {
 
 			if (!cmdInfo.m_strFileName.IsEmpty())
 			{
-				nSize = (_tcslen(cmdInfo.m_strFileName) + 1) * sizeof(TCHAR);
+				nSize = static_cast<int>((_tcslen(cmdInfo.m_strFileName) + 1) * sizeof(TCHAR));
 				::GetWindowThreadProcessId(hWnd, &dwProcessId);
 				hProcessDest = ::OpenProcess(PROCESS_DUP_HANDLE, FALSE, dwProcessId);
 
 				if (!hProcessDest)
 					return FALSE;
 
-				hMMF = ::CreateFileMapping((HANDLE)0xFFFFFFFF, NULL, PAGE_READWRITE, 0, nSize, NULL);
+				//hMMF = ::CreateFileMapping( static_cast<HANDLE>(0xFFFFFFFF), NULL, PAGE_READWRITE, 0, nSize, NULL);
+				hMMF = ::CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, nSize, NULL);
+				
 
 				if (!hMMF)
 					return FALSE;

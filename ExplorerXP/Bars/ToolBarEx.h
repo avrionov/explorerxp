@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -94,7 +94,7 @@ public:
    // virtual LRESULT DoCustomDraw( NMHDR* pNMHDR, CWnd* pToolBar );
 
     virtual bool HasButtonText( UINT nID );
-    virtual bool HasButtonTip( UINT nID );
+    virtual bool HasButtonTip(UINT_PTR nID );
     virtual void GetButtonText( UINT nID, CString& strText );
     virtual void GetButtonTip( UINT nID, CString& strTip );
 	virtual bool PassThroughTip (UINT nID);
@@ -197,7 +197,7 @@ public:
 protected:
     void SetPosition( UINT nFlags, CPoint pt, CRect& rcExclude );
     void Show( UINT nFlags, const CRect& rc );
-    void OnKeyDown( UINT nChar );
+    void OnKeyDown( WPARAM nChar );
 
     static LRESULT CALLBACK KeyboardProc( int code, WPARAM wParam, LPARAM lParam );
 

@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -23,7 +23,7 @@ CAddressBar::CAddressBar(CWnd *pParent /*=NULL*/) : CDialogBar() {
   //}}AFX_DATA_INIT
 }
 
-LONG CAddressBar::OnInitDialog(UINT wParam, LONG lParam) {
+LRESULT CAddressBar::OnInitDialog(WPARAM wParam, LPARAM lParam) {
   // BOOL bRet = HandleInitDialog(wParam, lParam);
   Default();
   if (!UpdateData(FALSE)) {
@@ -74,7 +74,14 @@ void CAddressBar::OnSize(UINT nType, int cx, int cy) {
 
   int width = rcClient.Width() - rcAddr.left;
 
-  pWnd->MoveWindow(rcAddr.left, rcAddr.top, width, rcAddr.Height());
+  //pWnd->MoveWindow(rcAddr.left, rcAddr.top, width, rcAddr.Height());
+  
+  //pWnd->MoveWindow(rcAddr.left, rcAddr.top + 1, width, rcAddr.Height()-4);
+  //ScreenToClient(rcClient);
+  //rcClient.OffsetRect(1, 1);
+
+  pWnd->MoveWindow(1, 5, width -2, rcAddr.Height());
+  
 }
 
 void CAddressBar::SetFolder(const TCHAR *folder) {

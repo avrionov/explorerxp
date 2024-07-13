@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -175,7 +175,7 @@ BOOL CMainFrame::VerifyBarState(LPCTSTR lpszProfileName)
 
         ASSERT(pInfo != NULL);
 
-        int nDockedCount = pInfo->m_arrBarID.GetSize();
+        int nDockedCount = static_cast<int>(pInfo->m_arrBarID.GetSize());
         if (nDockedCount > 0)
         {            
             for (int j = 0; j < nDockedCount; j++)
@@ -220,14 +220,21 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     m_wndToolBar.ModifyStyle( 0, CCS_ADJUSTABLE );
 
 		
-	if (!m_wndDlgBar.Create(&m_wndReBar, IDR_MAINFRAME, CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR))
+	if (!m_AddressBar.Create(&m_wndReBar, IDR_MAINFRAME, CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR))
 	{
 		TRACE0("Failed to create dialogbar\n");
 		return -1;		// fail to create
 	}
 
+	//if (!m_PatternMatchBar.Create(&m_wndReBar, IDR_PATTERNMATCH, CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR + 5))
+	//{
+	//	TRACE0("Failed to create dialogbar\n");
+	//	return -1;		// fail to create
+	//}
+
 	m_wndReBar.AddBar(&m_wndToolBar, 0, 0, RBBS_GRIPPERALWAYS, _T("&Toolbar"), false) ;
-	m_wndReBar.AddBar(&m_wndDlgBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Address Bar"), false);
+	m_wndReBar.AddBar(&m_AddressBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Address Bar"), false);
+	//m_wndReBar.AddBar(&m_PatternMatchBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Pattern Bar"), false);
 
 
 	m_wndToolBar.Init (); 
@@ -438,7 +445,7 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	if (pHandlerInfo == NULL)
 	{
 		// Filter the commands sent to Window menu
-		if (nID >= ID_WINDOWS_FIRST && nID <= ID_WINDOWS_LAST)
+		if (nID >= ID_WINDOWS_FIRST && nID < ID_WINDOWS_LAST)
 		{
 			if (nCode == CN_COMMAND)
 				// Handle WM_COMMAND message
@@ -809,6 +816,8 @@ void CMainFrame::FillTree()
 
 void CMainFrame::OnClose() 
 {
+	StopSizeThread();
+
 	gFavs.GetOpen();
 
 	SaveBarState(AfxGetApp()->m_pszProfileName);	
@@ -901,20 +910,22 @@ void CMainFrame::OnDesktop()
 
 void CMainFrame::OnViewAddressbar() 
 {
-	ShowControlBar (&m_wndDlgBar	, !m_wndDlgBar.IsWindowVisible (), FALSE);
+	ShowControlBar (&m_AddressBar	, !m_AddressBar.IsWindowVisible (), FALSE);
 }
 
 void CMainFrame::OnUpdateViewAddressbar(CCmdUI* pCmdUI) 
 {
-	pCmdUI->SetCheck (m_wndDlgBar.IsWindowVisible ());	
+	pCmdUI->SetCheck (m_AddressBar.IsWindowVisible ());	
 }
 
 void CMainFrame::OnHelpHelp() 
 {
-	CString cs;
+	/*CString cs;
 	GetExePath (cs);	
 	cs += "keyhelp.html";
-	ShellExecute (m_hWnd, NULL, cs, NULL, NULL, SW_SHOWNORMAL);	
+	ShellExecute (m_hWnd, NULL, cs, NULL, NULL, SW_SHOWNORMAL);	*/
+
+	ShellExecute(NULL, _T("open"), _T("https://explorerxp.com/help"), NULL, NULL, SW_SHOW);
 }
 
 
@@ -1129,15 +1140,15 @@ void CMainFrame::OnSavedefault()
 
 void CMainFrame::OnMovetoaddressbar()
 {
-	if (m_wndDlgBar.IsWindowVisible())
-		m_wndDlgBar.FocusOnAddress ();
+	if (m_AddressBar.IsWindowVisible())
+		m_AddressBar.FocusOnAddress ();
 }
 
 
 void CMainFrame::OnAddressshowdropdown()
 {
-	if (m_wndDlgBar.IsWindowVisible())
-		m_wndDlgBar.ShowDropDown();
+	if (m_AddressBar.IsWindowVisible())
+		m_AddressBar.ShowDropDown();
 }
 
 
@@ -1184,7 +1195,7 @@ void CMainFrame::TabFrom (int idView, int idDirection)
 {
 	CWnd *wnd[3];
 	wnd[0] = GetCurrentView();
-	wnd[1] = &m_wndDlgBar;
+	wnd[1] = &m_AddressBar;
 	wnd[2] = &m_DriveTree;
 
 	CWnd *pStart = wnd[idView];
@@ -1225,7 +1236,7 @@ void CMainFrame::OnUpdateFavs(CCmdUI *pCmdUI)
 }
 
 
-void CMainFrame::OnTimer(UINT nIDEvent) 
+void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 {
 	static ULONGLONG skipFirst = 0;
 	skipFirst++; 
@@ -1295,12 +1306,12 @@ void CMainFrame::OnOpenGroup(UINT nID)
 
 void CMainFrame::OnHelpCommunity()
 {
-	ShellExecute(NULL, _T("open"), _T("http://www.explorerxp.com/phpBB2/"), NULL,NULL, SW_SHOW);			
+	//ShellExecute(NULL, _T("open"), _T("http://www.explorerxp.com/phpBB2/"), NULL,NULL, SW_SHOW);			
 }
 
 void CMainFrame::OnHelpExplorerxphomepage()
 {
-	ShellExecute(NULL, _T("open"), _T("http://www.explorerxp.com"), NULL,NULL, SW_SHOW);
+	ShellExecute(NULL, _T("open"), _T("https://explorerxp.com"), NULL,NULL, SW_SHOW);
 }
 
 void CMainFrame::OnXxCloseothertabs()
@@ -1504,7 +1515,7 @@ void CWinList::OnOK()
 
 void CMainFrame::OnWindowsMore() 
 {
-	int nItem = CWinList().DoModal();
+	int nItem = static_cast<int>(CWinList().DoModal());
 	if (nItem != IDCANCEL) 
 		ActivateFrameFromMenu(nItem);
 }

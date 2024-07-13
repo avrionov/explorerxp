@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 
 LRESULT CHotKeyCtrlEx::OnSetRules(WPARAM wParam, LPARAM lParam)
 {
-	m_wInvalidComb = wParam;
+	m_wInvalidComb = static_cast<WORD>(wParam);
 	m_wModifiers = LOWORD(lParam);
 
 	return 0L;
@@ -53,7 +53,7 @@ BOOL CHotKeyCtrlEx::PreTranslateMessage(MSG* pMsg)
 {
 	if (pMsg->message == WM_KEYDOWN && pMsg->hwnd == *this)
 	{
-		UINT nChar = pMsg->wParam;
+		WPARAM nChar = pMsg->wParam;
 
 		switch (nChar)
 		{
@@ -110,7 +110,7 @@ BOOL CHotKeyCtrlEx::PreTranslateMessage(MSG* pMsg)
 				if (bFail)
 					wModifiers = m_wModifiers | (bExtended ? HOTKEYF_EXT : 0);
 
-				SetHotKey(nChar, wModifiers);
+				SetHotKey(static_cast<WORD>(nChar), wModifiers);
 
 				// send parent notification manually
 				GetParent()->SendMessage(WM_COMMAND, MAKEWPARAM(GetDlgCtrlID(), EN_CHANGE), (LPARAM)GetSafeHwnd());

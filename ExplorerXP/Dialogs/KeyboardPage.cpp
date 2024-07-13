@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -191,7 +191,7 @@ void CKeyboardPage::OnAssignshortcut()
 		if (!htiSel)
 			return;
 
-		UINT nCmdID = m_tcCommands.GetItemData(htiSel);
+		UINT nCmdID = static_cast<UINT>(m_tcCommands.GetItemData(htiSel));
 
 		if (nCmdID)
 		{
@@ -211,7 +211,7 @@ void CKeyboardPage::OnAssignshortcut()
 
 			if (m_mapShortcut2HTI.Lookup(dwShortcut, htiOther) && htiOther)
 			{
-				UINT nOtherCmdID = m_tcCommands.GetItemData(htiOther);
+				UINT nOtherCmdID = static_cast<UINT>(m_tcCommands.GetItemData(htiOther));
 
 				if (nOtherCmdID)
 					m_mapID2Shortcut.RemoveKey(nOtherCmdID);
@@ -264,7 +264,7 @@ void CKeyboardPage::OnChangeShortcut()
 		if (!htiSel)
 			return;
 
-		UINT nCmdID = m_tcCommands.GetItemData(htiSel);
+		UINT nCmdID = static_cast<UINT>(m_tcCommands.GetItemData(htiSel));
 
 		WORD wVKeyCode = 0, wModifiers = 0;
 		m_hkNew.GetHotKey(wVKeyCode, wModifiers);

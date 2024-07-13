@@ -211,6 +211,7 @@
 #define IDC_NEWLABEL                    1089
 #define IDD_DIALOG_WINLIST              1090
 #define IDC_LIST_WINDOWS                1091
+#define IDR_PATTERNMATCH                  1091
 #define ID_IMAGE_TOOLBAR_TGA            5002
 #define ID_WINDOWS_FIRST                32001
 #define ID_WINDOWS_2                    32002
@@ -367,6 +368,12 @@
 #define ID_WINDOWS_PREVIOUS             32955
 #define ID_WINDOWS_CLOSE_ALL            32956
 #define ID_TEMPFOLDER                   32957
+#define ID_COMMANDS_SORTBYCOLUMN1       32958
+#define ID_COMMANDS_SORTBYCOLUMN2       32959
+#define ID_COMMANDS_SORTBYCOLUMN3       32960
+#define ID_COMMANDS_SORTBYCOLUMN4       32961
+#define ID_COMMANDS_SORTBYCOLUMN5       32962
+#define ID_COMMANDS_SORTBYCOLUMN6       32963
 
 // Next default values for new objects
 // 
@@ -374,7 +381,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        193
-#define _APS_NEXT_COMMAND_VALUE         32958
+#define _APS_NEXT_COMMAND_VALUE         32972
 #define _APS_NEXT_CONTROL_VALUE         1081
 #define _APS_NEXT_SYMED_VALUE           109
 #endif

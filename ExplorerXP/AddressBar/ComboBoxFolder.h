@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -39,6 +39,7 @@ public:
      //virtual void MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct);
 
 	 afx_msg void OnSize(UINT nType, int cx, int cy);
+	 afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	 protected:
 
 	//}}AFX_VIRTUAL
@@ -64,7 +65,7 @@ protected:
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnPaint();
 	//}}AFX_MSG
-	afx_msg LONG OnUpdateEdit(UINT lParam, LONG wParam);
+	afx_msg LRESULT OnUpdateEdit(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 
 

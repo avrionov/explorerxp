@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -178,7 +178,7 @@ void CMenuButton::DrawItem (LPDRAWITEMSTRUCT lpDrawItemStruct)
 		if(Themed)
 		{	
 			zDrawThemeText(	hTheme, dc, BP_PUSHBUTTON, PBS_NORMAL,
-								sTitle, _tcslen(sTitle),
+								sTitle, static_cast<int>(_tcslen(sTitle)),
 								DT_CENTER | DT_VCENTER | DT_SINGLELINE,
 								0, &captionRect);
 			
@@ -371,7 +371,7 @@ bool CMenuButton::InRect()
 	return wr.PtInRect(p) ? true:false;
 }
 
-void CMenuButton::OnTimer(UINT nIDEvent)
+void CMenuButton::OnTimer(UINT_PTR  nIDEvent)
 {
 	if (nIDEvent == ButtonHoverTimer)
 	{

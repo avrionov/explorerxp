@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -29,10 +29,6 @@ public:
 		return	m_nCmdShow;
 	}
 
-	LPWINDOWPLACEMENT	getWindowsPlacement() {
-		return	&m_wndpl;
-	}
-
 	//	Set the window for which this object load/save state info
 	void	SetWindow( CFrameWnd* pWnd ) {
 		m_pWnd = pWnd;
@@ -51,7 +47,6 @@ public:
 private:
 	CFrameWnd*		m_pWnd;
 	UINT			m_nCmdShow;
-    WINDOWPLACEMENT	m_wndpl;
 
 	CString		m_profileHeading;			//	The assigned Profile Heading
 	bool		m_bManageBarStates;			//	True if we should manage bar states too

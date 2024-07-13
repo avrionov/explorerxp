@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -25,6 +25,7 @@
 #include "FavTree.h"
 #include "ResizableLib\ResizableDialog.h"
 #include "ShellTree.h"
+#include "PatternMatchBar.h"
 
 
 //#include "OXFileWatcher.h"
@@ -71,8 +72,12 @@ public:  // control bar embedded members
 	CMainToolBar    m_wndToolBar;
 	//CToolBar		m_wndToolBar;
 	CSizableReBar	m_wndReBar;
+	
+
 //	CReBar  m_wndReBar;
-	CAddressBar      m_wndDlgBar;
+	CAddressBar      m_AddressBar;
+	CPatternMatchBar m_PatternMatchBar;
+
 	baseCMyBar	m_FolderBar; // instant bar
 	baseCMyBar	m_Favorities; //
 	baseCMyBar  m_ShellBar;
@@ -130,7 +135,7 @@ public:  // control bar embedded members
 	afx_msg void OnWindowTileHorz();
 	afx_msg void OnWindowTileVert();
 	afx_msg void OnWindowCascade();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	//}}AFX_MSG
 	afx_msg void OnOpenGroup(UINT nID);
 	afx_msg void OnNewMenuDummy(UINT nID);

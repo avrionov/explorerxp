@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -31,7 +31,7 @@ public:
 	void clearExt ();
 	void deleteExt (int pos);
 	void setExt (int pos, const TCHAR *ext);
-	int size ();
+	size_t size ();
 	void removeDups ();
 	bool operator < (const CFilter &filter) { return m_Name <= filter.getName (); }
 	bool operator== (const CFilter &filter) { return m_Name.CompareNoCase (filter.getName ()) == 0;};
@@ -48,7 +48,7 @@ typedef CFilterAr::iterator CFilterIt;
 class CFilterMan 
 {	
 public:
-	int size ();
+	size_t size ();
 	void save ();
 	void load ();
 	void addFilter (const TCHAR *name, const TCHAR *ext);

@@ -1,4 +1,4 @@
-/* Copyright 2002-2020 Nikolay Avrionov. All Rights Reserved.
+/* Copyright 2002-2021 Nikolay Avrionov. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -175,13 +175,13 @@ void CViewer::ContextMenuOnHeader(CView *pView, CPoint &pt, NM_GRIDVIEW* pItem)
 	for (unsigned int i = 0; i < m_Headers.size (); i++) 
 	{
 		DWORD mask = 1 << i;
-		DWORD flag = ((mask & m_State.m_Visible) == mask) ? MF_CHECKED : 0;
+		DWORD itemFlag = ((mask & m_State.m_Visible) == mask) ? MF_CHECKED : 0;
 		
 		int width = m_pGridCtrl->GetColumnWidth (i);
 		if (width <= 1) 
 		{
 			m_State.m_Visible &= ~(1 << i);
-			flag = 0;
+			itemFlag = 0;
 		}
 		else
 		{
@@ -189,9 +189,9 @@ void CViewer::ContextMenuOnHeader(CView *pView, CPoint &pt, NM_GRIDVIEW* pItem)
 		}
 
 		if (i == 0)
-			flag |= MF_GRAYED;
+			itemFlag |= MF_GRAYED;
 		
-		menu.AppendMenu (MF_STRING | flag, i+1, m_Headers[i]);		
+		menu.AppendMenu (MF_STRING | itemFlag, i+1, m_Headers[i]);		
 	}
 
 
@@ -236,7 +236,7 @@ void CViewer::SetupGrid ()
 	if (!m_pGridCtrl)
 		return;
 
-	m_pGridCtrl->SetColumnCount(m_Headers.size ());		
+	m_pGridCtrl->SetColumnCount(static_cast<int>(m_Headers.size ()));		
 	m_pGridCtrl->SetSortColumn (m_State.m_nSortColumn);
 	m_pGridCtrl->SetSortAscending (m_State.m_bAscending);			
 
@@ -265,8 +265,9 @@ void CViewer::OnClose ()
 
 void CViewer::SaveState(const TCHAR *name)
 {	
-	GetState (m_State);	
-	gFolderStateMan.SaveState (name, m_State);		
+	CFolderState state;
+	GetState (state);
+	gFolderStateMan.SaveState (name, state);
 }
 
 void CViewer::GetState (CFolderState &state)
@@ -276,7 +277,7 @@ void CViewer::GetState (CFolderState &state)
 
 	state.m_Visible = 0;
 	
-	unsigned int column_count = min(m_Headers.size(), m_pGridCtrl->GetColumnCount());
+	size_t column_count = min(m_Headers.size(), m_pGridCtrl->GetColumnCount());
 
 	for (unsigned int i = 0; i < column_count; i++) 
 	{
@@ -291,6 +292,9 @@ void CViewer::GetState (CFolderState &state)
 		}
 				
 	}
+
+	state.m_bAscending = m_pGridCtrl->GetSortAscending();
+	state.m_nSortColumn = m_pGridCtrl->GetSortColumn();
 }
 
 void CViewer::SetState (CFolderState &state)
@@ -300,7 +304,12 @@ void CViewer::SetState (CFolderState &state)
 	SetupGrid ();
 }
 
-COLORREF CViewer::GetSelectedColor ()
+COLORREF CViewer::GetSelectedColorBackground ()
 {
 	return HLS_TRANSFORM(::GetSysColor(COLOR_HIGHLIGHT), 25, 0);
+}
+
+COLORREF CViewer::GetSelectedColorText()
+{
+	return ::GetSysColor(COLOR_HIGHLIGHTTEXT);
 }
