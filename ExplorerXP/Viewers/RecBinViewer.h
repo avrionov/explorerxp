@@ -101,6 +101,7 @@ public:
 	void DeleteSelection ();
 	
 	afx_msg LRESULT OnShellNotify (WPARAM wParam, LPARAM lParam);
+	void GetPathFromODList(DWORD item, TCHAR  szText[MAX_PATH]);
 	afx_msg LRESULT OnNotifyRBinDir (WPARAM wParam, LPARAM lParam);
 
 	DROPEFFECT CalcDropEffect (CSelRowArray &ar, const TCHAR * root, const TCHAR * drop_source,  DWORD dwKeyState) { return DROPEFFECT_MOVE;};

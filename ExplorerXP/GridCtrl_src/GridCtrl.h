@@ -701,7 +701,7 @@ protected:
     CPoint      m_LeftClickDownPoint, m_LastMousePoint;
     CCellID     m_LeftClickDownCell, m_SelectionStartCell;
     CCellID     m_idCurrentCell, m_idTopLeftCell;
-    int         m_nTimerID;
+    UINT_PTR    m_nTimerID;
     int         m_nTimerInterval;
     int         m_nResizeCaptureRange;
     BOOL        m_bAllowRowResize, m_bAllowColumnResize;

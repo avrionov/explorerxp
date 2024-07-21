@@ -278,7 +278,7 @@ void CExplorerXPView::OnInitialUpdate()
    
 	m_pViewer = &gDriveViewer;   
 	gDriveViewer.SetGrid (m_pGridCtrl);
-    SetTimer (m_iTimerID, 4000, NULL);
+    SetTimer (m_iTimerID, 1000, NULL);
 	InitInitial();
 	//m_bNeedTimerRefresh = true;
 	//gPool.StartThread (m_ThreadHandle++, this, CExplorerXPView::InitInitial);	
@@ -548,7 +548,9 @@ void CExplorerXPView::OnRightClick (NMHDR *pNotifyStruct, LRESULT* pResult)
 	}
 
 	if (!m_pGridCtrl->IsCellSelected (pItem->iRow, 0))
-		 m_pGridCtrl->SetSelectedRange ( pItem->iRow, 0, pItem->iRow, m_pViewer->GetColumnCount (), FALSE);
+		 m_pGridCtrl->SetSelectedRange ( pItem->iRow, 0, pItem->iRow, 
+										 static_cast<int>(m_pViewer->GetColumnCount ()), 
+										 FALSE);
 	
 	CSelRowArray ar;
 	GetSelection (ar);

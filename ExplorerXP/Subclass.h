@@ -82,7 +82,7 @@ protected:
 	void ClientToScreen(LPPOINT pPoint) const;
 	void ScreenToWindow(LPPOINT pPoint) const;
 
-	void SetRedraw(BOOL bRedraw = TRUE) { ::SendMessage(m_hWndHooked, WM_SETREDRAW, bRedraw, 0); }
+	void SetRedraw(BOOL bRedraw = TRUE) const { ::SendMessage(m_hWndHooked, WM_SETREDRAW, bRedraw, 0); }
 	virtual void Redraw() const { Invalidate(); }
 
 	//virtual BOOL PostMessage(UINT message, WPARAM wParam = 0, LPARAM lParam = 0) const;

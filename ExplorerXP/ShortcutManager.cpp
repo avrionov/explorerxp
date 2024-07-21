@@ -386,7 +386,8 @@ CString CShortcutManager::GetKeyName(UINT nVK, BOOL bExtended) {
   // GetKeyNameText() expects the scan code to be on the same format as
   // WM_KEYDOWN
   // Hence the left shift
-  BOOL bResult = GetKeyNameText(nScanCode << 16, str.GetBuffer(20), 19);
+  //BOOL bResult = 
+      GetKeyNameText(nScanCode << 16, str.GetBuffer(20), 19);
   str.ReleaseBuffer();
   return str;
 }

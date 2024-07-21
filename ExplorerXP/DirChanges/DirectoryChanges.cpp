@@ -590,7 +590,7 @@ int	CDirectoryChangeWatcher::NumWatchedDirectories()const
 {
 	CSingleLock lock(const_cast<CCriticalSection*>(&m_csDirWatchInfo), TRUE);
 	ASSERT( lock.IsLocked() );
-	int nCnt(0),max = m_DirectoriesToWatch.GetSize();
+	int nCnt(0),max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 	for(int i(0); i < max; ++i)
 	{
 		if( m_DirectoriesToWatch[i] != NULL )//array may contain NULL elements.
@@ -816,7 +816,7 @@ BOOL CDirectoryChangeWatcher::UnwatchAllDirectories()
 		CDirWatchInfo * pDirInfo;
 		//Unwatch each of the watched directories
 		//and delete the CDirWatchInfo associated w/ that directory...
-		int max = m_DirectoriesToWatch.GetSize();
+		int max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 		for(int i = 0; i < max; ++i)
 		{
 			if( (pDirInfo = m_DirectoriesToWatch[i]) != NULL )
@@ -984,7 +984,7 @@ int	CDirectoryChangeWatcher::AddToWatchInfo(CDirectoryChangeWatcher::CDirWatchIn
 	ASSERT( lock.IsLocked() );
 	
 	//first try to add it to the first empty slot in m_DirectoriesToWatch
-	int max = m_DirectoriesToWatch.GetSize();
+	int max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 	int i = 0;
 
 	for( i = 0; i < max; ++i)
@@ -999,7 +999,7 @@ int	CDirectoryChangeWatcher::AddToWatchInfo(CDirectoryChangeWatcher::CDirWatchIn
 	{
 		// there where no empty slots, add it to the end of the array
 		//try{
-			i = m_DirectoriesToWatch.Add( pWatchInfo );
+			i = static_cast<int>(m_DirectoriesToWatch.Add( pWatchInfo ));
 		/*}
 		catch(CMemoryException * e){
 			e->ReportError();
@@ -1021,7 +1021,7 @@ CDirectoryChangeWatcher::CDirWatchInfo * CDirectoryChangeWatcher::GetDirWatchInf
 	
 	CSingleLock lock(const_cast<CCriticalSection*>(&m_csDirWatchInfo), TRUE);
 
-	int max = m_DirectoriesToWatch.GetSize();
+	int max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 	CDirWatchInfo * p = NULL;
 	for(int i = 0; i < max; ++i )
 	{
@@ -1041,7 +1041,7 @@ CDirectoryChangeWatcher::CDirWatchInfo * CDirectoryChangeWatcher::GetDirWatchInf
 	ASSERT( pWatchInfo != NULL );
 
 	CSingleLock lock( const_cast<CCriticalSection*>(&m_csDirWatchInfo), TRUE);
-	int i(0), max = m_DirectoriesToWatch.GetSize();
+	int i(0), max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 	CDirWatchInfo * p;
 	for(; i < max; ++i)
 	{
@@ -1059,7 +1059,7 @@ CDirectoryChangeWatcher::CDirWatchInfo * CDirectoryChangeWatcher::GetDirWatchInf
 {
 	ASSERT( pChangeHandler != NULL );
 	CSingleLock lock( const_cast<CCriticalSection*>(&m_csDirWatchInfo), TRUE);
-	int i(0),max = m_DirectoriesToWatch.GetSize();
+	int i(0),max = static_cast<int>(m_DirectoriesToWatch.GetSize());
 	CDirWatchInfo * p;
 	for( ; i < max; ++i)
 	{

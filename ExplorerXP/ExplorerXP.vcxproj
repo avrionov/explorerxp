@@ -914,7 +914,6 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|Win32'">Full</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release - Opt|x64'">Full</Optimization>
     </ClCompile>
-    <ClCompile Include="ResizableLib\ResizableVersion.cpp" />
     <ClCompile Include="ResizableLib\ResizableWndState.cpp" />
     <ClCompile Include="Sizebar\scbarcf.cpp" />
     <ClCompile Include="Sizebar\scbarg.cpp" />
@@ -1139,7 +1138,6 @@
     <ClInclude Include="ResizableLib\ResizableMinMax.h" />
     <ClInclude Include="ResizableLib\ResizableMsgSupport.h" />
     <ClInclude Include="ResizableLib\ResizableState.h" />
-    <ClInclude Include="ResizableLib\ResizableVersion.h" />
     <ClInclude Include="ResizableLib\ResizableWndState.h" />
     <ClInclude Include="Sizebar\scbarcf.h" />
     <ClInclude Include="Sizebar\scbarg.h" />

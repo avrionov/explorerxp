@@ -196,8 +196,10 @@ void RegisterShellClipboardFormats() {
 }
 
 bool ReadDropEffect(COleDataObject *pObject, DROPEFFECT &dropEffect) {
-  if (pObject->IsDataAvailable(CF_PREFERREDDROPEFFECT)) {
-    HANDLE hGlobalDropEffect = pObject->GetGlobalData(CF_PREFERREDDROPEFFECT);
+  auto clipFormat = static_cast<CLIPFORMAT>(CF_PREFERREDDROPEFFECT);
+
+  if (pObject->IsDataAvailable(clipFormat)) {
+    HANDLE hGlobalDropEffect = pObject->GetGlobalData(clipFormat);
     if (hGlobalDropEffect != NULL) {
       DWORD *lpGlobalDropEffect = (DWORD *)GlobalLock(hGlobalDropEffect);
       if (lpGlobalDropEffect)
@@ -317,7 +319,7 @@ CString XFormatNumber(LPCTSTR lpszNumber, int nFracDigits) {
   }
   nf.NumDigits = dp;
 
-  int nSize = (_tcslen(lpszNumber) * 3) + 100;
+  int nSize = static_cast<int>((_tcslen(lpszNumber)) * 3) + 100;
   _TCHAR *pszFormattedNumber = new _TCHAR[nSize];
   ASSERT(pszFormattedNumber);
 
@@ -530,7 +532,7 @@ TCHAR *AllocateNullPaths(CSelRowArray &ar, int &buf_size) {
 }
 
 TCHAR *AllocateNullPath(const TCHAR *str, int &buf_size) {
-  buf_size = (_tcsclen(str) + 2) * sizeof(TCHAR);
+  buf_size = (static_cast<int>(_tcsclen(str)) + 2) * sizeof(TCHAR);
 
   TCHAR *pFrom = new TCHAR[buf_size];
 

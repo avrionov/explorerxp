@@ -220,7 +220,7 @@ void CFileViewer::GetFolder(fast_array<CFileInfo> &array, const TCHAR *path) {
 
   TCHAR path_buffer[MAX_PATH * 2];
 
-  int len = _tcslen(path);
+  auto len = _tcslen(path);
   _tcscpy(path_buffer, path);
 
   CString mask = path;
@@ -261,9 +261,9 @@ void CFileViewer::GetFolder(fast_array<CFileInfo> &array, const TCHAR *path) {
 
       if (bDir && CalculateSizes(path)) {
         ULONGLONG size, sizeondisk;
-        WIN32_FIND_DATA &FindFileData = array.back().m_FileInfo;
-        if (GetDirSize(path, FindFileData.cFileName, size, sizeondisk,
-                       FindFileData.ftLastWriteTime))
+        WIN32_FIND_DATA &lastFileData = array.back().m_FileInfo;
+        if (GetDirSize(path, lastFileData.cFileName, size, sizeondisk,
+                       lastFileData.ftLastWriteTime))
           array.back().SetSize(size, sizeondisk);
       }
     }
@@ -289,7 +289,7 @@ void CFileViewer::Fill(const TCHAR *root) {
   SureBackSlash(m_Root);
   GetFolder(m_Array, m_Root);
   Sort();
-  m_pGridCtrl->SetRowCount(m_Array.size() + 1);
+  m_pGridCtrl->SetRowCount(static_cast<int>(m_Array.size()) + 1);
   SetupGrid();
   m_pGridCtrl->SetRedraw(TRUE);
   m_pGridCtrl->ResetScrollBars();

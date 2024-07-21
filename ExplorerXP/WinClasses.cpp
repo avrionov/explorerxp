@@ -30,7 +30,10 @@ void TRACEWND(LPCTSTR szFunctionName, HWND hWnd)
 	{
 		CString sText; 
 		//		pWnd->GetWindowText(sText); 
-		TRACE ("%s(%s, %s, id = %d)\n", szFunctionName, CWinClasses::GetClass(hWnd), sText, GetDlgCtrlID(hWnd)); 
+		TRACE ("%s(%s, %s, id = %d)\n", szFunctionName, 
+			static_cast<LPCWSTR>(CWinClasses::GetClass(hWnd)),
+			static_cast<LPCWSTR>(sText),
+			GetDlgCtrlID(hWnd)); 
 	}
 #endif
 }

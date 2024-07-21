@@ -22,13 +22,15 @@
 
 #include "stdafx.h"
 #include "ResizableLayout.h"
-#include "ResizableVersion.h"
+//#include "ResizableVersion.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
+
+const int real_WIN32_WINNT = 0x0501;
 
 /*!
  *  @internal Constant used to detect clipping and refresh properties

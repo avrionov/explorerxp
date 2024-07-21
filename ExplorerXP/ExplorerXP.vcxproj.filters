@@ -185,9 +185,6 @@
     <ClCompile Include="ResizableLib\ResizableState.cpp">
       <Filter>Source Files\ResizableLib</Filter>
     </ClCompile>
-    <ClCompile Include="ResizableLib\ResizableVersion.cpp">
-      <Filter>Source Files\ResizableLib</Filter>
-    </ClCompile>
     <ClCompile Include="ResizableLib\ResizableWndState.cpp">
       <Filter>Source Files\ResizableLib</Filter>
     </ClCompile>
@@ -515,9 +512,6 @@
       <Filter>Source Files\ResizableLib</Filter>
     </ClInclude>
     <ClInclude Include="ResizableLib\ResizableState.h">
-      <Filter>Source Files\ResizableLib</Filter>
-    </ClInclude>
-    <ClInclude Include="ResizableLib\ResizableVersion.h">
       <Filter>Source Files\ResizableLib</Filter>
     </ClInclude>
     <ClInclude Include="ResizableLib\ResizableWndState.h">

@@ -20,9 +20,9 @@
 #if !defined(AFX_RESIZABLEVERSION_H__INCLUDED_)
 #define AFX_RESIZABLEVERSION_H__INCLUDED_
 
-#if _MSC_VER > 1000
+
 #pragma once
-#endif // _MSC_VER > 1000
+
 
 // global variables that hold actual version numbers
 // retrieved and adapted at run-time to be equivalent

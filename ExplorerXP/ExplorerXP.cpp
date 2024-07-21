@@ -222,7 +222,7 @@ BOOL CExplorerXPApp::InitInstance()
 	}
 
 	LoadFilters ();
-	//dirs.Start ();
+	dirs.Start ();
 
 	LoadDefaultTabs();
 	

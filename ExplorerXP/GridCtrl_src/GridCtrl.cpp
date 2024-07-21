@@ -5873,9 +5873,9 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 
         if (IsValid(cellID))
         {
-            CGridCellBase* pCell = GetCell(cellID.row, cellID.col);
-            if (pCell)
-                pCell->OnDblClick(pointClickedRel);
+            CGridCellBase* pInsideCell = GetCell(cellID.row, cellID.col);
+            if (pInsideCell)
+                pInsideCell->OnDblClick(pointClickedRel);
             SendMessageToParent(cellID.row, cellID.col, GVN_DBLCLK);
         }
     }

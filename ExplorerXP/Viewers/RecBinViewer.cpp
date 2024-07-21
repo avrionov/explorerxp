@@ -53,7 +53,7 @@ CRecBinViewer::~CRecBinViewer() {
 void CRecBinViewer::Fill (const TCHAR *root)  {	
   UpdateList ();
 	if (m_pGridCtrl) {		
-		m_pGridCtrl->SetRowCount(m_List.size () +1);
+		m_pGridCtrl->SetRowCount(static_cast<int>(m_List.size ()) +1);
 		SetupGrid ();
 	}	
 }
@@ -82,7 +82,7 @@ void CRecBinViewer::GridCallBack (GV_DISPINFO *pDispInfo)  {
 			SHFILEINFO		fi;
 
 			ZeroMemory (&fi, sizeof (fi));				
-			HRESULT hr = SHGetFileInfo ((LPCTSTR)m_List[row].m_PIDL, 0, &fi, sizeof (fi), SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_PIDL);
+			auto hr = SHGetFileInfo ((LPCTSTR)m_List[row].m_PIDL, 0, &fi, sizeof (fi), SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_PIDL);
 
 			if (SUCCEEDED (hr))			
 				pDispInfo->item.iImage = fi.iIcon;			
@@ -466,8 +466,9 @@ LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam) {
 	
 	memcpy((void *)&shns,(void *)wParam,sizeof(SHNOTIFYSTRUCT));
 
-	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem1, szBefore);
-	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
+	GetPathFromODList(shns.dwItem1, szBefore);
+	GetPathFromODList(shns.dwItem2, szAfter);
+	//SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
 
 	switch (lParam) {
 		case SHCNE_RENAMEITEM          : //0x00000001L
@@ -499,6 +500,11 @@ LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam) {
 	return lReturn;
 }
 
+void CRecBinViewer::GetPathFromODList(DWORD item, TCHAR  szText[MAX_PATH])
+{
+	SHGetPathFromIDList((struct _ITEMIDLIST*)item, szText);
+}
+
 LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam) {
 	LRESULT lReturn = 0;
 	SHNOTIFYSTRUCT shns;
@@ -507,8 +513,10 @@ LRESULT CRecBinViewer::OnNotifyRBinDir (WPARAM wParam, LPARAM lParam) {
 	
 	memcpy((void *)&shns,(void *)wParam,sizeof(SHNOTIFYSTRUCT));
 	
-	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem1, szBefore);
-	SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
+	GetPathFromODList(shns.dwItem1, szBefore);
+	GetPathFromODList(shns.dwItem2, szAfter);
+	//SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem1, szBefore);
+	//SHGetPathFromIDList((struct _ITEMIDLIST *)shns.dwItem2, szAfter);
 	
 	switch (lParam) {
 		case SHCNE_RENAMEITEM          : //0x00000001L
@@ -769,7 +777,7 @@ BOOL CRecBinViewer::ExecCommandOnSelection (LPCTSTR lpszCommand) {
 	if (!m_pGridCtrl)
 		return false;
 
-	int nItems = m_List.size();
+	int nItems = static_cast<int>(m_List.size());
 	LPITEMIDLIST *pidlArray = (LPITEMIDLIST *) malloc ( (nItems) * sizeof (LPITEMIDLIST));
 	int selCount = 0;
 	for (POSITION pos = m_pGridCtrl->m_SelectedCellMap.GetStartPosition(); pos != NULL; ) {
@@ -880,7 +888,7 @@ void CRecBinViewer::ContextMenu (CView* pView, CSelRowArray &ar, CPoint &pt)  {
 	for (unsigned int i = 0 ; i < ar.size () ; i++)				
 		pidlArray[i] = m_List[ar[i].m_nRow-1].m_PIDL;		
 	
-	scm.SetObjects (psfRecycle, pidlArray, ar.size ());
+	scm.SetObjects (psfRecycle, pidlArray, static_cast<int>(ar.size ()));
 	free (pidlArray);
 	psfDesktop->Release ();
 
@@ -908,7 +916,7 @@ void CRecBinViewer::Properties (CSelRowArray &ar) {
 	for (int i = 0 ; i < static_cast<int>(ar.size()) ; i++)				
 		pidlArray[i] = m_List[ar[i].m_nRow-1].m_PIDL;		
 	
-	scm.SetObjects (psfRecycle, pidlArray, ar.size ());
+	scm.SetObjects (psfRecycle, pidlArray, static_cast<int>(ar.size ()));
 	free (pidlArray);
 	psfDesktop->Release ();
 

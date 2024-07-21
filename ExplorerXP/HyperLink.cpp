@@ -319,22 +319,12 @@ void CHyperLink::PositionWindow()
 // It loads a "hand" cursor from the winhlp32.exe module
 void CHyperLink::SetDefaultCursor()
 {
-    if (m_hLinkCursor == NULL)                // No cursor handle - load our own
-    {
-        // Get the windows directory
-        CString strWndDir;
-        GetWindowsDirectory(strWndDir.GetBuffer(MAX_PATH), MAX_PATH);
-        strWndDir.ReleaseBuffer();
-
-        strWndDir += _T("\\winhlp32.exe");
-        // This retrieves cursor #106 from winhlp32.exe, which is a hand pointer
-        HMODULE hModule = LoadLibrary(strWndDir);
-        if (hModule) {
-            HCURSOR hHandCursor = ::LoadCursor(hModule, MAKEINTRESOURCE(106));
-            if (hHandCursor)
-                m_hLinkCursor = CopyCursor(hHandCursor);
-        }
-        FreeLibrary(hModule);
+    if (m_hLinkCursor == NULL)  
+    {       
+        HCURSOR hHandCursor = ::LoadCursor(NULL, IDC_HAND);
+        if (hHandCursor)
+            m_hLinkCursor = CopyCursor(hHandCursor);
+       
     }
 }
 
@@ -392,89 +382,3 @@ LONG CHyperLink::GetRegKey(HKEY key, LPCTSTR subkey, LPTSTR retdata)
     return retval;
 
 }
-#ifdef _EXP_FAT__
-void CHyperLink::SetURL(CString strURL)
-{
-    m_strURL = strURL;
-
-    if (::IsWindow(GetSafeHwnd())) {
-        PositionWindow();
-        m_ToolTip.UpdateTipText(strURL, this, TOOLTIP_ID);
-    }
-}
-
-CString CHyperLink::GetURL() const
-{ 
-    return m_strURL;   
-}
-
-void CHyperLink::SetColours(COLORREF crLinkColour, COLORREF crVisitedColour,
-                            COLORREF crHoverColour /* = -1 */) 
-{ 
-    m_crLinkColour    = crLinkColour; 
-    m_crVisitedColour = crVisitedColour;
-
-	if (crHoverColour == -1)
-		m_crHoverColour = ::GetSysColor(COLOR_HIGHLIGHT);
-	else
-		m_crHoverColour = crHoverColour;
-
-    if (::IsWindow(m_hWnd))
-        Invalidate(); 
-}
-
-COLORREF CHyperLink::GetLinkColour() const
-{ 
-    return m_crLinkColour; 
-}
-
-COLORREF CHyperLink::GetVisitedColour() const
-{
-    return m_crVisitedColour; 
-}
-
-COLORREF CHyperLink::GetHoverColour() const
-{
-    return m_crHoverColour;
-}
-
-
-
-BOOL CHyperLink::GetVisited() const
-{ 
-    return m_bVisited; 
-}
-
-void CHyperLink::SetLinkCursor(HCURSOR hCursor)
-{ 
-    m_hLinkCursor = hCursor;
-    if (m_hLinkCursor == NULL)
-        SetDefaultCursor();
-}
-
-HCURSOR CHyperLink::GetLinkCursor() const
-{
-    return m_hLinkCursor;
-}
-
-
-
-int CHyperLink::GetUnderline() const
-{ 
-    return m_nUnderline; 
-}
-
-void CHyperLink::SetAutoSize(BOOL bAutoSize /* = TRUE */)
-{
-    m_bAdjustToFit = bAutoSize;
-
-    if (::IsWindow(GetSafeHwnd()))
-        PositionWindow();
-}
-
-BOOL CHyperLink::GetAutoSize() const
-{ 
-    return m_bAdjustToFit; 
-}
-
-#endif

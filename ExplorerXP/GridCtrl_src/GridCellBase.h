@@ -67,6 +67,7 @@ typedef struct _GV_ITEM {
     LOGFONT  lfFont;      // Cell font
     UINT     nMargin;     // Internal cell margin
     CString  strText;     // Text in cell
+    _GV_ITEM(): row(0), col(0) {}
 } GV_ITEM;
 
 

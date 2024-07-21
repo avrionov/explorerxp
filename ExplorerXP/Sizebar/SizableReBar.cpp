@@ -519,7 +519,7 @@ void CSizableReBar::OnContextMenu( CWnd* /*pWnd*/, CPoint point )
 
             UINT nBars = menu.GetMenuItemCount();
             ::SendMessage( hwndBar, WM_REBAR_CONTEXTMENU, ( WPARAM )&menu, 0 );
-            if ( 0 < nBars && nBars < menu.GetMenuItemCount() )
+            if ( 0 < nBars && nBars < static_cast<UINT>(menu.GetMenuItemCount()) )
             {
                 VERIFY( menu.InsertMenu( nBars, MF_BYPOSITION | MF_SEPARATOR ) );
             }

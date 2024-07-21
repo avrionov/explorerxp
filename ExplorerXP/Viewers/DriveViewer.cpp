@@ -76,7 +76,7 @@ void CDriveViewer::Fill (const TCHAR *root)  {
 	
 	CGuard guard(m_lock);
 	Sort ();
-	m_pGridCtrl->SetRowCount(m_Array.size () +1);
+	m_pGridCtrl->SetRowCount(static_cast<int>(m_Array.size ()) +1);
 	SetupGrid ();	
 }
 
@@ -450,5 +450,5 @@ CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path) {
 
 int CDriveViewer::GetCount () { 
 	CGuard guard(m_lock);
-	return m_Array.size ();
+	return static_cast<int>(m_Array.size ());
 }
