@@ -188,7 +188,7 @@
     <ClCompile Include="ResizableLib\ResizableWndState.cpp">
       <Filter>Source Files\ResizableLib</Filter>
     </ClCompile>
-    <ClCompile Include="Sizebar\scbarcf.cpp">
+    <ClCompile Include="Sizebar\sizingcontrolbarcf.cpp">
       <Filter>Source Files\ResizableLib\SizeBar</Filter>
     </ClCompile>
     <ClCompile Include="Sizebar\scbarg.cpp">
@@ -517,7 +517,7 @@
     <ClInclude Include="ResizableLib\ResizableWndState.h">
       <Filter>Source Files\ResizableLib</Filter>
     </ClInclude>
-    <ClInclude Include="Sizebar\scbarcf.h">
+    <ClInclude Include="Sizebar\sizingcontrolbarcf.h">
       <Filter>Source Files\ResizableLib\SizeBar</Filter>
     </ClInclude>
     <ClInclude Include="Sizebar\scbarg.h">

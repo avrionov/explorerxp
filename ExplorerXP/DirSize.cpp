@@ -161,7 +161,7 @@ bool CDirSize::GetSizeInternal (const TCHAR *folder, const TCHAR *file, ULONGLON
 	path += file;
 
 	CDirInfo dirInfo;
-	TRACE(_T("GetSizeInternal GetDirInfoLock\n"));
+//	TRACE(_T("GetSizeInternal GetDirInfoLock\n"));
 	if (GetDirInfoLock(path,dirInfo))
 	{
 	  //if (CompareFileTime (&dirInfo.m_Time, &fTime)  == 0)
@@ -287,7 +287,7 @@ void CDirSize::Cycler ()
 		if (!m_StackLock.isLocked())
 			if (GetDir (path, file, fTime))
 			{	
-				TRACE(_T("Cycler GetSizeInternal %s %s\n"), static_cast<LPCWSTR>(path), static_cast<LPCWSTR>(file));
+//				TRACE(_T("Cycler GetSizeInternal %s %s\n"), static_cast<LPCWSTR>(path), static_cast<LPCWSTR>(file));
 				GetSizeInternal (path, file, size, sizeOndisk, fTime);
 				bShowReady = false;
 			}
@@ -314,7 +314,7 @@ void CDirSize::AddSize (const TCHAR* folder, const TCHAR* name , ULONGLONG size,
 	path += name;		
 
 	// TODO - fix it , crash on exit
-	TRACE(_T("Add Size - %s %d %d\n"), (LPCTSTR)path, fTime.dwHighDateTime, fTime.dwLowDateTime);
+//	TRACE(_T("Add Size - %s %d %d\n"), (LPCTSTR)path, fTime.dwHighDateTime, fTime.dwLowDateTime);
 	{
 		CGuard guard (m_SizeLock);
 

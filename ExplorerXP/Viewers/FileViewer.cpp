@@ -216,7 +216,7 @@ CFileViewer::~CFileViewer() {
 }
 
 void CFileViewer::GetFolder(fast_array<CFileInfo> &array, const TCHAR *path) {
-  InOut log(_T("GetFolder %s"), path);
+ // InOut log(_T("GetFolder %s"), path);
 
   TCHAR path_buffer[MAX_PATH * 2];
 
@@ -322,8 +322,12 @@ void CFileViewer::GridCallBack(GV_DISPINFO *pDispInfo) {
       pDispInfo->item.iImage = m_Array[row].m_nIcon;
       pDispInfo->item.strText = m_Array[row].as_text(pDispInfo->item.col);
 
-      if (gClipboard.IsFileIn(cs))
-        pDispInfo->item.lfFont.lfItalic = TRUE;
+      //if (gClipboard.IsFileIn(cs)) {
+      //    pDispInfo->item.lfFont.lfItalic = TRUE;
+      //    pDispInfo->item.lfFont.lfWeight = FW_MEDIUM;
+      //    pDispInfo->item.crBkClr = HLS_TRANSFORM(::GetSysColor(COLOR_WINDOW), -15, -15);
+      //}
+        
     } break;
 
     case 3:
@@ -344,7 +348,19 @@ void CFileViewer::GridCallBack(GV_DISPINFO *pDispInfo) {
 
     default:
       pDispInfo->item.strText = m_Array[row].as_text(pDispInfo->item.col);
+
+      
+
       break;
+    }
+
+    CString cs = m_Root;
+    cs += m_Array[row].as_text(0);
+
+    if (gClipboard.IsFileIn(cs)) {
+        pDispInfo->item.lfFont.lfItalic = TRUE;
+        pDispInfo->item.lfFont.lfWeight = FW_MEDIUM;
+        pDispInfo->item.crBkClr = HLS_TRANSFORM(::GetSysColor(COLOR_WINDOW), -8, -8);
     }
 
     if (m_Array[row].m_FileInfo.dwFileAttributes & FILE_ATTRIBUTE_COMPRESSED)

@@ -43,14 +43,16 @@ public:
     CSCBButton();
 
     void Move(CPoint ptTo) {ptOrg = ptTo; };
-    CRect GetRect() { return CRect(ptOrg, CSize(11, 11)); };
+    CRect GetRect() { return CRect(ptOrg, CSize(m_Dimension, m_Dimension)); };
     void Paint(CDC* pDC);
+    void SetDimension(int dimension) { m_Dimension = dimension;}
 
     BOOL    bPushed;
     BOOL    bRaised;
 
 protected:
     CPoint  ptOrg;
+    int     m_Dimension;
 };
 
 /////////////////////////////////////////////////////////////////////////

@@ -377,7 +377,7 @@ bool CDriveViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDi
 void CDriveViewer::CheckUpdate () {
 
 	if (m_bNeedUpdate) {
-		TRACE (_T("Check Update Dr Viewer\n"));
+//		TRACE (_T("Check Update Dr Viewer\n"));
 		Fill (EMPTYSTR);
 		m_bNeedUpdate = false;
 	}

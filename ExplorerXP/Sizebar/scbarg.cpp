@@ -45,7 +45,8 @@ IMPLEMENT_DYNAMIC(CSizingControlBarG, baseCSizingControlBarG);
 
 CSizingControlBarG::CSizingControlBarG()
 {
-    m_cyGripper = 12;
+    m_cyGripper = GetSystemMetrics(SM_CYMENU);
+    m_biHide.SetDimension(m_cyGripper - 2);
 }
 
 CSizingControlBarG::~CSizingControlBarG()
@@ -98,9 +99,9 @@ void CSizingControlBarG::NcCalcClient(LPRECT pRc, UINT nDockBarID)
     // set position for the "x" (hide bar) button
     CPoint ptOrgBtn;
     if (bHorz)
-        ptOrgBtn = CPoint(rc.left - 13, rc.top);
+        ptOrgBtn = CPoint(rc.left - m_cyGripper + 1, rc.top);
     else
-        ptOrgBtn = CPoint(rc.right - 12, rc.top - 13);
+        ptOrgBtn = CPoint(rc.right - m_cyGripper, rc.top - m_cyGripper + 1);
 
     m_biHide.Move(ptOrgBtn - rcBar.TopLeft());
 
@@ -203,34 +204,46 @@ CSCBButton::CSCBButton()
 {
     bRaised = FALSE;
     bPushed = FALSE;
+    m_Dimension = 28;
 }
 
 void CSCBButton::Paint(CDC* pDC)
 {
     CRect rc = GetRect();
 
+    //if (bPushed)
+    //    pDC->Draw3dRect(rc, ::GetSysColor(COLOR_BTNSHADOW),
+    //        ::GetSysColor(COLOR_BTNHIGHLIGHT));
+    //else
+    //    if (bRaised)
+    //        pDC->Draw3dRect(rc, ::GetSysColor(COLOR_BTNHIGHLIGHT),
+    //            ::GetSysColor(COLOR_BTNSHADOW));
+
+    //COLORREF clrOldTextColor = pDC->GetTextColor();
+    //pDC->SetTextColor(::GetSysColor(COLOR_BTNTEXT));
+    //int nPrevBkMode = pDC->SetBkMode(TRANSPARENT);
+    //CFont font;
+    //int ppi = pDC->GetDeviceCaps(LOGPIXELSX);
+    //int pointsize = MulDiv(60, 96, ppi); // 6 points at 96 ppi
+    //font.CreatePointFont(pointsize, _T("Marlett"));
+    //CFont* oldfont = pDC->SelectObject(&font);
+
+    //pDC->TextOut(ptOrg.x + 2, ptOrg.y + 2, CString(_T("r"))); // x-like
+
+    //pDC->SelectObject(oldfont);
+    //pDC->SetBkMode(nPrevBkMode);
+    //pDC->SetTextColor(clrOldTextColor);
+    CRect closeRect = rc;
+    closeRect.DeflateRect(2, 2, 2, 2);
+    UINT btnState = 0;
     if (bPushed)
-        pDC->Draw3dRect(rc, ::GetSysColor(COLOR_BTNSHADOW),
-            ::GetSysColor(COLOR_BTNHIGHLIGHT));
+        btnState = DFCS_HOT;
     else
         if (bRaised)
-            pDC->Draw3dRect(rc, ::GetSysColor(COLOR_BTNHIGHLIGHT),
-                ::GetSysColor(COLOR_BTNSHADOW));
+            btnState = DFCS_PUSHED;
 
-    COLORREF clrOldTextColor = pDC->GetTextColor();
-    pDC->SetTextColor(::GetSysColor(COLOR_BTNTEXT));
-    int nPrevBkMode = pDC->SetBkMode(TRANSPARENT);
-    CFont font;
-    int ppi = pDC->GetDeviceCaps(LOGPIXELSX);
-    int pointsize = MulDiv(60, 96, ppi); // 6 points at 96 ppi
-    font.CreatePointFont(pointsize, _T("Marlett"));
-    CFont* oldfont = pDC->SelectObject(&font);
 
-    pDC->TextOut(ptOrg.x + 2, ptOrg.y + 2, CString(_T("r"))); // x-like
-
-    pDC->SelectObject(oldfont);
-    pDC->SetBkMode(nPrevBkMode);
-    pDC->SetTextColor(clrOldTextColor);
+    pDC->DrawFrameControl(&closeRect, DFC_CAPTION, DFCS_CAPTIONCLOSE | DFCS_FLAT | btnState);
 }
 
 BOOL CSizingControlBarG::HasGripper() const

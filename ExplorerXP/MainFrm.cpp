@@ -1242,7 +1242,7 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 	skipFirst++; 
 	if ((nIDEvent == MAIN_UPDATETIMER) && (gOptions.m_FolderSizeMode != FOLDERSIZE_MANUAL))	
 	{		
-		TRACE (_T("MainFrame Check Timer\n"));
+//		TRACE (_T("MainFrame Check Timer\n"));
 		StartSizeThread ();			
 	}
 

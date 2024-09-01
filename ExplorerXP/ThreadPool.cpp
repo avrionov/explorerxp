@@ -37,7 +37,7 @@ CThreadPool::~CThreadPool()
 
 void CThreadPool::AddThread (int iID, HANDLE hThread)
 {
-	TRACE(_T("Add Th \n"));
+//	TRACE(_T("Add Th \n"));
 	CGuard guard(m_lock);
 	m_Threads.insert (CI2HVal (iID, hThread));
 }

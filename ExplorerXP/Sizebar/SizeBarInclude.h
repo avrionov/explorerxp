@@ -6,7 +6,7 @@
 //#define _SCB_MINIFRAME_CAPTION
 #include "sizecbar.h"
 #include "scbarg.h"
-#include "scbarcf.h"
+#include "sizingcontrolbarcf.h"
 
 #define baseCMyBar CSizingControlBarCF
 #endif //  __SIZEBAR_INCLUDE__
