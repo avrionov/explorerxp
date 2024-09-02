@@ -470,7 +470,23 @@ void CExplorerXPView::DoSomething (int iRow, bool &bChange)
 	{		
 		CString cs = m_pViewer->GetPath (iRow);
 		CString dir = m_pViewer->GetTitle ();
-		ShellExecute (m_hWnd, NULL, cs, NULL, dir, SW_SHOWNORMAL );
+		//ShellExecute (m_hWnd, NULL, cs, NULL, dir, SW_SHOWNORMAL );
+		ShellExecute(m_hWnd, NULL, cs, NULL, dir, SW_SHOW);
+		
+		SHELLEXECUTEINFO ShExecInfo;
+
+		ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+		ShExecInfo.fMask = NULL;
+		ShExecInfo.hwnd = m_hWnd;
+		ShExecInfo.lpVerb = NULL;
+		ShExecInfo.lpFile = cs;
+		ShExecInfo.lpParameters = NULL;
+		ShExecInfo.lpDirectory = dir;
+		ShExecInfo.nShow = SW_SHOWNORMAL;
+		ShExecInfo.hInstApp = NULL;
+
+		//ShellExecuteEx(&ShExecInfo);
+
 	}
 }
 
@@ -1197,7 +1213,7 @@ CString CExplorerXPView::GetCountAll()
 	if (m_bDisable)
 		return csTemp;
 	
-	csTemp.Format (_T("%d object"), m_pViewer->GetCount ());
+	csTemp.Format (_T("  %d object"), m_pViewer->GetCount ());
 	if (m_pViewer->GetCount () != 1)
 		csTemp += "s";
 	

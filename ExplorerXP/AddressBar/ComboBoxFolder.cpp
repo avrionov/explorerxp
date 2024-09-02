@@ -95,6 +95,7 @@ void CComboBoxFolder::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 */
 void CComboBoxFolder::Init(int w, int h)
 {
+
 	CRect rc(0, 0, 10, 10);
 	UINT style =  WS_POPUP | WS_BORDER | TVS_DISABLEDRAGDROP | TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS | TVS_FULLROWSELECT;
 	CWnd* pWnd = &m_treeCtrl;
@@ -298,6 +299,7 @@ void CComboBoxFolder::OnPaint()
 	CRect rcClip, rcClient;
 	dc.GetClipBox( &rcClip );
 	GetClientRect(&rcClient);
+	rcClip.bottom--;
 
 	// Select a compatible bitmap into the memory DC
 	CBitmap bitmap;
@@ -315,7 +317,7 @@ void CComboBoxFolder::OnPaint()
 
 	CPoint p;
 	p.x = 4;
-	p.y = (rcClient.bottom - m_iconWidth)/2 ;
+	p.y = (rcClient.bottom - m_iconWidth)/2 - 4;
 
 	GetSysImageList()->Draw(&memDC, m_nIcon, p, ILD_NORMAL);
 

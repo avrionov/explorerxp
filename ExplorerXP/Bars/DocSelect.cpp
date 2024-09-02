@@ -23,7 +23,7 @@
 
 #include "debug_new.h"
 
-#define ID_TABHEIGHT 22
+#define ID_TABHEIGHT_OLD 44
 //#define DS_HEIGHT				ID_TABHEIGHT+4		// Default
 //is 22.
 //#define DS_WIDTH				110		// Default is
@@ -36,7 +36,10 @@
 CDocSelector::CDocSelector() {
   m_iNextButtonStart = DS_LEFT_MARGIN;
   m_iSelectedButton = 0;
-  m_nLMargin = 14 + 8;
+  
+  m_TabHeight = GetSystemMetrics(SM_CYMENU) + 4;
+
+  m_nLMargin = m_TabHeight - 4;
 }
 
 CDocSelector::~CDocSelector() {}
@@ -78,16 +81,17 @@ void CDocSelector::OnSize(UINT nType, int cx, int cy) {
   DWORD dwStyle = m_ViewTabCtrl.GetStyle();
   GetClientRect(rect);
 
-  m_HoverClose.SetWindowPos(&wndTop, rect.Width() - m_nLMargin + 4,
-                            rect.top + 2, 0, 0, SWP_NOSIZE);
+  m_HoverClose.SetWindowPos(&wndTop, rect.Width() - m_TabHeight + 2,
+                            //rect.top + 2, 0, 0, SWP_NOSIZE);
+                            rect.top + 2, m_nLMargin, m_nLMargin, 0);
 
   if (dwStyle & TCS_BOTTOM)
     m_ViewTabCtrl.SetWindowPos(&wndTop, 2, rect.top,
-                               rect.Width() - m_nLMargin - 2, ID_TABHEIGHT,
+                               rect.Width() - m_TabHeight -4 , m_TabHeight,
                                SWP_DEFERERASE);
   else
-    m_ViewTabCtrl.SetWindowPos(&wndTop, 2, 0, rect.Width() - m_nLMargin - 2,
-                               ID_TABHEIGHT, SWP_DEFERERASE);
+    m_ViewTabCtrl.SetWindowPos(&wndTop, 2, 0, rect.Width() - m_TabHeight - 4,
+        m_TabHeight, SWP_DEFERERASE);
 }
 
 int CDocSelector::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -99,7 +103,7 @@ int CDocSelector::OnCreate(LPCREATESTRUCT lpCreateStruct) {
                   TCS_FORCELABELLEFT /*| TCS_MULTILINE*/;
 
   if (!ThemeLibLoaded)
-    dwStyle |= TCS_BUTTONS | TCS_FLATBUTTONS;
+    dwStyle |= TCS_BUTTONS | TCS_FLATBUTTONS | TCS_HOTTRACK;
   else
     dwStyle |= TCS_TABS;
 
@@ -118,20 +122,9 @@ int CDocSelector::OnCreate(LPCREATESTRUCT lpCreateStruct) {
   m_HoverClose.SetToolTipText(IDS_CLOSETAB);
   m_HoverClose.EnableWindow(TRUE);
 
-  /*m_ViewTabCtrl.Create(WS_CHILD | WS_VISIBLE |// WS_EX_NOPARENTNOTIFY
-          //TCS_BUTTONS	| TCS_FIXEDWIDTH | //TCS_TABS |// TCS_FLATBUTTONS |
-     // pLaY with this!
-          TCS_TOOLTIPS | TCS_SINGLELINE | TCS_FOCUSNEVER |  TCS_FORCELABELLEFT,
-     //| TCS_OWNERDRAWFIXED,
-          CRect(0, 0, 0, 0), this, ID_VIEWTAB);*/
-
   TabCtrl_SetExtendedStyle(m_ViewTabCtrl.m_hWnd,
                            TCS_EX_FLATSEPARATORS | TCS_EX_REGISTERDROP);
-
-  // m_ViewTabCtrl.SetIconDisplay (TRUE);
-  // m_ViewTabCtrl.SetImageList(GetSysImageList ());
-
-  // ModifyStyleEx(0, WS_EX_WINDOWEDGE );
+    
   ModifyStyle(0, WS_CLIPCHILDREN);
 
   // m_ViewTabCtrl.SetTabStyle (TRUE, TRUE);
@@ -149,7 +142,7 @@ CSize CDocSelector::CalcFixedLayout(BOOL bStretch, BOOL bHorz) {
   // plus the top and bottom border.
   CSize size;
   size.cx = 32767;
-  size.cy = ID_TABHEIGHT;
+  size.cy = m_TabHeight;
   size.cy += (-rBorder.Height());
 
   return size;

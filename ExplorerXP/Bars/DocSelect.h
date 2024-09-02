@@ -87,6 +87,7 @@ protected:
     CWindowTabCtrl      m_ViewTabCtrl;
 	CHoverButton		m_HoverClose;
     int                 m_nLMargin;
+	int					m_TabHeight;
     
 	virtual CSize CalcFixedLayout(BOOL bStretch, BOOL bHorz);
 	

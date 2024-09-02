@@ -80,7 +80,9 @@ void CAddressBar::OnSize(UINT nType, int cx, int cy) {
   //ScreenToClient(rcClient);
   //rcClient.OffsetRect(1, 1);
 
-  pWnd->MoveWindow(1, 5, width -2, rcAddr.Height());
+  int yPos = (rcClient.Height() - rcAddr.Height()) / 2;
+
+  pWnd->MoveWindow(1, yPos, width - 2, rcAddr.Height());
   
 }
 

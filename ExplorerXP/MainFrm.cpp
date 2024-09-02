@@ -34,6 +34,9 @@
 #include "Themes.h"
 #include "Shell32.h"
 
+#include <vector>
+#include <algorithm>
+
 extern CDirSize dirs;
 extern CExplorerXPApp theApp;
 extern CShortcutManager gShortcutManager;
@@ -233,8 +236,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//}
 
 	m_wndReBar.AddBar(&m_wndToolBar, 0, 0, RBBS_GRIPPERALWAYS, _T("&Toolbar"), false) ;
-	m_wndReBar.AddBar(&m_AddressBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Address Bar"), false);
 	//m_wndReBar.AddBar(&m_PatternMatchBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Pattern Bar"), false);
+	m_wndReBar.AddBar(&m_AddressBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Address Bar"), false);
+	
 
 
 	m_wndToolBar.Init (); 
@@ -1364,6 +1368,25 @@ CMenu* CMainFrame::GetWindowMenu()
 	return pWindowMenu;
 }
 
+std::vector<CString> getSortedWindowTitles(CWnd* pWnd) {
+	std::vector<CString> windowTitles;
+
+	CString strTitle;
+
+	while (pWnd) {
+		if (pWnd->IsWindowVisible()) {
+
+			CString tabName;
+			pWnd->GetWindowText(tabName);
+			windowTitles.push_back(tabName);
+		}
+		pWnd = pWnd->GetWindow(GW_HWNDNEXT);
+	}
+		
+	std::sort(windowTitles.begin(), windowTitles.end());
+	return windowTitles;
+}
+
 void CMainFrame::UpdateWindowMenu()
 {
 	CMenu* pWindowMenu = GetWindowMenu();
@@ -1375,34 +1398,54 @@ void CMainFrame::UpdateWindowMenu()
 	//m_hWndMDIClient - undocumented
 
 	CWnd* pWnd = CWnd::FromHandle(m_hWndMDIClient)->GetWindow(GW_CHILD);
+	
+	std::vector<CString> windowsTitle = getSortedWindowTitles(pWnd);
 
 	CString strTitle;
-	int i = 0;
-	while(pWnd)
-	{
-		if(pWnd)
-			if(pWnd->IsWindowVisible())
-			{
-			    if (i == NUM_WINDOWS_ITEMS)    //Critical number ow windows (9) reached
-				{
-					pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_MORE, _T("&Windows..."));
-					return;
-				}
+	for (int i = 0; i < windowsTitle.size(); i++) {
+		if (i == NUM_WINDOWS_ITEMS)    //Critical number ow windows (9) reached
+		{
+			pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_MORE, _T("&Windows..."));
+			return;
+		}
 
-				CString tabName;
-				pWnd->GetWindowText(tabName);
-				
-				if (i < 9)
-					strTitle.Format (_T("&%d "), i+1);
-				else
-					strTitle.Format (_T("%d "), i+1);
+		if (i < 9)
+			strTitle.Format (_T("&%d "), i+1);
+		else
+			strTitle.Format (_T("%d "),  i+1);
 
-				strTitle += tabName;
+		strTitle += windowsTitle[i];
 
-				pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_FIRST + i++, strTitle);
-			}
-		pWnd = pWnd->GetWindow(GW_HWNDNEXT);
+		pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_FIRST + i, strTitle);
+
 	}
+
+	//int i = 0;
+	//while(pWnd)
+	//{
+	//	if(pWnd)
+	//		if(pWnd->IsWindowVisible())
+	//		{
+	//		    if (i == NUM_WINDOWS_ITEMS)    //Critical number ow windows (9) reached
+	//			{
+	//				pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_MORE, _T("&Windows..."));
+	//				return;
+	//			}
+
+	//			CString tabName;
+	//			pWnd->GetWindowText(tabName);
+	//			
+	//			if (i < 9)
+	//				strTitle.Format (_T("&%d "), i+1);
+	//			else
+	//				strTitle.Format (_T("%d "), i+1);
+
+	//			strTitle += tabName;
+
+	//			pWindowMenu->AppendMenu( MF_STRING,  ID_WINDOWS_FIRST + i++, strTitle);
+	//		}
+	//	pWnd = pWnd->GetWindow(GW_HWNDNEXT);
+	//}
 
 }
 
@@ -1411,8 +1454,35 @@ void CMainFrame::ActivateFrameFromMenu(int nItem)
 	CWnd* pWnd = CWnd::FromHandle(m_hWndMDIClient)->GetWindow(GW_CHILD);
 	int i = ID_WINDOWS_FIRST;
 	BOOL bMaximized;
+	std::vector<CString> windowsTitle = getSortedWindowTitles(pWnd);
 
-	while(pWnd)
+	int index = nItem - ID_WINDOWS_FIRST;
+	if (index < 0) return;
+	if (index >= windowsTitle.size()) return;
+
+	CString toSelect = windowsTitle[index];
+
+	while (pWnd)
+	{
+		if (pWnd)
+			if (pWnd->IsWindowVisible()) {
+				CString tabName;
+				pWnd->GetWindowText(tabName);
+			
+				if (tabName == toSelect)
+				{
+					MDIGetActive(&bMaximized);
+					if (!bMaximized)
+						MDIRestore(pWnd);
+					MDIActivate(pWnd);
+					return;
+				}
+			}
+		pWnd = pWnd->GetWindow(GW_HWNDNEXT);
+	}
+
+
+	/*while(pWnd)
 	{
 		if(pWnd)
 			if(pWnd->IsWindowVisible())
@@ -1425,14 +1495,30 @@ void CMainFrame::ActivateFrameFromMenu(int nItem)
 					return;
 				}
 		pWnd = pWnd->GetWindow(GW_HWNDNEXT);
-	}
+	}*/
 }
 
 void CMainFrame::DoUpdateWindowMenu(int nID, CCmdUI* pCCmdUI)
 {
 	pCCmdUI->Enable(TRUE);
-	if (nID == ID_WINDOWS_FIRST)
-		pCCmdUI->SetCheck();
+	//if (nID == ID_WINDOWS_FIRST)
+	//	pCCmdUI->SetCheck();
+
+	CWnd* pWnd = CWnd::FromHandle(m_hWndMDIClient)->GetWindow(GW_CHILD);
+
+	if (pWnd == NULL) return;
+
+	std::vector<CString> windowsTitle = getSortedWindowTitles(pWnd);
+
+	CString tabName;
+	pWnd->GetWindowText(tabName);
+
+	for (int i = 0; i < windowsTitle.size(); i++) {
+		if (windowsTitle[i] == tabName)
+			if (nID == (i + ID_WINDOWS_FIRST))
+				pCCmdUI->SetCheck();
+	}
+
 }
 
 void CMainFrame::OnUpdateWindowsCascade(CCmdUI* pCmdUI) 

@@ -56,7 +56,7 @@ END_MESSAGE_MAP()
 void CPatternMatchBar::OnSize(UINT nType, int cx, int cy) {
     CDialogBar::OnSize(nType, cx, cy);
 
-    CWnd* pWnd = GetDlgItem(IDC_ADDRESS);
+    CWnd* pWnd = GetDlgItem(IDC_PATTERN);
 
     if (!pWnd)
         return;
@@ -72,30 +72,21 @@ void CPatternMatchBar::OnSize(UINT nType, int cx, int cy) {
 
     int width = rcClient.Width() - rcAddr.left;
 
+    int yPos = (rcClient.Height() - rcAddr.Height()) / 2;
+
+
     //pWnd->MoveWindow(rcAddr.left, rcAddr.top, width, rcAddr.Height());
-    pWnd->MoveWindow(1, 5, width - 2, rcAddr.Height());
+    pWnd->MoveWindow(4, yPos, width - 4, rcAddr.Height());
 }
 
-BOOL CPatternMatchBar::OnEraseBkgnd(CDC* pDC)
-{
-    CWnd* pParent = GetParent();
-    ASSERT_VALID(pParent);
-    CPoint pt(0, 0);
-    MapWindowPoints(pParent, &pt, 1);
-    pt = pDC->OffsetWindowOrg(pt.x, pt.y);
-    LRESULT lResult = pParent->SendMessage(WM_ERASEBKGND,
-        (WPARAM)pDC->m_hDC, 0L);
-    pDC->SetWindowOrg(pt.x, pt.y);
-    return (BOOL)lResult;
-}
 
-void CPatternMatchBar::OnMove(int x, int y)
-{
-    UNREFERENCED_PARAMETER(x);
-    UNREFERENCED_PARAMETER(y);
-
-    Invalidate();
-}
+//void CPatternMatchBar::OnMove(int x, int y)
+//{
+//    UNREFERENCED_PARAMETER(x);
+//    UNREFERENCED_PARAMETER(y);
+//
+//    Invalidate();
+//}
 //
 //void CPatternMatchBar::SetFolder(const TCHAR* folder) {
 //    m_Address.SetFolder(folder);

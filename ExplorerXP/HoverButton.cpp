@@ -114,7 +114,7 @@ void CHoverButton::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 {
 	CDC *mydc = CDC::FromHandle(lpDrawItemStruct->hDC);
 
-	CDC * pMemDC = new CDC;
+	/*CDC * pMemDC = new CDC;
 	pMemDC -> CreateCompatibleDC(mydc);
 
 	CBitmap * pOldBitmap;
@@ -134,8 +134,25 @@ void CHoverButton::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 			mydc->BitBlt(0,0,m_ButtonSize.cx,m_ButtonSize.cy,pMemDC,0,0,SRCCOPY);		
 	}
 
-	pMemDC -> SelectObject(pOldBitmap);
-	delete pMemDC;
+	pMemDC -> SelectObject(pOldBitmap);*/
+
+
+	CRect rc;
+	GetClientRect(&rc);
+
+	CRect closeRect = rc;
+	closeRect.DeflateRect(4, 0, 4, 6);
+	UINT btnState = 0;
+	if (m_bHover)
+		btnState = DFCS_HOT;
+	else
+		if (lpDrawItemStruct->itemState & ODS_SELECTED)
+			btnState = DFCS_PUSHED;
+
+
+	mydc->DrawFrameControl(&closeRect, DFC_CAPTION, DFCS_CAPTIONCLOSE | DFCS_FLAT | btnState);
+
+	//delete pMemDC;
 }
 
 // Load a bitmap from the resources in the button, the bitmap has to have 3 buttonsstates next to each other: Up/Down/Hover
