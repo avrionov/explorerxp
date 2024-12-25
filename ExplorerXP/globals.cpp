@@ -573,7 +573,8 @@ bool FileOperation(CWnd *pWnd, CSelRowArray &ar, UINT wFunc,
 
   SHFILEOPSTRUCT *fo = new SHFILEOPSTRUCT;
 
-  fo->hwnd = pWnd->GetSafeHwnd();
+  //fo->hwnd = pWnd->GetSafeHwnd();
+  fo->hwnd = 0;
 
   fo->wFunc = wFunc;
   fo->fFlags = fFlags;
@@ -586,7 +587,7 @@ bool FileOperation(CWnd *pWnd, CSelRowArray &ar, UINT wFunc,
 
   fo->lpszProgressTitle = NULL;
 
-  //	int ret = SHFileOperation (&fo);
+  //int ret = SHFileOperation (fo);
   AfxBeginThread(FileOperationInternal, (LPVOID)fo);
 
   // return ret == 0;

@@ -200,6 +200,7 @@ void CTitleTip::Show(CRect rectTitle, LPCTSTR lpszTitleText, int xoffset /*=0*/,
 		//rectDisplay.OffsetRect (ptCursor.x, (3 * rectDisplay.Height ()) / 2);
 		rectDisplay.OffsetRect (rectTitle.Width () , (3 * rectDisplay.Height ()) / 2);
         //SetWindowPos( &wndTop, rectDisplay.left, rectDisplay.top, 
+		TRACE(_T("Show Title Tip\n"));
 		SetWindowPos( &wndTop, ptCursor.x, rectDisplay.top, 
             rectDisplay.Width(), rectDisplay.Height(), 
             SWP_SHOWWINDOW|SWP_NOACTIVATE );
@@ -221,7 +222,7 @@ void CTitleTip::Show(CRect rectTitle, LPCTSTR lpszTitleText, int xoffset /*=0*/,
 
         dc.SetBkMode( TRANSPARENT );
         dc.TextOut( 0, 0, strTitle );
-        SetCapture();
+        //SetCapture();
     }
     
     dc.SelectObject( pOldFont );
@@ -236,6 +237,7 @@ void CTitleTip::Hide()
         ReleaseCapture();
 
 	ShowWindow( SW_HIDE );
+	TRACE(_T("Hide Title Tip\n"));
 }
 
 void CTitleTip::OnMouseMove(UINT nFlags, CPoint point) 
@@ -334,12 +336,12 @@ BOOL CTitleTip::PreTranslateMessage(MSG* pMsg)
 			Hide();
 			m_pParentWnd->PostMessage( pMsg->message, pMsg->wParam, pMsg->lParam );
 			return TRUE;
-/*
+
 		case WM_COMMAND:
 			Hide();
 			m_pParentWnd->PostMessage( pMsg->message, pMsg->wParam, pMsg->lParam );
 			return TRUE;
-			break;*/
+			break;
 
 		case WM_ACTIVATEAPP:
 			Hide();
@@ -347,13 +349,23 @@ BOOL CTitleTip::PreTranslateMessage(MSG* pMsg)
 	}
 
 	
-	if( GetFocus() == NULL )
-	{
-        Hide();
+	//if( GetFocus() == NULL )
+	//{
+ //       Hide();
+	//	return TRUE;
+	//}
+
+	if (GetActiveWindow() == NULL) {
+		Hide();
 		return TRUE;
 	}
+	HWND focusHwnd = GetFocus()->GetSafeHwnd();
+	HWND activeHwnd = GetActiveWindow()->GetSafeHwnd();
+	TRACE(_T("Focus 0x%I64X, Active 0x%I64X\n"), focusHwnd, activeHwnd);
+
 
 	return CWnd::PreTranslateMessage(pMsg);
 }
+
 
 #endif // GRIDCONTROL_NO_TITLETIPS

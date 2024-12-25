@@ -58,6 +58,7 @@ public:
 	afx_msg LRESULT OnNotifyRBinDir (WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnWmOpenFromShell(WPARAM, LPARAM lParam);
 	afx_msg LRESULT OnChangeDesktop (WPARAM wParam, LPARAM lParam);
+	afx_msg void OnActivateApp(BOOL bActive, DWORD hTask);
 // Implementation
 public:
 	virtual ~CMainFrame();

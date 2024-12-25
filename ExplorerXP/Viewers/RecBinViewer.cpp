@@ -115,7 +115,7 @@ struct SortByString
 		if (m_bAscending)		
 			return _tcsicmp (f1[m_iCol], f2[m_iCol]) <= 0;
 
-		return _tcsicmp (f1[m_iCol], f2[m_iCol]) >= 0;		
+		return _tcsicmp (f1[m_iCol], f2[m_iCol]) > 0;		
 	}
 
 	int  m_iCol;

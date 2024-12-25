@@ -697,7 +697,7 @@ protected:
 
     // Mouse operations such as cell selection
     int         m_MouseMode;
-    BOOL        m_bLMouseButtonDown, m_bRMouseButtonDown;
+    BOOL        m_bLMouseButtonDown, m_bRMouseButtonDown, m_bLMouseDoubleClick;
     CPoint      m_LeftClickDownPoint, m_LastMousePoint;
     CCellID     m_LeftClickDownCell, m_SelectionStartCell;
     CCellID     m_idCurrentCell, m_idTopLeftCell;
@@ -711,6 +711,7 @@ public:
 
 #ifndef GRIDCONTROL_NO_TITLETIPS
     CTitleTip   m_TitleTip;             // Title tips for cells
+    CToolTipCtrl m_ToolTip;
 #endif
 
     // Drag and drop

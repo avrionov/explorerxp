@@ -150,6 +150,8 @@ IMPLEMENT_DYNCREATE(CGridCtrl, CWnd)
 #define IDTIMER_DEBOUNCE      10
 #define IDTIMER_BUTTON_DELAY  200
 
+#define TOOLTIP_ID 1
+
 // Get the number of lines to scroll with each mouse wheel notch
 // Why doesn't windows give us this function???
 UINT GetMouseScrollLines()
@@ -256,8 +258,10 @@ CGridCtrl::CGridCtrl(int nRows, int nCols, int nFixedRows, int nFixedCols)
     SetFixedRowCount(nFixedRows);
     SetFixedColumnCount(nFixedCols);
 
-    SetTitleTipTextClr(CLR_DEFAULT);  //FNA
-    SetTitleTipBackClr(CLR_DEFAULT); 
+    //SetTitleTipTextClr(CLR_DEFAULT);  //FNA
+    //SetTitleTipBackClr(CLR_DEFAULT); 
+    SetTitleTipTextClr(GetSysColor(COLOR_INFOTEXT));  
+    SetTitleTipBackClr(GetSysColor(COLOR_INFOBK));
 
     // set initial selection range (ie. none)
     m_SelectedCellMap.RemoveAll();
@@ -336,6 +340,8 @@ BOOL CGridCtrl::Initialise()
 
 #ifndef GRIDCONTROL_NO_TITLETIPS
     m_TitleTip.SetParentWnd(this);
+  
+
 #endif
 
 	// This would be a good place to register the droptarget but
@@ -370,6 +376,8 @@ BOOL CGridCtrl::Create(const RECT& rect, CWnd* pParentWnd, UINT nID, DWORD dwSty
 
     if (!CWnd::Create(GRIDCTRL_CLASSNAME, NULL, dwStyle, rect, pParentWnd, nID))
         return FALSE;
+
+    m_ToolTip.Create(this, TTS_ALWAYSTIP);
 
     //Initialise(); - called in PreSubclassWnd
 
@@ -1247,6 +1255,9 @@ void CGridCtrl::OnSysKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 #ifdef GRIDCONTROL_USE_TITLETIPS
     m_TitleTip.Hide();  // hide any titletips
+    //m_ToolTip.Pop();
+    //m_ToolTip.DelTool(this, TOOLTIP_ID);
+
 #endif
 
     CWnd::OnSysKeyDown(nChar, nRepCnt, nFlags);
@@ -1318,6 +1329,9 @@ void CGridCtrl::OnHScroll(UINT nSBCode, UINT /*nPos*/, CScrollBar* /*pScrollBar*
 
 #ifndef GRIDCONTROL_NO_TITLETIPS
     m_TitleTip.Hide();  // hide any titletips
+
+    //m_ToolTip.Pop();
+    //m_ToolTip.DelTool(this, TOOLTIP_ID);
 #endif
 
     int scrollPos = GetScrollPos32(SB_HORZ);
@@ -1438,6 +1452,8 @@ void CGridCtrl::OnVScroll(UINT nSBCode, UINT /*nPos*/, CScrollBar* /*pScrollBar*
 
 #ifndef GRIDCONTROL_NO_TITLETIPS
     m_TitleTip.Hide();  // hide any titletips
+    //m_ToolTip.Pop();
+    //m_ToolTip.DelTool(this, TOOLTIP_ID);
 #endif
 
     // Get the scroll position ourselves to ensure we get a 32 bit value
@@ -5659,8 +5675,64 @@ void CGridCtrl::OnMouseMove(UINT /*nFlags*/, CPoint point)
                         && GetCellRect(idCurrentCell.row, idCurrentCell.col, CellRect) )
                     {
 						//TRACE0("Showing TitleTip\n");
-						m_TitleTip.Show(TextRect, pCell->GetTipText(),  0, CellRect,
-                                        pCell->GetFont(),  GetTitleTipTextClr(), GetTitleTipBackClr());
+						//m_TitleTip.Show(TextRect, pCell->GetTipText(),  0, CellRect,
+                        //                pCell->GetFont(),  GetTitleTipTextClr(), GetTitleTipBackClr());
+
+                        {
+                            int xoffset = 0;
+                            CRect rectTitle = TextRect;
+                            CClientDC dc(this);
+                            CString strTitle = EMPTYSTR;
+                            strTitle += _T(" ");
+                            strTitle += pCell->GetTipText();
+                            strTitle += _T(" ");
+
+                            CFont font, * pOldFont = NULL;
+                            if (pCell->GetFont())
+                            {
+                                font.CreateFontIndirect(pCell->GetFont());
+                                pOldFont = dc.SelectObject(&font);
+                            }
+                            else
+                            {
+                                // use same font as ctrl
+                                pOldFont = dc.SelectObject(GetFont());
+                            }
+
+                            CSize size = dc.GetTextExtent(strTitle);
+
+                            TEXTMETRIC tm;
+                            dc.GetTextMetrics(&tm);
+                            size.cx += tm.tmOverhang;
+
+                            CRect rectDisplay = rectTitle;
+                            rectDisplay.left += xoffset;
+                            rectDisplay.right = rectDisplay.left + size.cx + xoffset;
+                            if (rectDisplay.right > rectTitle.right - xoffset) {
+                                //m_ToolTip.SetTipTextColor(GetTitleTipTextClr());
+                               // m_ToolTip.SetTipBkColor(GetTitleTipBackClr());
+                                if (m_ToolTip.GetToolCount() == 0) {                                
+                                    m_ToolTip.AddTool(this, pCell->GetTipText(), &rectDisplay, TOOLTIP_ID);
+                                    m_ToolTip.Popup();
+                                }
+                                else {
+                                    CString txt;
+                                    m_ToolTip.GetText(txt, this, TOOLTIP_ID);
+                                    if (txt == pCell->GetTipText()) {
+                                        m_ToolTip.SetToolRect(this, TOOLTIP_ID, &rectDisplay);
+                                    }
+                                    else {
+                                        m_ToolTip.SetToolRect(this, TOOLTIP_ID, &rectDisplay);
+                                        m_ToolTip.UpdateTipText(pCell->GetTipText(), this, TOOLTIP_ID);
+                                    }
+
+                                }
+
+                                //TRACE("ToolCount %d\n", m_ToolTip.GetToolCount());
+                            }
+
+                        }
+                        
                     }
                 }
             }
@@ -5874,8 +5946,14 @@ void CGridCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
         if (IsValid(cellID))
         {
             CGridCellBase* pInsideCell = GetCell(cellID.row, cellID.col);
+            TRACE(_T("Grid Double Click\n"));
             if (pInsideCell)
                 pInsideCell->OnDblClick(pointClickedRel);
+#ifndef GRIDCONTROL_USE_TITLETIPS
+            // EFW - Bug Fix
+            m_TitleTip.Hide();  // hide any titletips
+#endif
+            
             SendMessageToParent(cellID.row, cellID.col, GVN_DBLCLK);
         }
     }
@@ -7507,5 +7585,6 @@ void CGridCtrl::CreateSortIcons()
 
 BOOL CGridCtrl::PreTranslateMessage(MSG* pMsg)
 {
+    m_ToolTip.RelayEvent(pMsg);
 	return CWnd::PreTranslateMessage(pMsg);
 }

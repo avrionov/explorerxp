@@ -147,6 +147,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CPersistMDIFrame )
 
 	ON_WM_THEMECHANGED()
 	ON_WM_WININICHANGE()
+	ON_WM_ACTIVATEAPP()
 	ON_COMMAND(ID_WINDOWS_MORE, OnWindowsMore)
 END_MESSAGE_MAP()
 
@@ -235,20 +236,22 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//	return -1;		// fail to create
 	//}
 
+	
+
 	m_wndReBar.AddBar(&m_wndToolBar, 0, 0, RBBS_GRIPPERALWAYS, _T("&Toolbar"), false) ;
 	//m_wndReBar.AddBar(&m_PatternMatchBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Pattern Bar"), false);
 	m_wndReBar.AddBar(&m_AddressBar, 0, 0, RBBS_GRIPPERALWAYS, _T("Address Bar"), false);
 	
+	m_wndToolBar.Init();
 
-
-	m_wndToolBar.Init (); 
+	
 	//m_wndReBar.AddBar(&m_wndToolBar, _T("&Toolbar"), NULL, RBBS_USECHEVRON |RBBS_GRIPPERALWAYS ) ;
 	//m_wndReBar.AddBar(&m_wndDlgBar,_T("Address Bar"));
 	
 	
 	 
 	 //m_wndReBar.GetReBarCtrl().MaximizeBand(0);
-	m_wndReBar.GetReBarCtrl().RestoreBand(0);
+	//m_wndReBar.GetReBarCtrl().RestoreBand(0);
 	
 	
 	if (!m_wndStatusBar.Create(this) || !m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT)))
@@ -773,6 +776,19 @@ LRESULT CMainFrame::OnChangeDesktop (WPARAM wParam, LPARAM lParam)
 		}
 
 		return NULL;
+}
+
+void CMainFrame::OnActivateApp(BOOL bActive, DWORD hTask)
+{
+	CFrameWnd::OnActivateApp(bActive, hTask);
+	if (bActive)
+	{
+		TRACE(_T("\nbActive = TRUE\thTask = 0x%08X\n"), hTask);
+	}
+	else
+	{
+		TRACE(_T("\nbActive = FALSE\thTask = 0x%08X\n"), hTask);
+	}
 }
 
 void CMainFrame::OnUpdateRecyclebin(CCmdUI* pCmdUI) 

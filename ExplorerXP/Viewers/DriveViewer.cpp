@@ -421,25 +421,24 @@ CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path) {
 	static CString info;
 	info.Empty ();
 
-	if (drArray.size() == 0)
+	if (drArray.size() == 0) {
 		MarkForUpdate();
-  else {
-    for (int i = 0; i < static_cast<int>(drArray.size()); i++) {
+	} else {
+		for (int i = 0; i < static_cast<int>(drArray.size()); i++) {
+		  if (drArray[i].m_nType == DRIVE_FIXED)
+			if (PathIsSameRoot(path, drArray[i].m_Path)) {
 
-      if (drArray[i].m_nType == DRIVE_FIXED)
-        if (PathIsSameRoot(path, drArray[i].m_Path)) {
+			  TCHAR buf[128];
+			  StrFormatByteSize64(drArray[i].m_FreeSpace, buf, 127);
 
-          TCHAR buf[128];
-          StrFormatByteSize64(drArray[i].m_FreeSpace, buf, 127);
+			  if (*path && path[0] > 0) {
+				info += path[0];
+				info += TEXT(": ");
+			  }
 
-          if (*path && path[0] > 0) {
-            info += path[0];
-            info += TEXT(": ");
-          }
-
-          info += buf;
-          info += " free ";
-        }
+			  info += buf;
+			  info += " free ";
+			}
     }
   }
 	
