@@ -33,7 +33,7 @@ public:
 	virtual bool Sync (const TCHAR* folder , const TCHAR *name) = 0;
 	virtual bool CanChangeTo (int iRow)=0;
 	virtual CString  GetPath (int iRow)=0;
-  virtual CString  GetPath(int iRow, bool &bFolder) = 0;
+	virtual CString  GetPath(int iRow, bool &bFolder) = 0;
 	virtual const TCHAR*  GetName (int iRow)=0;
 	virtual int GetCount () = 0;
 	virtual bool GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk) = 0;
@@ -58,6 +58,7 @@ public:
 	virtual void SaveState(const TCHAR *name);
 	virtual void GetState (CFolderState &state);
 	virtual void SetState (CFolderState &state);
+	virtual bool ExpandLastColumn() { return true;}
 // virtual 
 	
 	virtual DROPEFFECT CalcDropEffect (CSelRowArray &ar, const TCHAR * root, const TCHAR * drop_source,  DWORD dwKeyState);

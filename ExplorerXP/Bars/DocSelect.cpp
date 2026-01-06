@@ -124,6 +124,8 @@ int CDocSelector::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
   TabCtrl_SetExtendedStyle(m_ViewTabCtrl.m_hWnd,
                            TCS_EX_FLATSEPARATORS | TCS_EX_REGISTERDROP);
+
+  //TabCtrl_SetPadding(m_ViewTabCtrl.m_hWnd, 6, 2);
     
   ModifyStyle(0, WS_CLIPCHILDREN);
 

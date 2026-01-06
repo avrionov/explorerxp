@@ -196,6 +196,8 @@ void CFolderStateManager::Load ()
 	InOut in(_T("CFolderStateManager:Load"));
 	CSimpleFile file (GetStateFileName(), "rb");
 
+	m_Map.clear(); // CDriveViewer already adds values in the constructor
+
 	file.read_all();
 
 	char *line = NULL;

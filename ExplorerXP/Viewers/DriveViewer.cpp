@@ -29,7 +29,9 @@ extern CThreadPool gPool;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-static TCHAR *Headers[] = {_T("Name"), _T("Type"), _T("Total Size"), _T("Free Size"), EMPTYSTR};
+static TCHAR *Headers[] = {_T("Name"), _T("Type"), _T("Total Size"),
+                           _T("Free Size"), _T("  ")};
+static int HEADER_COLUMNS = 5;
 
 CDriveViewer gDriveViewer;
 
@@ -44,7 +46,7 @@ CDriveViewer::~CDriveViewer() {
 
 void CDriveViewer::GetDrives () {	
 	
-  CDriveArray drArray;
+	CDriveArray drArray;
 	::GetDrives (drArray);
 
 	setDrives(drArray);
@@ -69,15 +71,28 @@ void CDriveViewer::Fill (const TCHAR *root)  {
 	if (!m_pGridCtrl)
 		return;
 
+	m_pGridCtrl->SetRedraw(FALSE);
+	TRACE("Drive Viewer %d, %d, %d, %d, %d", m_State.m_Widths[0], m_State.m_Widths[1], m_State.m_Widths[2], m_State.m_Widths[3], m_State.m_Widths[4]);
+
 	if (!m_bGetState) {
-		gFolderStateMan.LoadState (CONST_MYCOMPUTER, m_State);
+        loadState();
 		m_bGetState = true;
+	}
+	else {
+		CFolderState state;
+		GetState(state);
+		gFolderStateMan.SaveState(CONST_MYCOMPUTER, state);
+		m_State = state;
 	}
 	
 	CGuard guard(m_lock);
 	Sort ();
 	m_pGridCtrl->SetRowCount(static_cast<int>(m_Array.size ()) +1);
 	SetupGrid ();	
+
+	TRACE("Drive Viewer %d, %d, %d, %d, %d", m_State.m_Widths[0], m_State.m_Widths[1], m_State.m_Widths[2], m_State.m_Widths[3], m_State.m_Widths[4]);
+
+	m_pGridCtrl->SetRedraw(TRUE);
 }
 
 const TCHAR * CDriveViewer::GetTitle ()  {
@@ -256,25 +271,98 @@ bool CDriveViewer::Sync (const TCHAR* folder , const TCHAR *name) {
 	return false;
 }
 
-void GetDrives (CDriveArray &array) {
+std::wstring formatDriveName(const std::wstring driveString) {
+  // Find the opening parenthesis
+  size_t openParenPos = driveString.rfind('(');
+  // Find the closing parenthesis
+  size_t closeParenPos = driveString.rfind(')');
+
+  // If both parentheses are found and in the correct order
+  if (openParenPos != std::wstring::npos && closeParenPos != std::wstring::npos &&
+      openParenPos < closeParenPos) {
+    // Extract the drive letter part (e.g., "C:")
+    auto driveLetterPart = driveString.substr(
+        openParenPos + 1, closeParenPos - (openParenPos + 1));
+
+    // Extract the OS name part (e.g., "OS ")
+    auto osNamePart = driveString.substr(0, openParenPos);
+
+    // Remove any trailing space from the OS name if present
+    if (!osNamePart.empty() && osNamePart.back() == ' ') {
+      osNamePart.pop_back();
+    }
+
+    // Concatenate in the desired format
+    return driveLetterPart + L" " + osNamePart;
+  } else {
+    // Return the original string if the format is not as expected
+    return driveString;
+  }
+}
+
+void GetDrives(CDriveArray& array) {
+
+	array.clear();
+
+	char driveLetter = 'A';
+
+	while (driveLetter <= 'Z') {
+		CString path = CString(driveLetter) + ":\\";
+		
+		SHFILEINFO     sfi;
+		UINT nType = GetDriveType(path);
+		//	if( DRIVE_REMOVABLE < nType && nType <= DRIVE_RAMDISK )
+		if (nType != DRIVE_UNKNOWN && nType != DRIVE_NO_ROOT_DIR)
+			if (SHGetFileInfo(path, 0, &sfi, sizeof(sfi),  SHGFI_DISPLAYNAME | SHGFI_TYPENAME | SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_LINKOVERLAY))
+			{
+				CDriveInfo info;
+                info.m_Name = formatDriveName (sfi.szDisplayName).c_str();
+				info.m_Path = path;
+				info.m_Type = sfi.szTypeName;
+				info.m_nImage = sfi.iIcon;
+				info.m_nType = nType;
+
+				DWORD SectorsPerCluster;     // sectors per cluster
+				DWORD BytesPerSector;        // bytes per sector
+				DWORD NumberOfFreeClusters;  // free clusters
+				DWORD TotalNumberOfClusters; // total clusters
+				//	TRACE (L"%s %s\n", sfi.szDisplayName, path);		
+				if (nType != DRIVE_REMOVABLE)
+					if (GetDiskFreeSpace(path, &SectorsPerCluster, &BytesPerSector, &NumberOfFreeClusters, &TotalNumberOfClusters))
+					{
+						DWORD BytesPerCluster = BytesPerSector * SectorsPerCluster;
+						info.m_FreeSpace = UInt32x32To64(NumberOfFreeClusters, BytesPerCluster);
+						info.m_TotalSize = UInt32x32To64(TotalNumberOfClusters, BytesPerCluster);
+					}
+				array.push_back(info);
+			}
+		driveLetter++;
+	}
+}
+
+void _GetDrives (CDriveArray &array) {
 
 	array.clear ();
 
+	
 	IShellFolder   *psfDesktop;
 
-	SHGetDesktopFolder(&psfDesktop);
+	HRESULT errDesktop = SHGetDesktopFolder(&psfDesktop);
 	if(psfDesktop == NULL)
 		return;
 	
+	
+
 	LPITEMIDLIST   pidlMyComputer;
 
-	SHGetSpecialFolderLocation(NULL, CSIDL_DRIVES, &pidlMyComputer);
+	HRESULT errDrives = SHGetSpecialFolderLocation(NULL, CSIDL_DRIVES, &pidlMyComputer);
 
 	if(pidlMyComputer == NULL)
 	{
 		psfDesktop->Release();
 		return;
 	}
+	
 	
 	IShellFolder   *psfMyComputer;
 
@@ -288,38 +376,38 @@ void GetDrives (CDriveArray &array) {
 				TCHAR  path[MAX_PATH];
 
 				while(SUCCEEDED(pEnum->Next(1, &pidl, &dwFetched)) && dwFetched) {
-					SHFILEINFO     sfi;	
-					
-					//LPITEMIDLIST pidl_full = Pidl_Concatenate (pidlMyComputer, pidl);
-					LPITEMIDLIST pidl_full = ILCombine (pidlMyComputer, pidl);					
-					SHGetPathFromIDList (pidl_full, path);
+				//	SHFILEINFO     sfi;	
+				//	
+				//	//LPITEMIDLIST pidl_full = Pidl_Concatenate (pidlMyComputer, pidl);
+				//	LPITEMIDLIST pidl_full = ILCombine (pidlMyComputer, pidl);					
+				//	SHGetPathFromIDList (pidl_full, path);
 
-					UINT nType = GetDriveType( path);
-				//	if( DRIVE_REMOVABLE < nType && nType <= DRIVE_RAMDISK )
-					if( nType != DRIVE_UNKNOWN && nType != DRIVE_NO_ROOT_DIR )
-					if(SHGetFileInfo((LPCTSTR)pidl_full, 0, &sfi, sizeof(sfi), SHGFI_PIDL | SHGFI_DISPLAYNAME | SHGFI_TYPENAME | SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_LINKOVERLAY))
-					{
-						CDriveInfo info;
-						info.m_Name = sfi.szDisplayName;
-						info.m_Path = path;
-						info.m_Type = sfi.szTypeName;
-						info.m_nImage = sfi.iIcon;
-						info.m_nType = nType;
-						
-						DWORD SectorsPerCluster;     // sectors per cluster
-						DWORD BytesPerSector;        // bytes per sector
-						DWORD NumberOfFreeClusters;  // free clusters
-						DWORD TotalNumberOfClusters; // total clusters
-					//	TRACE (L"%s %s\n", sfi.szDisplayName, path);		
-						if (nType != DRIVE_REMOVABLE )
-						if (GetDiskFreeSpace (path, &SectorsPerCluster, &BytesPerSector, &NumberOfFreeClusters, &TotalNumberOfClusters))
-							{	
-									DWORD BytesPerCluster = BytesPerSector * SectorsPerCluster;								
-									info.m_FreeSpace = UInt32x32To64(NumberOfFreeClusters, BytesPerCluster);
-									info.m_TotalSize= UInt32x32To64(TotalNumberOfClusters, BytesPerCluster);
-							}
-						array.push_back (info);
-					}
+				//	UINT nType = GetDriveType( path);
+				////	if( DRIVE_REMOVABLE < nType && nType <= DRIVE_RAMDISK )
+				//	if( nType != DRIVE_UNKNOWN && nType != DRIVE_NO_ROOT_DIR )
+				//	if(SHGetFileInfo((LPCTSTR)pidl_full, 0, &sfi, sizeof(sfi), SHGFI_PIDL | SHGFI_DISPLAYNAME | SHGFI_TYPENAME | SHGFI_SYSICONINDEX | SHGFI_SMALLICON | SHGFI_LINKOVERLAY))
+				//	{
+				//		CDriveInfo info;
+				//		info.m_Name = sfi.szDisplayName;
+				//		info.m_Path = path;
+				//		info.m_Type = sfi.szTypeName;
+				//		info.m_nImage = sfi.iIcon;
+				//		info.m_nType = nType;
+				//		
+				//		DWORD SectorsPerCluster;     // sectors per cluster
+				//		DWORD BytesPerSector;        // bytes per sector
+				//		DWORD NumberOfFreeClusters;  // free clusters
+				//		DWORD TotalNumberOfClusters; // total clusters
+				//	//	TRACE (L"%s %s\n", sfi.szDisplayName, path);		
+				//		if (nType != DRIVE_REMOVABLE )
+				//		if (GetDiskFreeSpace (path, &SectorsPerCluster, &BytesPerSector, &NumberOfFreeClusters, &TotalNumberOfClusters))
+				//			{	
+				//					DWORD BytesPerCluster = BytesPerSector * SectorsPerCluster;								
+				//					info.m_FreeSpace = UInt32x32To64(NumberOfFreeClusters, BytesPerCluster);
+				//					info.m_TotalSize= UInt32x32To64(TotalNumberOfClusters, BytesPerCluster);
+				//			}
+				//		array.push_back (info);
+				//	}
 				}
 				pEnum->Release ();
 			}
@@ -368,8 +456,8 @@ const TCHAR* CDriveInfo::as_text (int i)
 
 bool CDriveViewer::GetObjectSize (int iRow, ULONGLONG &size, ULONGLONG &sizeOnDisk) {
 
-  CGuard guard(m_lock);
-  size = m_Array[iRow].m_TotalSize;
+	CGuard guard(m_lock);
+	size = m_Array[iRow].m_TotalSize;
 	sizeOnDisk = 0;	
 	return true;
 }
@@ -391,7 +479,7 @@ CString CDriveViewer::GetText (int row, int col) {
 void CDriveViewer::FillHeader() {	
 
 	m_State.m_Visible = 0;
-	for (int i = 0; i < 4; i++) {
+   for (int i = 0; i < HEADER_COLUMNS; i++) {
 		m_Headers.push_back (Headers[i]);
 		m_State.m_Visible |= 1 << i;
 	}
@@ -402,8 +490,8 @@ void CDriveViewer::FillHeader() {
 	m_State.m_Widths[3] = 140;
 	m_State.m_Widths[4] = 120;	
 
-	if (gFolderStateMan.IsIn (CONST_MYCOMPUTER))
-		gFolderStateMan.LoadState (CONST_MYCOMPUTER, m_State);
+	if (gFolderStateMan.IsIn(CONST_MYCOMPUTER))
+        loadState();
 	else
 		gFolderStateMan.SaveState (CONST_MYCOMPUTER, m_State);		
 }
@@ -450,4 +538,15 @@ CString & CDriveViewer::GetDriveInfoStr(const TCHAR *path) {
 int CDriveViewer::GetCount () { 
 	CGuard guard(m_lock);
 	return static_cast<int>(m_Array.size ());
+}
+
+
+void CDriveViewer::loadState() {
+  gFolderStateMan.LoadState(CONST_MYCOMPUTER, m_State);
+  
+  // make the name column always visibile
+  m_State.m_Visible |= 1;
+
+  // make the last column always visible
+  m_State.m_Visible |= 1 << (HEADER_COLUMNS -1);
 }

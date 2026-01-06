@@ -49,13 +49,14 @@ public:
 
 	virtual bool CanDropToView () { return false;};
 	virtual bool CanDropToSubs () { return true;};
+	virtual bool ExpandLastColumn() { return false; }
 
 	void MarkForUpdate () { m_bNeedUpdate = true;}
 	void CheckUpdate ();
 	
 	bool CanChangeTo (int iRow) { return true;};
 	CString  GetPath (int iRow) { return m_Array[iRow].m_Path;};
-  CString  GetPath(int iRow, bool &bFolder) { bFolder = false;  return m_Array[iRow].m_Path; }; // ToDo check this
+    CString  GetPath(int iRow, bool &bFolder) { bFolder = false;  return m_Array[iRow].m_Path; }; // ToDo check this
 
 	const TCHAR*  GetName (int iRow) { return m_Array[iRow].m_Path;};
 
@@ -63,6 +64,8 @@ public:
 	void setDrives (const CDriveArray& drives_array);
 
 	void OnClose ();
+
+	void loadState();
 
 	CDriveArray m_Array;
 	void FillHeader();

@@ -253,7 +253,10 @@ void CViewer::SetupGrid ()
 		else
 			m_pGridCtrl->SetColumnWidth (i, 0);
 	}
-	m_pGridCtrl->ExpandLastColumn ();
+
+	if (ExpandLastColumn())
+		m_pGridCtrl->ExpandLastColumn ();
+
 	m_pGridCtrl->ClearSelection ();
 	m_pGridCtrl->Invalidate ();
 }
@@ -274,6 +277,8 @@ void CViewer::GetState (CFolderState &state)
 {
 	if (!m_pGridCtrl)
 		return;
+
+	if (m_pGridCtrl->GetColumnCount() == 0) return;
 
 	state.m_Visible = 0;
 	

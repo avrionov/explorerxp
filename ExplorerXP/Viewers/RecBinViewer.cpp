@@ -51,7 +51,7 @@ CRecBinViewer::~CRecBinViewer() {
 
 //-----------------------------------------------------------------------------
 void CRecBinViewer::Fill (const TCHAR *root)  {	
-  UpdateList ();
+ UpdateList ();
 	if (m_pGridCtrl) {		
 		m_pGridCtrl->SetRowCount(static_cast<int>(m_List.size ()) +1);
 		SetupGrid ();
@@ -214,16 +214,16 @@ void CRecBinViewer::InitInterfaces (void) {
 //-----------------------------------------------------------------------------
 void CRecBinViewer::UpdateList (void) {	
 
-  RemovePIDL ();
+	RemovePIDL ();
 
-  m_List.clear ();
+	m_List.clear ();
 
 	if (NULL != m_pFolder2)	
 		FillFolder2 ();	
-  else {
-    if (NULL != m_pRecycleBin)
-      FillFolder();
-  }		
+	else {
+		if (NULL != m_pRecycleBin)
+			FillFolder();
+	}	
 }
 
 //-----------------------------------------------------------------------------

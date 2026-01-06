@@ -2198,7 +2198,7 @@ void CExplorerXPView::OnCopyclipboard()
 
 	if (ar.size () >= 1)	
 	{
-		for (size_t i = ar.size() - 1; i >= 0; i--)
+		for (int  i = ar.size() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < m_pViewer->GetColumnCount (); j++)
 			{
@@ -2449,7 +2449,7 @@ void CExplorerXPView::OnEditCopyfilenametoclipboard()
 
 	if (ar.size () >= 1)	
 	{
-		for (size_t i = ar.size() - 1; i >= 0; i--)
+		for (int i = ar.size() - 1; i >= 0; i--)
 		{
 
 			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
@@ -2495,7 +2495,7 @@ void CExplorerXPView::OnEditCopyfullpathnamesastext()
 
 	if (ar.size () >= 1)	
 	{
-		for (size_t i = ar.size() - 1; i >= 0; i--)
+		for (int i = ar.size() - 1; i >= 0; i--)
 		{
 			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
 			tmp.TrimLeft ();
