@@ -685,6 +685,8 @@ inline bool IsNonFilterableEvent( CDirChangeNotification::eFunctionToDispatch eE
 	else
 		return false;
 }
+
+
 DWORD GetPathOffsetBasedOnFilterFlags(CDirChangeNotification * pNot, DWORD dwFilterFlags)
 {
 	
@@ -697,7 +699,7 @@ DWORD GetPathOffsetBasedOnFilterFlags(CDirChangeNotification * pNot, DWORD dwFil
 		//set the offset to support FILTERS_CHECK_FILE_NAME_ONLY
 		TCHAR * pSlash  = _tcsrchr(pNot->m_szFileName1, SLASH   );
 		if( pSlash )
-			dwFileNameOffset = (++pSlash - pNot->m_szFileName1);
+             dwFileNameOffset = static_cast<DWORD>(++pSlash - pNot->m_szFileName1);
 
 		//
 		//	Because file name change notifications take place in the same directory,

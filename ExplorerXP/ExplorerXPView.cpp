@@ -2223,48 +2223,40 @@ void CExplorerXPView::OnUpdateCommandsClean(CCmdUI* pCmdUI)
 }
 
 
+void CExplorerXPView::OnCopyclipboard() {
+  CSelRowArray ar;
+  GetSelection(ar);
+  CString cs;
 
-void CExplorerXPView::OnCopyclipboard() 
-{	
-	CSelRowArray ar;
-	GetSelection (ar);
-    CString cs;
+  if (!ar.empty()) {
+    for (size_t i = ar.size() - 1;; i--) {
+      for (int j = 0; j < m_pViewer->GetColumnCount(); j++) {
+        CString tmp = m_pViewer->GetText(ar[i].m_nRow - 1, j);
+        tmp.TrimLeft();
+        tmp.TrimRight();
+        cs += tmp;
+        if (j != (m_pViewer->GetColumnCount() - 1)) cs += "\t";
+      }
+      cs += "\r\n";
 
-	if (ar.size () >= 1)	
-	{
-		for (int  i = ar.size() - 1; i >= 0; i--)
-		{
-			for (int j = 0; j < m_pViewer->GetColumnCount (); j++)
-			{
-				CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  j);
-				tmp.TrimLeft ();
-				tmp.TrimRight ();
-				cs += tmp;
-				if (j!= (m_pViewer->GetColumnCount () -1))
-					cs += "\t";
-			}
-			cs +="\r\n";
-		}	
-    } 
-    else
-    {
-        for (int i = 0; i < m_pViewer->GetCount (); i++)
-        {
-		    for (int j = 0; j < m_pViewer->GetColumnCount (); j++)
-			    {
-				    CString tmp = m_pViewer->GetText (i,  j);
-				    tmp.TrimLeft ();
-				    tmp.TrimRight ();
-				    cs += tmp;
-				    if (j!= (m_pViewer->GetColumnCount () -1))
-					    cs += "\t";
-			    }
-		    cs +="\r\n";		   	
-        }
+      if (i == 0) break;  // Prevent underflow loop continuation with size_t
     }
-    
-	CopyTextToClip(cs);
+  } else {
+    for (int i = 0; i < m_pViewer->GetCount(); i++) {
+      for (int j = 0; j < m_pViewer->GetColumnCount(); j++) {
+        CString tmp = m_pViewer->GetText(i, j);
+        tmp.TrimLeft();
+        tmp.TrimRight();
+        cs += tmp;
+        if (j != (m_pViewer->GetColumnCount() - 1)) cs += "\t";
+      }
+      cs += "\r\n";
+    }
+  }
+
+  CopyTextToClip(cs);
 }
+
 
 void CExplorerXPView::OnWindowNext() 
 {
@@ -2475,83 +2467,72 @@ void CExplorerXPView::OnEditCopyfolderpathtoclipboard()
 	CopyTextToClip(cs);
 }
 
-void CExplorerXPView::OnEditCopyfilenametoclipboard()
-{
-	CSelRowArray ar;
-	GetSelection (ar);
-	CString cs;
+void CExplorerXPView::OnEditCopyfilenametoclipboard() {
+  CSelRowArray ar;
+  GetSelection(ar);
+  CString cs;
 
-	if (ar.size () >= 1)	
-	{
-		for (int i = ar.size() - 1; i >= 0; i--)
-		{
+  if (!ar.empty()) {
+    for (size_t i = ar.size() - 1;; i--) {
+      CString tmp = m_pViewer->GetText(ar[i].m_nRow - 1, 0);
+      tmp.TrimLeft();
+      tmp.TrimRight();
+      cs += tmp;
+      cs += "\r\n";
 
-			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
-			tmp.TrimLeft ();
-			tmp.TrimRight ();
-			cs += tmp;			
-			cs +="\r\n";
-		}	
-	} 
-	else
-	{
-		for (int i = 0; i < m_pViewer->GetCount (); i++)
-		{
-			CString tmp = m_pViewer->GetText (i,  0);
-			tmp.TrimLeft ();
-			tmp.TrimRight ();
-			cs += tmp;			
-			cs +="\r\n";		   	
-		}
-	}
-	CopyTextToClip(cs);
+      if (i == 0) break;  // Prevent underflow with unsigned size_t loop counter
+    }
+  } else {
+    for (int i = 0; i < m_pViewer->GetCount(); i++) {
+      CString tmp = m_pViewer->GetText(i, 0);
+      tmp.TrimLeft();
+      tmp.TrimRight();
+      cs += tmp;
+      cs += "\r\n";
+    }
+  }
+  CopyTextToClip(cs);
 }
+
 
 void CExplorerXPView::OnUpdateEditCopyfolderpathtoclipboard(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable (!IsSpecialViewer ());
 }
 
+void CExplorerXPView::OnEditCopyfullpathnamesastext() {
+  CSelRowArray ar;
+  GetSelection(ar);
+  CString cs;
 
-void CExplorerXPView::OnEditCopyfullpathnamesastext()
-{
-	CSelRowArray ar;
-	GetSelection (ar);
-	CString cs;
+  CString path;
+  if (!IsSpecialViewer()) {
+    path = m_pViewer->GetTitle();
+    SureBackSlash(path);
+  }
 
-	CString path;
-	if (!IsSpecialViewer())
-	{
-		path = m_pViewer->GetTitle();
-		SureBackSlash(path);
-	}
-	
+  if (!ar.empty()) {
+    for (size_t i = ar.size() - 1;; i--) {
+      CString tmp = m_pViewer->GetText(ar[i].m_nRow - 1, 0);
+      tmp.TrimLeft();
+      tmp.TrimRight();
+      cs += path;
+      cs += tmp;
+      cs += "\r\n";
 
-	if (ar.size () >= 1)	
-	{
-		for (int i = ar.size() - 1; i >= 0; i--)
-		{
-			CString tmp = m_pViewer->GetText (ar[i].m_nRow - 1,  0);
-			tmp.TrimLeft ();
-			tmp.TrimRight ();
-			cs += path;
-			cs += tmp;			
-			cs +="\r\n";
-		}	
-	} 
-	else
-	{
-		for (int i = 0; i < m_pViewer->GetCount (); i++)
-		{
-			CString tmp = m_pViewer->GetText (i,  0);
-			tmp.TrimLeft ();
-			tmp.TrimRight ();
-			cs += path;
-			cs += tmp;			
-			cs +="\r\n";		   	
-		}
-	}
-	CopyTextToClip(cs);
+      if (i == 0) break;  // Prevent underflow with unsigned size_t loop counter
+    }
+  } else {
+    for (int i = 0; i < m_pViewer->GetCount(); i++) {
+      CString tmp = m_pViewer->GetText(i, 0);
+      tmp.TrimLeft();
+      tmp.TrimRight();
+      cs += path;
+      cs += tmp;
+      cs += "\r\n";
+    }
+  }
+  CopyTextToClip(cs);
 }
 
 void CExplorerXPView::OnEditCopytoparent()

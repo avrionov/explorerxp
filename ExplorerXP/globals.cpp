@@ -550,6 +550,11 @@ UINT __cdecl FileOperationInternal(LPVOID info) {
   SHFILEOPSTRUCT *fo = (SHFILEOPSTRUCT *)info;
   auto ret = SHFileOperation(fo);
 
+  if (ret != 0) {
+    // Optional: Trace or handle the shell file operation error code
+    TRACE(_T("SHFileOperation failed with code: %d\n"), ret);
+  }
+
   delete[](TCHAR *)fo->pFrom;
 
   if (fo->pTo)

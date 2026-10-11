@@ -1066,6 +1066,8 @@
     <ClInclude Include="BrowseForFolder.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClipboardFiles.h" />
+    <ClInclude Include="DirChanges\FileNotifyInformation.h" />
+    <ClInclude Include="DirChanges\PrivilegeEnabler.h" />
     <ClInclude Include="PatternMatchBar.h" />
     <ClInclude Include="debug_new.h" />
     <ClInclude Include="Dialogs\AddEditPatternDlg.h" />

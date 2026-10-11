@@ -742,6 +742,12 @@
     <ClInclude Include="HoverButton.h">
       <Filter>Source Files\Bars</Filter>
     </ClInclude>
+    <ClInclude Include="DirChanges\PrivilegeEnabler.h">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClInclude>
+    <ClInclude Include="DirChanges\FileNotifyInformation.h">
+      <Filter>Source Files\DirChanges</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ExplorerXP.rc">

@@ -1475,7 +1475,7 @@ void CMainFrame::UpdateWindowMenu()
 void CMainFrame::ActivateFrameFromMenu(int nItem)
 {
 	CWnd* pWnd = CWnd::FromHandle(m_hWndMDIClient)->GetWindow(GW_CHILD);
-	int i = ID_WINDOWS_FIRST;
+	//int i = ID_WINDOWS_FIRST;
 	BOOL bMaximized;
 	std::vector<CString> windowsTitle = getSortedWindowTitles(pWnd);
 

@@ -500,7 +500,7 @@ LRESULT CRecBinViewer::OnShellNotify (WPARAM wParam, LPARAM lParam) {
 	return lReturn;
 }
 
-void CRecBinViewer::GetPathFromODList(DWORD item, TCHAR  szText[MAX_PATH])
+void CRecBinViewer::GetPathFromODList(LPARAM item, TCHAR  szText[MAX_PATH])
 {
 	SHGetPathFromIDList((struct _ITEMIDLIST*)item, szText);
 }

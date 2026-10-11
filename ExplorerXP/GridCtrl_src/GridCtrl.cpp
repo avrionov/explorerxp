@@ -5096,7 +5096,7 @@ void CGridCtrl::ExpandLastColumn()
     }
 	else
 	{
-		if (abs (nDifference) < m_arColWidths[ nLastColumn ] )
+      if (static_cast<unsigned int>(abs(nDifference)) < m_arColWidths[nLastColumn])
 		{
 			m_arColWidths[ nLastColumn ] += nDifference;
 			Refresh();

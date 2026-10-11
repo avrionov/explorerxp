@@ -357,67 +357,58 @@ CSubclassWndMap& CSubclassWndMap::GetHookMap()
 /////////////////
 // Add hook to map; i.e., associate hook with window
 //
-void CSubclassWndMap::Add(HWND hwnd, CSubclassWnd* pSubclassWnd)
-{
-	ASSERT(hwnd && ::IsWindow(hwnd));
+void CSubclassWndMap::Add(HWND hwnd, CSubclassWnd* pSubclassWnd) {
+  ASSERT(hwnd && ::IsWindow(hwnd));
 
-	// Add to front of list
-	pSubclassWnd->m_pNext = Lookup(hwnd);
-	SetAt(hwnd, pSubclassWnd);
-	
-	if (pSubclassWnd->m_pNext == NULL) 
-	{
-		// If this is the first hook added, subclass the window
-		//WNDPROC wndProc = (WNDPROC)GetWindowLong(hwnd, GWL_WNDPROC);
+  // Add to front of list
+  pSubclassWnd->m_pNext = Lookup(hwnd);
+  SetAt(hwnd, pSubclassWnd);
 
-		pSubclassWnd->m_pOldWndProc = (WNDPROC)SetWindowLong(hwnd, GWLP_WNDPROC, (LONG)CSubclassWnd::HookWndProc);
-	} 
-	else 
-	{
-		// just copy wndproc from next hook
-		pSubclassWnd->m_pOldWndProc = pSubclassWnd->m_pNext->m_pOldWndProc;
-	}
-	ASSERT(pSubclassWnd->m_pOldWndProc);
+  if (pSubclassWnd->m_pNext == NULL) {
+    // If this is the first hook added, subclass the window using 64-bit safe
+    // APIs
+    pSubclassWnd->m_pOldWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(
+        hwnd, GWLP_WNDPROC,
+        reinterpret_cast<LONG_PTR>(CSubclassWnd::HookWndProc)));
+  } else {
+    // just copy wndproc from next hook
+    pSubclassWnd->m_pOldWndProc = pSubclassWnd->m_pNext->m_pOldWndProc;
+  }
+  ASSERT(pSubclassWnd->m_pOldWndProc);
 }
 
 //////////////////
 // Remove hook from map
 //
-void CSubclassWndMap::Remove(CSubclassWnd* pUnHook)
-{
-	HWND hwnd = pUnHook->m_hWndHooked;
-	ASSERT(hwnd && ::IsWindow(hwnd));
+void CSubclassWndMap::Remove(CSubclassWnd* pUnHook) {
+  HWND hwnd = pUnHook->m_hWndHooked;
+  ASSERT(hwnd && ::IsWindow(hwnd));
 
-	CSubclassWnd* pHook = Lookup(hwnd);
-//	ASSERT(pHook);
+  CSubclassWnd* pHook = Lookup(hwnd);
+  //	ASSERT(pHook);
 
-	if (!pHook)
-		return;
+  if (!pHook) return;
 
-	if (pHook == pUnHook) 
-	{
-		// hook to remove is the one in the hash table: replace w/next
-		if (pHook->m_pNext)
-			SetAt(hwnd, pHook->m_pNext);
-		else 
-		{
-			// This is the last hook for this window: restore wnd proc
-			RemoveKey(hwnd);
-			SetWindowLong(hwnd, GWLP_WNDPROC, (LONG)pHook->m_pOldWndProc);
-		}
-	} 
-	else 
-	{
-		// Hook to remove is in the middle: just remove from linked list
-		while (pHook->m_pNext && pHook->m_pNext != pUnHook)
-			pHook = pHook->m_pNext;
+  if (pHook == pUnHook) {
+    // hook to remove is the one in the hash table: replace w/next
+    if (pHook->m_pNext)
+      SetAt(hwnd, pHook->m_pNext);
+    else {
+      // This is the last hook for this window: restore wnd proc safely for
+      // 64-bit
+      RemoveKey(hwnd);
+      SetWindowLongPtr(hwnd, GWLP_WNDPROC,
+                       reinterpret_cast<LONG_PTR>(pHook->m_pOldWndProc));
+    }
+  } else {
+    // Hook to remove is in the middle: just remove from linked list
+    while (pHook->m_pNext && pHook->m_pNext != pUnHook) pHook = pHook->m_pNext;
 
-		if (pHook)
-		{
-			ASSERT(pHook->m_pNext == pUnHook);
-			pHook->m_pNext = pUnHook->m_pNext;
-		}
-	}
+    if (pHook) {
+      ASSERT(pHook->m_pNext == pUnHook);
+      pHook->m_pNext = pUnHook->m_pNext;
+    }
+  }
 }
 
 //////////////////

@@ -75,6 +75,14 @@ int CFileShellAttributes::GetFileIcon(const TCHAR *file_name) {
     return 0;
   }
 
+  // FIX: Check if the file/path actually exists before calling SHGetFileInfo
+  // GetFileAttributes returns INVALID_FILE_ATTRIBUTES if the file doesn't
+  // exist.
+  if (GetFileAttributes(file_name) == INVALID_FILE_ATTRIBUTES) {
+    // Return a default icon index for non-existent files or handle gracefully
+    return 0;
+  }
+
   SHFILEINFO sfi;
 
   SHGetFileInfo(file_name, 0, &sfi, sizeof(SHFILEINFO),

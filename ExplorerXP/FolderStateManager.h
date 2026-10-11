@@ -26,8 +26,7 @@ public:
 	DWORD   m_Widths[MAX_FOLDERCOLONMS];	
 	DWORD   m_Visible;
 	bool	m_bAscending;
-	int     m_nSortColumn;
-	int		m_CalcSize;
+	int     m_nSortColumn;	
 
 	bool operator != (const CFolderState &state);
 	void LimitedEq (const CFolderState &state);

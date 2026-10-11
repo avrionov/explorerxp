@@ -208,8 +208,8 @@ void CSizingControlBarCF::NcPaintGripper(CDC* pDC, CRect rcClient)
 
     // draw the caption text - first select a font
     CFont font;
-    int ppi = pDC->GetDeviceCaps(LOGPIXELSX);
-    int pointsize = MulDiv(85, 96, ppi); // 8.5 points at 96 ppi
+    //int ppi = pDC->GetDeviceCaps(LOGPIXELSX);
+    //int pointsize = MulDiv(85, 96, ppi); // 8.5 points at 96 ppi
 
     //LOGFONT lf;
     //BOOL bFont = font.CreatePointFont(pointsize, m_sFontFace);

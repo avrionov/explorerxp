@@ -264,7 +264,10 @@ void CFolderStateManager::Load ()
 			if (line && len > 11)
 				if (line[0] == 'A')
 				{
-					sscanf(line + 11, "%lX", &state.m_bAscending);
+					unsigned long tempVal = 0;
+                    if (sscanf(line + 11, "%lX", &tempVal) == 1) {
+                    state.m_bAscending = (tempVal != 0);
+                    }
 				}
 
 			if (!folder.IsEmpty ())
