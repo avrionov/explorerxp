@@ -1572,6 +1572,39 @@ LPARAM CExplorerXPView::OnRecBinUpdate (WPARAM wp, LPARAM lp)
 	return 0;
 }
 
+#include <windows.h>
+
+#include <filesystem>
+#include <iostream>
+
+bool safe_rename_with_case_change(const std::filesystem::path &src,
+                                  const std::filesystem::path &dst) {
+  namespace fs = std::filesystem;
+
+  // 1. Ensure source file exists
+  if (!fs::exists(src)) {
+    return false;
+  }
+
+  // 2. Handle target existence checks
+  if (fs::exists(dst)) {
+    // If dst exists AND points to the exact same file on disk,
+    // it's a case-only rename on the same file -> ALLOW.
+    // If dst points to a different file, reject to prevent overwriting -> DENY.
+    if (!fs::equivalent(src, dst)) {
+      return false;  // Target is an existing, different file
+    }
+  }
+
+  // 3. Perform single-operation rename using native Windows API
+  // MOVEFILE_REPLACE_EXISTING allows updating the file's own directory entry
+  // for case changes
+  BOOL success =
+      MoveFileExW(src.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING);
+
+  return success != 0;
+}
+
 bool Rename(const CString& src, const CString& dst, FILEOP_FLAGS fFlags)
 {
 	// int size = 0;
@@ -1583,8 +1616,9 @@ bool Rename(const CString& src, const CString& dst, FILEOP_FLAGS fFlags)
 	std::filesystem::path src1 = src.GetString();
 	std::filesystem::path dst1 = dst.GetString();
 	try {
-		if (std::filesystem::exists(dst1) == false) 
-			std::filesystem::rename(src1, dst1);
+	//	if (std::filesystem::exists(dst1) == false) 
+	//		std::filesystem::rename(src1, dst1);
+          safe_rename_with_case_change(src1, dst1);
 	}
 	catch (std::filesystem::filesystem_error& e) {
 		auto errorCode = e.code();		

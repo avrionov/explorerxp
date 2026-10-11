@@ -37,6 +37,9 @@
 #include <vector>
 #include <algorithm>
 
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
+
 extern CDirSize dirs;
 extern CExplorerXPApp theApp;
 extern CShortcutManager gShortcutManager;
@@ -203,6 +206,10 @@ BOOL CMainFrame::VerifyBarState(LPCTSTR lpszProfileName)
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
+
+	BOOL bUseDarkMode = TRUE;
+	//DwmSetWindowAttribute(m_hWnd, 20, &bUseDarkMode, sizeof(bUseDarkMode));
+
 	if (CPersistMDIFrame ::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	
