@@ -16,7 +16,6 @@
 #include "MainFrm.h"
 #include "globals.h"
 #include "ClipboardFiles.h"
-#include "globals.h"
 #include "dirsize.h"
 #include "ExplorerXPDoc.h"
 #include "ExplorerXPView.h"
@@ -161,8 +160,7 @@ END_MESSAGE_MAP()
 
 CMainFrame::CMainFrame()
 :m_bAcc (true),
-m_bEmptyRecycle (true)
-{
+m_bEmptyRecycle (true), m_ShellNotifyHandle(NULL), m_bCallingSetClipboardViewer(0), m_hNextClipboardViewer(NULL) {
 	// TODO: add member initialization code here
 	
 }
@@ -427,10 +425,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
-{
-	cs.lpszClass = theApp.m_SingleInstance.GetClassName();
-	return CPersistMDIFrame::PreCreateWindow(cs);
+BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs) {
+  // Cache the class name statically so the string buffer remains valid
+  // permanently
+  static CString className = theApp.m_SingleInstance.GetClassName();
+  cs.lpszClass = className;
+
+  return CPersistMDIFrame::PreCreateWindow(cs);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -674,21 +675,24 @@ void CMainFrame::SetEmptyRecycle ()
 	}
 }
 
-void SpecialFolderProperties (int iFolder)
-{
-	LPITEMIDLIST   pidlMFolder;
+void SpecialFolderProperties(int iFolder) {
+  LPITEMIDLIST pidlMFolder = nullptr;
 
-	SHGetSpecialFolderLocation(NULL, iFolder, &pidlMFolder);
-
-	SHELLEXECUTEINFO sei;
-
-    ZeroMemory(&sei,sizeof(sei));
-    sei.cbSize = sizeof(sei);    
-	sei.lpIDList = pidlMFolder;
+  // Check the HRESULT return value and ensure the PIDL is valid
+  if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, iFolder, &pidlMFolder)) &&
+      pidlMFolder != nullptr) {
+    SHELLEXECUTEINFO sei;
+    ZeroMemory(&sei, sizeof(sei));
+    sei.cbSize = sizeof(sei);
+    sei.lpIDList = pidlMFolder;
     sei.lpVerb = _T("properties");
-    sei.fMask  = SEE_MASK_INVOKEIDLIST;
+    sei.fMask = SEE_MASK_INVOKEIDLIST;
 
-    ShellExecuteEx(&sei); 	
+    ShellExecuteEx(&sei);
+
+    // Free the shell-allocated PIDL to prevent memory leaks
+    ILFree(pidlMFolder);
+  }
 }
 
 void CMainFrame::OnMycomputerProperties() 
@@ -909,7 +913,7 @@ void CMainFrame::OnMydocuments()
 {
 	TCHAR path[2094];
 
-	SHGetSpecialFolderPath (m_hWnd, path, CSIDL_PERSONAL, FALSE);
+	SHGetSpecialFolderPath (NULL, path, CSIDL_PERSONAL, FALSE);
 	CString mydocs = path;
 	SureBackSlash (mydocs);
 	OpenFolder (mydocs);	
@@ -929,7 +933,7 @@ void CMainFrame::OnDesktop()
 {
 	TCHAR path[2094];
 
-	SHGetSpecialFolderPath (m_hWnd, path, CSIDL_DESKTOP , FALSE);
+	SHGetSpecialFolderPath (NULL, path, CSIDL_DESKTOP , FALSE);
 	CString mydocs = path;
 	SureBackSlash (mydocs);
 	OpenFolder (mydocs);	
@@ -1220,10 +1224,7 @@ void CMainFrame::OnUpdateViewToolbar(CCmdUI *pCmdUI)
 
 void CMainFrame::TabFrom (int idView, int idDirection)
 {
-	CWnd *wnd[3];
-	wnd[0] = GetCurrentView();
-	wnd[1] = &m_AddressBar;
-	wnd[2] = &m_DriveTree;
+	CWnd* wnd[3] = {GetCurrentView(), &m_AddressBar, &m_DriveTree};
 
 	CWnd *pStart = wnd[idView];
 	int next = 0;

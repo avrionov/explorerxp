@@ -48,9 +48,9 @@ public:
 //protected:
 public:
 
-	HBITMAP _hBmp;
-	void* _pBits;
-	BITMAPINFO _bmi;
-	bool _bNeedRefresh;
+	HBITMAP _hBmp = NULL;
+	void* _pBits = nullptr;
+	BITMAPINFO _bmi{};
+	bool _bNeedRefresh = false;
 	
 };

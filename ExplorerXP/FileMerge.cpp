@@ -25,10 +25,11 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNCREATE(CFileMerge, CWinThread)
 
 CFileMerge::CFileMerge()
+	: pInFile(nullptr),
+	  pOutFile(nullptr),
+	  pBuf{},
+	  m_dStatus(0.0)
 {
-	pInFile = NULL;
-	pOutFile = NULL;
-	m_dStatus = 0.0;
 }
 
 CFileMerge::~CFileMerge()

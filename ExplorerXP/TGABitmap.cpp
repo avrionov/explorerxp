@@ -15,11 +15,20 @@
 #include ".\tgabitmap.h"
 
 TGABitmap::TGABitmap(void)
+	: _hBmp(NULL),
+	  _pBits(nullptr),
+	  _bmi{},
+	  _bNeedRefresh(false)
 {
 }
 
 TGABitmap::~TGABitmap(void)
 {
+	if (_hBmp != NULL)
+	{
+		DeleteObject(_hBmp);
+		_hBmp = NULL;
+	}
 }
 
 
@@ -30,6 +39,9 @@ void TGABitmap::loadFromResource (DWORD resourceNum)
 	if (!res)  return;
 		
 	HGLOBAL mem = LoadResource(GetModuleHandle(NULL), res);
+
+    if (mem == NULL) return;
+
 	void *data = LockResource(mem);
 		
 	TGA_Header *header;

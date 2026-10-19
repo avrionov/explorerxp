@@ -129,6 +129,7 @@ void CDirChangeNotification::DispatchNotificationFunction()
 void CDirChangeNotification::PostOn_FileAdded(LPCTSTR szFileName)
 {
 	ASSERT( szFileName );
+	if( !szFileName ) return;
 	m_eFunctionToDispatch	= eOn_FileAdded;
 	m_szFileName1			= _tcsdup( szFileName) ;
 	//
@@ -139,6 +140,7 @@ void CDirChangeNotification::PostOn_FileAdded(LPCTSTR szFileName)
 void CDirChangeNotification::PostOn_FileRemoved(LPCTSTR szFileName)
 {
 	ASSERT( szFileName );
+	if( !szFileName ) return;
 	m_eFunctionToDispatch	= eOn_FileRemoved;
 	m_szFileName1			= _tcsdup( szFileName) ;
 	//
@@ -149,6 +151,7 @@ void CDirChangeNotification::PostOn_FileRemoved(LPCTSTR szFileName)
 void CDirChangeNotification::PostOn_FileNameChanged(LPCTSTR szOldName, LPCTSTR szNewName)
 {
 	ASSERT( szOldName && szNewName );
+	if( !szOldName || !szNewName ) return;
 
 	m_eFunctionToDispatch	= eOn_FileNameChanged;
 	m_szFileName1			= _tcsdup( szOldName) ;
@@ -162,6 +165,7 @@ void CDirChangeNotification::PostOn_FileNameChanged(LPCTSTR szOldName, LPCTSTR s
 void CDirChangeNotification::PostOn_FileModified(LPCTSTR szFileName)
 {
 	ASSERT( szFileName );
+	if( !szFileName ) return;
 
 	m_eFunctionToDispatch	= eOn_FileModified;
 	m_szFileName1			= _tcsdup( szFileName );
@@ -173,6 +177,7 @@ void CDirChangeNotification::PostOn_FileModified(LPCTSTR szFileName)
 void CDirChangeNotification::PostOn_ReadDirectoryChangesError(DWORD dwError, LPCTSTR szDirectoryName)
 {
 	ASSERT( szDirectoryName );
+	if( !szDirectoryName ) return;
 
 	m_eFunctionToDispatch = eOn_ReadDirectoryChangesError;
 	m_dwError			  = dwError;
@@ -186,6 +191,7 @@ void CDirChangeNotification::PostOn_ReadDirectoryChangesError(DWORD dwError, LPC
 void CDirChangeNotification::PostOn_WatchStarted(DWORD dwError, LPCTSTR szDirectoryName)
 {
 	ASSERT( szDirectoryName );
+	if( !szDirectoryName ) return;
 
 	m_eFunctionToDispatch = eOn_WatchStarted;
 	m_dwError			  =	dwError;
@@ -197,6 +203,7 @@ void CDirChangeNotification::PostOn_WatchStarted(DWORD dwError, LPCTSTR szDirect
 void CDirChangeNotification::PostOn_WatchStopped(LPCTSTR szDirectoryName)
 {
 	ASSERT( szDirectoryName );
+	if( !szDirectoryName ) return;
 
 	m_eFunctionToDispatch = eOn_WatchStopped;
 	m_szFileName1		  = _tcsdup(szDirectoryName);

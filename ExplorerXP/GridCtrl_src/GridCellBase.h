@@ -32,14 +32,14 @@
 class CGridCtrl;
 
 // Cell states
-#define GVIS_FOCUSED            0x0001
-#define GVIS_SELECTED           0x0002
-#define GVIS_DROPHILITED        0x0004
-#define GVIS_READONLY           0x0008
-#define GVIS_FIXED              0x0010
-#define GVIS_FIXEDROW           0x0020
-#define GVIS_FIXEDCOL           0x0040
-#define GVIS_MODIFIED           0x0080
+constexpr UINT GVIS_FOCUSED = 0x0001;
+constexpr UINT GVIS_SELECTED = 0x0002;
+constexpr UINT GVIS_DROPHILITED = 0x0004;
+constexpr UINT GVIS_READONLY = 0x0008;
+constexpr UINT GVIS_FIXED = 0x0010;
+constexpr UINT GVIS_FIXEDROW = 0x0020;
+constexpr UINT GVIS_FIXEDCOL = 0x0040;
+constexpr UINT GVIS_MODIFIED = 0x0080;
 
 // Cell data mask
 #define GVIF_TEXT               LVIF_TEXT
@@ -55,19 +55,35 @@ class CGridCtrl;
                                  GVIF_FORMAT|GVIF_FONT|GVIF_MARGIN)
 
 // Used for Get/SetItem calls.
+// Used for Get/SetItem calls.
 typedef struct _GV_ITEM {
-    int      row,col;     // Row and Column of item
-    UINT     mask;        // Mask for use in getting/setting cell data
-    UINT     nState;      // cell state (focus/hilighted etc)
-    DWORD    nFormat;     // Format of cell
-    int      iImage;      // index of the list view item’s icon
-    COLORREF crBkClr;     // Background colour (or CLR_DEFAULT)
-    COLORREF crFgClr;     // Forground colour (or CLR_DEFAULT)
-    LPARAM   lParam;      // 32-bit value to associate with item
-    LOGFONT  lfFont;      // Cell font
-    UINT     nMargin;     // Internal cell margin
-    CString  strText;     // Text in cell
-    _GV_ITEM(): row(0), col(0) {}
+  int row, col;      // Row and Column of item
+  UINT mask;         // Mask for use in getting/setting cell data
+  UINT nState;       // cell state (focus/hilighted etc)
+  DWORD nFormat;     // Format of cell
+  int iImage;        // index of the list view item’s icon
+  COLORREF crBkClr;  // Background colour (or CLR_DEFAULT)
+  COLORREF crFgClr;  // Forground colour (or CLR_DEFAULT)
+  LPARAM lParam;     // 32-bit value to associate with item
+  LOGFONT lfFont;    // Cell font
+  UINT nMargin;      // Internal cell margin
+  CString strText;   // Text in cell
+
+  // Fully initialized constructor to satisfy type.6 guidelines
+  _GV_ITEM()
+      : row(0),
+        col(0),
+        mask(0),
+        nState(0),
+        nFormat(0),
+        iImage(-1),
+        crBkClr(CLR_DEFAULT),
+        crFgClr(CLR_DEFAULT),
+        lParam(0),
+        nMargin(0) {
+    // Zero-initialize LOGFONT structure safely
+    memset(&lfFont, 0, sizeof(lfFont));
+  }
 } GV_ITEM;
 
 

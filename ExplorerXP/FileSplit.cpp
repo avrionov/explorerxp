@@ -27,10 +27,15 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNCREATE(CFileSplit, CWinThread)
 
 CFileSplit::CFileSplit()
+	: pInFile(nullptr),
+	  pOutFile(nullptr),
+	  m_nFileNameIndex(0),
+	  pBuf{},
+	  m_dStatus(0.0),
+	  m_nSplitMode(0),
+	  m_nSplitVal(0)
 {
-	m_pMainWnd=NULL;
-	pInFile = NULL;
-	pOutFile = NULL;
+	m_pMainWnd = nullptr;
 }
 
 CFileSplit::~CFileSplit()

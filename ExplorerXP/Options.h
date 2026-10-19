@@ -53,45 +53,63 @@ public:
 
 };
 
-class COptions : public CRegSettings
-{
-	public:
-		BOOL m_bTabsOnTop;
-		BOOL m_bVLines;
-		BOOL m_bHLines;
-		std::vector<CStrOptions> m_LastTabs;
-		std::vector<CStrOptions> m_DefaultTabs;
-		DWORD m_OnStart;
-		DWORD m_LastWindowMode;
-		BOOL  m_bShowHidden;
-		DWORD m_nCleanSel;
-		DWORD m_SizeIn;
-		CString m_LastTabsActiveView;
-		DWORD m_FolderSizeMode;
-		BOOL m_bStripPath;
-		BOOL m_bLimitChars;
-		DWORD m_CharLimit;
-		BOOL m_bShowExeIcons;
 
-	BEGIN_REG_MAP(COptions)
-		REG_ITEM(m_bTabsOnTop, TRUE)		
-		REG_ITEM(m_bVLines, FALSE)
-		REG_ITEM(m_bHLines, TRUE)
-		REG_ITEM_VECTOR(m_LastTabs)
-		REG_ITEM_VECTOR(m_DefaultTabs)
-		REG_ITEM(m_OnStart, ONSTART_LASTSAVED);
-		REG_ITEM(m_LastWindowMode, WINDOW_FULL);
-		REG_ITEM(m_bShowHidden, TRUE);
-		REG_ITEM(m_nCleanSel, ((DWORD)-1));
-		REG_ITEM(m_SizeIn, SIZE_IN_DEPEND)
-		REG_ITEM(m_LastTabsActiveView, "");
-		REG_ITEM(m_FolderSizeMode, FOLDERSIZE_AUTOMATIC);
-		REG_ITEM(m_bStripPath, TRUE);
-		REG_ITEM(m_bLimitChars, TRUE);
-		REG_ITEM(m_CharLimit, 30);
-		REG_ITEM(m_bShowExeIcons, FALSE);		
-	END_REG_MAP()
+class COptions : public CRegSettings {
+ public:
+  BOOL m_bTabsOnTop;
+  BOOL m_bVLines;
+  BOOL m_bHLines;
+  std::vector<CStrOptions> m_LastTabs;
+  std::vector<CStrOptions> m_DefaultTabs;
+  DWORD m_OnStart;
+  DWORD m_LastWindowMode;
+  BOOL m_bShowHidden;
+  DWORD m_nCleanSel;
+  DWORD m_SizeIn;
+  CString m_LastTabsActiveView;
+  DWORD m_FolderSizeMode;
+  BOOL m_bStripPath;
+  BOOL m_bLimitChars;
+  DWORD m_CharLimit;
+  BOOL m_bShowExeIcons;
 
+  //// Explicit constructor matching REG_MAP default values to satisfy type.6
+  //COptions()
+  //    : m_bTabsOnTop(TRUE),
+  //      m_bVLines(FALSE),
+  //      m_bHLines(TRUE),
+  //      m_OnStart(ONSTART_LASTSAVED),
+  //      m_LastWindowMode(WINDOW_FULL),
+  //      m_bShowHidden(TRUE),
+  //      m_nCleanSel(static_cast<DWORD>(-1)),
+  //      m_SizeIn(SIZE_IN_DEPEND),
+  //      m_LastTabsActiveView(_T("")),
+  //      m_FolderSizeMode(FOLDERSIZE_AUTOMATIC),
+  //      m_bStripPath(TRUE),
+  //      m_bLimitChars(TRUE),
+  //      m_CharLimit(30),
+  //      m_bShowExeIcons(FALSE) {
+  //  // std::vector and CString initialize themselves automatically
+  //}
+
+  BEGIN_REG_MAP(COptions)
+  REG_ITEM(m_bTabsOnTop, TRUE)
+  REG_ITEM(m_bVLines, FALSE)
+  REG_ITEM(m_bHLines, TRUE)
+  REG_ITEM_VECTOR(m_LastTabs)
+  REG_ITEM_VECTOR(m_DefaultTabs)
+  REG_ITEM(m_OnStart, ONSTART_LASTSAVED)
+  REG_ITEM(m_LastWindowMode, WINDOW_FULL)
+  REG_ITEM(m_bShowHidden, TRUE)
+  REG_ITEM(m_nCleanSel, ((DWORD)-1))
+  REG_ITEM(m_SizeIn, SIZE_IN_DEPEND)
+  REG_ITEM(m_LastTabsActiveView, "")
+  REG_ITEM(m_FolderSizeMode, FOLDERSIZE_AUTOMATIC)
+  REG_ITEM(m_bStripPath, TRUE)
+  REG_ITEM(m_bLimitChars, TRUE)
+  REG_ITEM(m_CharLimit, 30)
+  REG_ITEM(m_bShowExeIcons, FALSE)
+  END_REG_MAP()
 };
 
 

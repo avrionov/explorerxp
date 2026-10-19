@@ -42,11 +42,11 @@ protected:
 	bool changeOutputFile();
 	CString makeNewFileName();
 	bool start();
-	CStdioFile *pInFile;
-	CStdioFile *pOutFile;
-	int m_nFileNameIndex;
-	char pBuf[BYTES_PER_READ_MAX];
-	double m_dStatus;
+	CStdioFile *pInFile = nullptr;
+	CStdioFile *pOutFile = nullptr;
+	int m_nFileNameIndex = 0;
+	char pBuf[BYTES_PER_READ_MAX]{};
+	double m_dStatus = 0.0;
 
 
 // Operations
@@ -65,8 +65,8 @@ public:
 	bool CreateSplitFiles(CString inputFile, CString outputDir,int howTo, int splitVal);
 	CString m_OutputDirName;
 	CString m_InputFileName;
-	int m_nSplitMode;
-	int m_nSplitVal;
+	int m_nSplitMode = 0;
+	int m_nSplitVal = 0;
 	virtual ~CFileSplit();
 
 	// Generated message map functions

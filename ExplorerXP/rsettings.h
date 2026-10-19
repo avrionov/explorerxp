@@ -450,7 +450,7 @@ ret:
 	}
 
 	CString m_sKey;
-	HKEY m_hKey;
+	HKEY m_hKey = NULL;
 	virtual DWORD InternalSaveLoad(HKEY hKey, bool bSave, bool bOnlyInit) = 0;
 
 	virtual void OnBeforeSave()
@@ -468,7 +468,7 @@ public:
 	{
 		DWORD dwResult = 0;
 
-		HKEY hKey;
+		HKEY hKey = NULL;
 
 		dwResult = ::RegCreateKeyEx(m_hKey, m_sKey, NULL, NULL, REG_OPTION_NON_VOLATILE,
 				KEY_WRITE, NULL, &hKey, NULL);

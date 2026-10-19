@@ -37,9 +37,10 @@ public:
 	CStringArray m_InFiles;
 	CString		 m_OutFile;
 protected:
-	CFile *pInFile, *pOutFile;
-	char		pBuf[BYTES_PER_READ];
-	double m_dStatus;
+	CFile *pInFile = nullptr;
+	CFile *pOutFile = nullptr;
+	char		pBuf[BYTES_PER_READ]{};
+	double m_dStatus = 0.0;
 
 // Operations
 public:

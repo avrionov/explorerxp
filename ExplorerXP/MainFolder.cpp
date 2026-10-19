@@ -153,7 +153,7 @@ void CMainFolder::OnClick(NMHDR* pNMHDR, LRESULT* pResult)
 	
 	*pResult = NULL;
 	
-	UINT uFlags;
+	UINT uFlags = 0;
 
 //Work out the position of where the context menu should be
   CPoint p(GetCurrentMessage()->pt);
@@ -178,7 +178,7 @@ void CMainFolder::OnClick(NMHDR* pNMHDR, LRESULT* pResult)
 
 DROPEFFECT CMainFolder::OnDragEnter(COleDataObject* pDataObject, DWORD dwKeyState, CPoint point)
 {
-	UINT uFlags;
+	UINT uFlags = 0;
 
 	DROPEFFECT dwEffect = DROPEFFECT_NONE;
 
@@ -211,7 +211,7 @@ DROPEFFECT CMainFolder::OnDragEnter(COleDataObject* pDataObject, DWORD dwKeyStat
 
 DROPEFFECT CMainFolder::OnDragOver(COleDataObject* pDataObject, DWORD dwKeyState, CPoint point)
 {
-	UINT uFlags;
+	UINT uFlags = 0;
 	HTREEITEM hITem =  HitTest (point, &uFlags);
 
 	//if (hITem && (TVHT_ONITEM & uFlags)
@@ -449,7 +449,7 @@ void CMainFolder::OnTimer(UINT_PTR nIDEvent)
 		CPoint pt;
 		GetCursorPos (&pt);
 		ScreenToClient (&pt);
-		UINT uFlags;
+		UINT uFlags = 0;
 
 		HTREEITEM hItem = HitTest (pt, &uFlags);
 		if (hItem/* && (uFlags &TVHT_ONITEM)*/ )

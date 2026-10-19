@@ -1560,6 +1560,7 @@ void CGridCtrl::OnVScroll(UINT nSBCode, UINT /*nPos*/, CScrollBar* /*pScrollBar*
             SetScrollPos32(SB_VERT, m_nVScrollMax);
             Invalidate();
         }
+        break;
         
     default: 
         break;
@@ -3936,17 +3937,22 @@ BOOL CGridCtrl::SetCellType(int nRow, int nCol, CRuntimeClass* pRuntimeClass)
     return TRUE;
 }
 
-BOOL CGridCtrl::SetDefaultCellType( CRuntimeClass* pRuntimeClass)
-{
-    ASSERT( pRuntimeClass != NULL );
-    if (!pRuntimeClass->IsDerivedFrom(RUNTIME_CLASS(CGridCellBase)))
-    {
-        ASSERT( FALSE);
-        return FALSE;
-    }
-    m_pRtcDefault = pRuntimeClass;
-    return TRUE;
+BOOL CGridCtrl::SetDefaultCellType(CRuntimeClass* pRuntimeClass) {
+  // FIX: Add a real runtime check because ASSERT is disabled in Release builds
+  if (pRuntimeClass == nullptr) {
+    ASSERT(FALSE);
+    return FALSE;
+  }
+
+  if (!pRuntimeClass->IsDerivedFrom(RUNTIME_CLASS(CGridCellBase))) {
+    ASSERT(FALSE);
+    return FALSE;
+  }
+
+  m_pRtcDefault = pRuntimeClass;
+  return TRUE;
 }
+
 
 // Creates a new grid cell and performs any necessary initialisation
 /*virtual*/ CGridCellBase* CGridCtrl::CreateCell(int nRow, int nCol)

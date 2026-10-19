@@ -598,7 +598,7 @@ public:
     int  GetScrollPos32(int nBar, BOOL bGetTrackPos = FALSE);
     BOOL SetScrollPos32(int nBar, int nPos, BOOL bRedraw = TRUE);
 
-    BOOL SortTextItems(int nCol, BOOL bAscending, int low, int high);
+    //BOOL SortTextItems(int nCol, BOOL bAscending, int low, int high);
     BOOL SortItems(PFNLVCOMPARE pfnCompare, int nCol, BOOL bAscending, LPARAM data,
                    int low, int high);
 
